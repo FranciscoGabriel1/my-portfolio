@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import { useReducedMotion } from "framer-motion";
 import type { LottieComponentProps } from "lottie-react";
 
-interface LottiePlayerProps extends Omit<LottieComponentProps, "animationData"> {
+interface LottiePlayerProps extends Omit<LottieComponentProps, "animationData" | "src"> {
   src: Record<string, unknown>;
   className?: string;
   loop?: boolean;

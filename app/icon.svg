@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#007AFF"/>
+      <stop offset="100%" stop-color="#5856D6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Handle -->
+  <path
+    d="M 36,32 C 36,14 64,14 64,32"
+    fill="none"
+    stroke="url(#g)"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+
+  <!-- Body -->
+  <rect x="10" y="32" width="80" height="54" rx="10" fill="url(#g)"/>
+
+  <!-- Center divider line -->
+  <rect x="10" y="56" width="80" height="3" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+
+  <!-- Latch -->
+  <rect x="42" y="50" width="16" height="13" rx="4" fill="rgba(255,255,255,0.45)"/>
+</svg>
