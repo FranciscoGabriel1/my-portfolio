@@ -4,6 +4,7 @@ import { useTranslations, useMessages } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowDown, Download, ArrowRight, MapPin } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FadeInView } from "@/components/animations/FadeInView";
@@ -130,10 +131,14 @@ export function Hero() {
               {/* Avatar + name */}
               <div className="mb-6 flex items-center gap-4">
                 <div className="relative h-16 w-16 shrink-0">
-                  {/* TODO: replace with real photo */}
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-accent-primary/30 bg-accent-primary/10">
-                    <span className="font-display text-h2 font-bold text-accent-primary">FM</span>
-                  </div>
+                  <Image
+                    src="/images/profile.jpeg"
+                    alt="Francisco Marinho"
+                    width={64}
+                    height={64}
+                    className="h-16 w-16 rounded-full object-cover"
+                    priority
+                  />
                   <span
                     aria-hidden
                     className="absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-surface-elevated bg-accent-success"

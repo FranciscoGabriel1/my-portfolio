@@ -24,7 +24,7 @@ interface SkillGroup {
 
 export function About() {
   const t = useTranslations("about");
-  const messages = useMessages() as {
+  const messages = useMessages() as unknown as {
     about: {
       skills: Record<SkillCategory, SkillGroup>;
     };
@@ -64,10 +64,9 @@ export function About() {
             {/* Photo + info card */}
             <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
               <div className="relative shrink-0">
-                {/* TODO: replace with real photo */}
                 <div className="h-36 w-36 overflow-hidden rounded-full border-2 border-accent-primary/20 ring-4 ring-accent-primary/10">
                   <Image
-                    src="https://i.pravatar.cc/300?img=11"
+                    src="/images/profile.jpeg"
                     alt={t("label") + " — Francisco Marinho"}
                     width={144}
                     height={144}

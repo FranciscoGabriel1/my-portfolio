@@ -25,7 +25,7 @@ type FilterKey = "all" | "frontend" | "backend" | "fullstack";
 
 export function Projects() {
   const t = useTranslations("projects");
-  const messages = useMessages() as { projects: { items: Project[] } };
+  const messages = useMessages() as unknown as { projects: { items: Project[] } };
   const projects = messages.projects.items;
 
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
