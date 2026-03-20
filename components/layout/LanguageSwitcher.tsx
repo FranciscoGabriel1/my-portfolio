@@ -16,6 +16,7 @@ const localeConfig: Record<Locale, { countryCode: string; label: string }> = {
 
 function FlagImage({ countryCode, label }: { countryCode: string; label: string }) {
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={`https://flagcdn.com/20x15/${countryCode}.png`}
       srcSet={`https://flagcdn.com/40x30/${countryCode}.png 2x`}
