@@ -90,7 +90,7 @@ const config: Config = {
       boxShadow: {
         glass: "0 4px 40px rgba(0,0,0,0.3)",
         "glass-light": "0 4px 40px rgba(0,0,0,0.08)",
-        "glow-primary": "0 0 40px rgba(99,102,241,0.3)",
+        "glow-primary": "0 0 40px rgba(10,132,255,0.35)",
         "glow-secondary": "0 0 40px rgba(6,182,212,0.3)",
         card: "0 1px 3px rgba(0,0,0,0.12), 0 8px 32px rgba(0,0,0,0.08)",
       },

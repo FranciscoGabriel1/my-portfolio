@@ -35,6 +35,8 @@
       "Software Engineer",
       "Design Systems Architect"
     ],
+    "available": "Available for opportunities",
+    "tagline": "Need a website or app? I'm a Front-end professional with extensive experience. I solve your problem using the best technologies on the market.",
     "cta_projects": "See Projects",
     "cta_cv": "Download CV",
     "scroll_hint": "Scroll down"
@@ -300,9 +302,10 @@
     },
     "social": {
       "email": "franciscogabriel.dev@gmail.com",
-      "github": "https://github.com/franciscomarinho",
-      "linkedin": "https://linkedin.com/in/franciscomarinho",
-      "discord": "https://discord.com"
+      "github": "https://github.com/FranciscoGabriel1",
+      "linkedin": "https://www.linkedin.com/in/francisco-gabriel-software/",
+      "lattes": "http://lattes.cnpq.br/6111525331943224",
+      "discord": "https://discord.gg/jDjgZUjamz"
     }
   },
 

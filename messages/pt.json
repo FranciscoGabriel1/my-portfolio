@@ -35,6 +35,8 @@
       "Engenheiro de Software",
       "Arquiteto de Design Systems"
     ],
+    "available": "Disponível para oportunidades",
+    "tagline": "Precisa de um site ou aplicativo? Sou um profissional Front-end com vasta experiência. Resolvo o seu problema utilizando as melhores tecnologias do mercado.",
     "cta_projects": "Ver Projetos",
     "cta_cv": "Download CV",
     "scroll_hint": "Role para baixo"
@@ -325,9 +327,10 @@
     },
     "social": {
       "email": "franciscogabriel.dev@gmail.com",
-      "github": "https://github.com/franciscomarinho",
-      "linkedin": "https://linkedin.com/in/franciscomarinho",
-      "discord": "https://discord.com"
+      "github": "https://github.com/FranciscoGabriel1",
+      "linkedin": "https://www.linkedin.com/in/francisco-gabriel-software/",
+      "lattes": "http://lattes.cnpq.br/6111525331943224",
+      "discord": "https://discord.gg/jDjgZUjamz"
     }
   },
 
