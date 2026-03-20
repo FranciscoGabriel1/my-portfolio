@@ -52,10 +52,16 @@ export function Contact() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  function onSubmit(data: FormData) {
-    const mailto = `mailto:franciscogabriel.dev@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`Nome: ${data.name}\nEmail: ${data.email}\n\n${data.message}`)}`;
+  async function onSubmit(data: FormData) {
     try {
-      window.location.href = mailto;
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error();
+
       setStatus("success");
       reset();
     } catch {
