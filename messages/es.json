@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "title": "Francisco Marinho — Desarrollador Frontend Senior",
+    "description": "Portafolio de Francisco Marinho, Desarrollador Frontend Senior especialista en React, Next.js y TypeScript con 5+ años de experiencia."
+  },
+
+  "nav": {
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto",
+    "download_cv": "Descargar CV",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú"
+  },
+
+  "theme": {
+    "toggle_dark": "Activar modo oscuro",
+    "toggle_light": "Activar modo claro"
+  },
+
+  "language": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "English",
+    "es": "Español"
+  },
+
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Francisco Marinho",
+    "roles": [
+      "Desarrollador Frontend Senior",
+      "Especialista en React & TypeScript",
+      "Ingeniero de Software",
+      "Arquitecto de Design Systems"
+    ],
+    "cta_projects": "Ver Proyectos",
+    "cta_cv": "Descargar CV",
+    "scroll_hint": "Desplázate hacia abajo"
+  },
+
+  "about": {
+    "label": "Sobre mí",
+    "title": "Quién soy",
+    "bio_1": "Ingeniero de Software con Maestría en Informática por la UFAM, con 5+ años de experiencia en Desarrollo Front-End con React.js, Next.js, Angular, JavaScript ES6+, TypeScript, Vite y Webpack. Especialista en arquitecturas modulares y creación de componentes reutilizables.",
+    "bio_2": "Tengo experiencia sólida en gestión de estado avanzada con Context API, Zustand, Redux y Redux Saga, integración de APIs REST y GraphQL, optimización de rendimiento (Lighthouse > 95), pruebas automatizadas con Jest y Cypress, y flujos colaborativos con Git Flow y CI/CD.",
+    "skills_title": "Habilidades",
+    "location": "Manaus, Brasil",
+    "available": "Disponible para oportunidades",
+    "skills": {
+      "frontend": {
+        "label": "Frontend",
+        "items": [
+          "React.js", "Next.js", "TypeScript", "JavaScript ES6+",
+          "HTML5", "CSS3 / SCSS", "Tailwind CSS", "Styled Components", "Angular"
+        ]
+      },
+      "state_tools": {
+        "label": "Estado & Herramientas",
+        "items": [
+          "Redux & Redux Saga", "Zustand", "Context API", "Storybook",
+          "Figma", "Design System", "Webpack", "Vite"
+        ]
+      },
+      "backend_infra": {
+        "label": "Backend & Infra",
+        "items": [
+          "Node.js", "Express", "REST & GraphQL", "Docker",
+          "AWS", "GitHub Actions", "CI/CD", "Git Flow"
+        ]
+      },
+      "quality": {
+        "label": "Calidad",
+        "items": [
+          "Jest", "React Testing Library", "Cypress E2E", "Zod",
+          "ESLint", "Prettier", "WCAG 2.1", "Lighthouse > 95"
+        ]
+      }
+    }
+  },
+
+  "projects": {
+    "label": "Proyectos",
+    "title": "Lo que he construido",
+    "subtitle": "Una selección de los proyectos de los que estoy más orgulloso.",
+    "filters": {
+      "all": "Todos",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full Stack"
+    },
+    "github_label": "Ver en GitHub",
+    "live_label": "Ver en vivo",
+    "items": [
+      {
+        "id": "1",
+        "title": "UpRobotics",
+        "description": "Herramienta web para programación visual de brazos robóticos con Google Blocks. Genera código para Arduino UNO o simulaciones 3D en Webots mediante interfaz drag-and-drop.",
+        "stack": ["React.js", "JavaScript", "Google Blockly", "Webots", "Arduino"],
+        "category": "fullstack",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=1"
+      },
+      {
+        "id": "2",
+        "title": "HobbySphere Red Social",
+        "description": "Red social para entusiastas de hobbies con feeds personalizados, foros y contenido multimedia. Proyecto WebAcademy con backend robusto y frontend intuitivo.",
+        "stack": ["React.js", "TypeScript", "Node.js", "Docker", "MySQL", "Material UI"],
+        "category": "fullstack",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=2"
+      },
+      {
+        "id": "3",
+        "title": "Dashboard de Telemetría",
+        "description": "Dashboards responsivos integrados con telemetría en tiempo real, desarrollados con React.js/Next.js y design system compartido via micro-frontends.",
+        "stack": ["React.js", "Next.js", "TypeScript", "Module Federation", "WebSocket"],
+        "category": "frontend",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=3"
+      },
+      {
+        "id": "4",
+        "title": "Plataforma SaaS para Guionistas",
+        "description": "Plataforma SaaS con React.js y TypeScript. Componentes escalables, Redux + Saga, integración GraphQL y CI/CD automatizado.",
+        "stack": ["React.js", "TypeScript", "Redux Saga", "GraphQL", "Jest", "Docker"],
+        "category": "frontend",
+        "github": null,
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=4"
+      },
+      {
+        "id": "5",
+        "title": "Portafolio Personal",
+        "description": "¡Este portafolio! Construido con Next.js 14, TypeScript, Tailwind CSS, Framer Motion, next-intl (PT/EN/ES) y design system inspirado en Apple.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "next-intl"],
+        "category": "frontend",
+        "github": "https://github.com/franciscomarinho",
+        "live": "https://franciscomarinho.dev",
+        "image": "https://picsum.photos/600/400?random=5"
+      }
+    ]
+  },
+
+  "experience": {
+    "label": "Experiencia",
+    "title": "Trayectoria profesional",
+    "subtitle": "Empresas y proyectos que dieron forma a mi carrera.",
+    "present": "Presente",
+    "items": [
+      {
+        "id": "1",
+        "role": "Desarrollador Frontend Senior",
+        "company": "HostGator",
+        "location": "Florianópolis",
+        "type": "Tiempo completo",
+        "start": "2025-10",
+        "end": null,
+        "description": "Desarrollo y mantengo aplicaciones web en equipos de monetización, innovación y agentes de IA. Creo interfaces responsivas y escalables, implemento nuevas funcionalidades y contribuyo a la evolución de la arquitectura front-end.",
+        "highlights": [
+          "Jenkins, Design System, JavaScript ES6+, Redux Saga",
+          "Jest y React Testing Library con foco en Clean Code",
+          "ESLint, Prettier y GitFlow",
+          "Equipos de monetización, innovación y agentes de IA"
+        ]
+      },
+      {
+        "id": "2",
+        "role": "Desarrollador Frontend Semi-Senior",
+        "company": "O2 Filmes",
+        "location": "São Paulo (remoto)",
+        "type": "Contratista",
+        "start": "2024-09",
+        "end": "2025-12",
+        "description": "Trabajé en plataforma SaaS para guionistas con React.js y TypeScript. Componentes escalables, Redux + Saga, APIs REST/GraphQL y CI/CD automatizado.",
+        "highlights": [
+          "React.js + TypeScript con componentes escalables",
+          "Redux + Saga para gestión de flujos",
+          "Integración REST/GraphQL y pruebas con Jest",
+          "CI/CD con GitHub Actions y Docker"
+        ]
+      },
+      {
+        "id": "3",
+        "role": "Desarrollador Frontend Semi-Senior",
+        "company": "Atem Distribuidora de Petróleo",
+        "location": "Manaus (híbrido)",
+        "type": "Tiempo completo",
+        "start": "2022-05",
+        "end": "2025-05",
+        "description": "Lideré productos en React.js/React Native y TypeScript, estructurando flujos con Redux + Saga y trabajando en squads ágiles con foco en performance y escalabilidad.",
+        "highlights": [
+          "React.js / React Native con TypeScript",
+          "Redux + Saga y bibliotecas de componentes",
+          "Optimización de bundles y automatización CI/CD",
+          "Squads ágiles — Scrum y Kanban"
+        ]
+      },
+      {
+        "id": "4",
+        "role": "Desarrollador de Software Jr.",
+        "company": "Sidia Instituto de Ciência e Tecnologia",
+        "location": "Manaus (presencial)",
+        "type": "Tiempo completo",
+        "start": "2021-04",
+        "end": "2022-05",
+        "description": "Creé dashboards responsivos integrados con telemetría en tiempo real. Estructuré design system compartido, implementé micro-frontends con Module Federation y mantuve pruebas y pipelines CI.",
+        "highlights": [
+          "React.js / Next.js con TypeScript",
+          "Design system compartido entre equipos",
+          "Micro-frontends con Module Federation",
+          "Pipelines CI y squads ágiles"
+        ]
+      },
+      {
+        "id": "5",
+        "role": "Investigador Becado (CAPES)",
+        "company": "iComp UFAM",
+        "location": "Manaus",
+        "type": "Beca",
+        "start": "2019-03",
+        "end": "2022-03",
+        "description": "Creé la herramienta web UpRobotics con Google Blocks para facilitar la programación de brazos robóticos, generando código para Arduino UNO y simulaciones 3D en Webots.",
+        "highlights": [
+          "Herramienta web UpRobotics (Google Blockly)",
+          "Generación de código para Arduino UNO",
+          "Simulaciones 3D en Webots",
+          "Publicaciones en SBIE 2022 y SBESC 2020"
+        ]
+      }
+    ]
+  },
+
+  "education": {
+    "label": "Formación",
+    "title": "Formación académica",
+    "items": [
+      {
+        "id": "1",
+        "degree": "Maestría en Informática",
+        "institution": "Programa de Posgrado en Informática — UFAM",
+        "location": "Manaus",
+        "start": "2019-03",
+        "end": "2022-03",
+        "description": "Disertación enfocada en robótica educativa. Publicaciones en SBIE 2022 y SBESC 2020."
+      },
+      {
+        "id": "2",
+        "degree": "Licenciatura en Ingeniería de Software",
+        "institution": "Universidad Federal de Amazonas — UFAM",
+        "location": "Itacoatiara",
+        "start": "2013-11",
+        "end": "2019-01",
+        "description": ""
+      },
+      {
+        "id": "3",
+        "degree": "Técnico en Informática",
+        "institution": "Instituto Federal de Amazonas — IFAM",
+        "location": "Parintins",
+        "start": "2010-03",
+        "end": "2012-12",
+        "description": "Técnico en Informática integrado a la secundaria."
+      }
+    ]
+  },
+
+  "contact": {
+    "label": "Contacto",
+    "title": "¿Hablamos?",
+    "subtitle": "Abierto a oportunidades, freelance y colaboraciones. ¡Envíame un mensaje!",
+    "form": {
+      "name_label": "Nombre",
+      "name_placeholder": "Tu nombre completo",
+      "email_label": "Correo electrónico",
+      "email_placeholder": "tu@correo.com",
+      "subject_label": "Asunto",
+      "subject_placeholder": "¿De qué quieres hablar?",
+      "message_label": "Mensaje",
+      "message_placeholder": "Escribe tu mensaje aquí...",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando...",
+      "success_title": "¡Mensaje enviado!",
+      "success_body": "Gracias por contactarme. Te responderé pronto.",
+      "error_title": "Ups, algo salió mal.",
+      "error_body": "Inténtalo de nuevo o escríbeme directamente."
+    },
+    "validation": {
+      "name_required": "El nombre es requerido",
+      "name_min": "El nombre debe tener al menos 2 caracteres",
+      "email_required": "El correo es requerido",
+      "email_invalid": "Correo inválido",
+      "subject_required": "El asunto es requerido",
+      "message_required": "El mensaje es requerido",
+      "message_min": "El mensaje debe tener al menos 10 caracteres"
+    },
+    "social": {
+      "email": "franciscogabriel.dev@gmail.com",
+      "github": "https://github.com/franciscomarinho",
+      "linkedin": "https://linkedin.com/in/franciscomarinho",
+      "discord": "https://discord.com"
+    }
+  },
+
+  "footer": {
+    "made_with": "Hecho con",
+    "and": "y",
+    "rights": "Todos los derechos reservados.",
+    "back_to_top": "Volver arriba"
+  },
+
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido principal",
+    "theme_toggle": "Cambiar tema",
+    "language_switcher": "Seleccionar idioma",
+    "open_link_new_tab": "Abre en nueva pestaña",
+    "project_image_alt": "Imagen del proyecto {title}",
+    "profile_photo_alt": "Foto de perfil de Francisco Marinho"
+  }
+}

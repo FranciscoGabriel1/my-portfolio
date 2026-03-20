@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "title": "Francisco Marinho — Senior Frontend Developer",
+    "description": "Portfolio of Francisco Marinho, Senior Frontend Developer specializing in React, Next.js and TypeScript with 5+ years of experience."
+  },
+
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact",
+    "download_cv": "Download CV",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu"
+  },
+
+  "theme": {
+    "toggle_dark": "Enable dark mode",
+    "toggle_light": "Enable light mode"
+  },
+
+  "language": {
+    "label": "Language",
+    "pt": "Português",
+    "en": "English",
+    "es": "Español"
+  },
+
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Francisco Marinho",
+    "roles": [
+      "Senior Frontend Developer",
+      "React & TypeScript Specialist",
+      "Software Engineer",
+      "Design Systems Architect"
+    ],
+    "cta_projects": "See Projects",
+    "cta_cv": "Download CV",
+    "scroll_hint": "Scroll down"
+  },
+
+  "about": {
+    "label": "About",
+    "title": "Who I am",
+    "bio_1": "Software Engineer with a Master's degree in Computer Science from UFAM, with 5+ years of experience in Front-End Development using React.js, Next.js, Angular, JavaScript ES6+, TypeScript, Vite and Webpack. Specialist in modular architectures and reusable component creation.",
+    "bio_2": "I have solid experience in advanced state management via Context API, Zustand, Redux and Redux Saga, REST and GraphQL API integration, performance optimization (Lighthouse > 95), automated testing with Jest and Cypress, and collaborative workflows with Git Flow and CI/CD.",
+    "skills_title": "Skills",
+    "location": "Manaus, Brazil",
+    "available": "Available for opportunities",
+    "skills": {
+      "frontend": {
+        "label": "Frontend",
+        "items": [
+          "React.js", "Next.js", "TypeScript", "JavaScript ES6+",
+          "HTML5", "CSS3 / SCSS", "Tailwind CSS", "Styled Components", "Angular"
+        ]
+      },
+      "state_tools": {
+        "label": "State & Tools",
+        "items": [
+          "Redux & Redux Saga", "Zustand", "Context API", "Storybook",
+          "Figma", "Design System", "Webpack", "Vite"
+        ]
+      },
+      "backend_infra": {
+        "label": "Backend & Infra",
+        "items": [
+          "Node.js", "Express", "REST & GraphQL", "Docker",
+          "AWS", "GitHub Actions", "CI/CD", "Git Flow"
+        ]
+      },
+      "quality": {
+        "label": "Quality",
+        "items": [
+          "Jest", "React Testing Library", "Cypress E2E", "Zod",
+          "ESLint", "Prettier", "WCAG 2.1", "Lighthouse > 95"
+        ]
+      }
+    }
+  },
+
+  "projects": {
+    "label": "Projects",
+    "title": "What I've built",
+    "subtitle": "A selection of the projects I'm most proud of.",
+    "filters": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full Stack"
+    },
+    "github_label": "View on GitHub",
+    "live_label": "View live",
+    "items": [
+      {
+        "id": "1",
+        "title": "UpRobotics",
+        "description": "Web tool for visual programming of robotic arms using Google Blocks. Generates code for Arduino UNO or 3D simulations in Webots through an intuitive drag-and-drop interface.",
+        "stack": ["React.js", "JavaScript", "Google Blockly", "Webots", "Arduino"],
+        "category": "fullstack",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=1"
+      },
+      {
+        "id": "2",
+        "title": "HobbySphere Social Network",
+        "description": "Social network for hobby enthusiasts with personalized feeds, forums and multimedia content. WebAcademy project with robust backend and intuitive frontend.",
+        "stack": ["React.js", "TypeScript", "Node.js", "Docker", "MySQL", "Material UI"],
+        "category": "fullstack",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=2"
+      },
+      {
+        "id": "3",
+        "title": "Telemetry Dashboard",
+        "description": "Responsive dashboards integrated with real-time telemetry data, developed at Sidia with React.js/Next.js and shared design system via micro-frontends.",
+        "stack": ["React.js", "Next.js", "TypeScript", "Module Federation", "WebSocket"],
+        "category": "frontend",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=3"
+      },
+      {
+        "id": "4",
+        "title": "SaaS Platform for Screenwriters",
+        "description": "SaaS platform developed at O2 Filmes with React.js and TypeScript. Scalable components, Redux + Saga, GraphQL integration and automated CI/CD.",
+        "stack": ["React.js", "TypeScript", "Redux Saga", "GraphQL", "Jest", "Docker"],
+        "category": "frontend",
+        "github": null,
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=4"
+      },
+      {
+        "id": "5",
+        "title": "Personal Portfolio",
+        "description": "This portfolio! Built with Next.js 14, TypeScript, Tailwind CSS, Framer Motion, next-intl (PT/EN/ES) and Apple-inspired design system.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "next-intl"],
+        "category": "frontend",
+        "github": "https://github.com/franciscomarinho",
+        "live": "https://franciscomarinho.dev",
+        "image": "https://picsum.photos/600/400?random=5"
+      }
+    ]
+  },
+
+  "experience": {
+    "label": "Experience",
+    "title": "Career path",
+    "subtitle": "Companies and projects that shaped my career.",
+    "present": "Present",
+    "items": [
+      {
+        "id": "1",
+        "role": "Senior Frontend Developer",
+        "company": "HostGator",
+        "location": "Florianópolis",
+        "type": "Full-time",
+        "start": "2025-10",
+        "end": null,
+        "description": "Developing and maintaining web applications in monetization, innovation, and AI agent teams. Creating responsive and scalable interfaces, implementing new features, and contributing to front-end architecture evolution.",
+        "highlights": [
+          "Jenkins, Design System, JavaScript ES6+, Redux Saga",
+          "Jest and React Testing Library focused on Clean Code",
+          "ESLint, Prettier and GitFlow",
+          "Monetization, innovation and AI agents teams"
+        ]
+      },
+      {
+        "id": "2",
+        "role": "Mid-level Frontend Developer",
+        "company": "O2 Filmes",
+        "location": "São Paulo (remote)",
+        "type": "Contractor",
+        "start": "2024-09",
+        "end": "2025-12",
+        "description": "Worked on a SaaS platform for screenwriters, developing scalable components with React.js and TypeScript, managing flows with Redux + Saga and integrating REST/GraphQL APIs.",
+        "highlights": [
+          "React.js + TypeScript with scalable components",
+          "Redux + Saga for flow management",
+          "REST/GraphQL integration and testing with Jest",
+          "CI/CD with GitHub Actions and Docker"
+        ]
+      },
+      {
+        "id": "3",
+        "role": "Mid-level Frontend Developer",
+        "company": "Atem Distribuidora de Petróleo",
+        "location": "Manaus (hybrid)",
+        "type": "Full-time",
+        "start": "2022-05",
+        "end": "2025-05",
+        "description": "Led products in React.js/React Native and TypeScript, structuring flows with Redux + Saga, component libraries and REST/GraphQL integrations. Worked in agile squads focused on performance and scalability.",
+        "highlights": [
+          "React.js / React Native with TypeScript",
+          "Redux + Saga and component libraries",
+          "Bundle optimization and CI/CD automation",
+          "Agile squads — Scrum and Kanban"
+        ]
+      },
+      {
+        "id": "4",
+        "role": "Junior Software Developer",
+        "company": "Sidia Instituto de Ciência e Tecnologia",
+        "location": "Manaus (on-site)",
+        "type": "Full-time",
+        "start": "2021-04",
+        "end": "2022-05",
+        "description": "Created responsive dashboards integrated with real-time telemetry. Built shared design system, implemented micro-frontends with Module Federation and maintained tests and CI pipelines.",
+        "highlights": [
+          "React.js / Next.js with TypeScript",
+          "Shared design system across teams",
+          "Micro-frontends with Module Federation",
+          "CI pipelines and agile squads"
+        ]
+      },
+      {
+        "id": "5",
+        "role": "Research Fellow (CAPES)",
+        "company": "iComp UFAM",
+        "location": "Manaus",
+        "type": "Scholarship",
+        "start": "2019-03",
+        "end": "2022-03",
+        "description": "Created the UpRobotics web tool with Google Blocks to facilitate robotic arm programming, generating code for Arduino UNO and 3D simulations in Webots.",
+        "highlights": [
+          "UpRobotics web tool (Google Blockly)",
+          "Code generation for Arduino UNO",
+          "3D simulations in Webots",
+          "Publications at SBIE 2022 and SBESC 2020"
+        ]
+      }
+    ]
+  },
+
+  "education": {
+    "label": "Education",
+    "title": "Academic background",
+    "items": [
+      {
+        "id": "1",
+        "degree": "Master's in Computer Science",
+        "institution": "Graduate Program in Computer Science — UFAM",
+        "location": "Manaus",
+        "start": "2019-03",
+        "end": "2022-03",
+        "description": "Dissertation focused on educational robotics. Publications at SBIE 2022 and SBESC 2020."
+      },
+      {
+        "id": "2",
+        "degree": "Bachelor's in Software Engineering",
+        "institution": "Federal University of Amazonas — UFAM",
+        "location": "Itacoatiara",
+        "start": "2013-11",
+        "end": "2019-01",
+        "description": ""
+      },
+      {
+        "id": "3",
+        "degree": "Technical Degree in Computer Science",
+        "institution": "Federal Institute of Amazonas — IFAM",
+        "location": "Parintins",
+        "start": "2010-03",
+        "end": "2012-12",
+        "description": "Technical degree integrated with high school."
+      }
+    ]
+  },
+
+  "contact": {
+    "label": "Contact",
+    "title": "Let's talk?",
+    "subtitle": "Open to opportunities, freelance and collaborations. Send me a message!",
+    "form": {
+      "name_label": "Name",
+      "name_placeholder": "Your full name",
+      "email_label": "Email",
+      "email_placeholder": "your@email.com",
+      "subject_label": "Subject",
+      "subject_placeholder": "What do you want to talk about?",
+      "message_label": "Message",
+      "message_placeholder": "Write your message here...",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "success_title": "Message sent!",
+      "success_body": "Thank you for reaching out. I'll reply soon.",
+      "error_title": "Oops, something went wrong.",
+      "error_body": "Please try again or email me directly."
+    },
+    "validation": {
+      "name_required": "Name is required",
+      "name_min": "Name must be at least 2 characters",
+      "email_required": "Email is required",
+      "email_invalid": "Invalid email",
+      "subject_required": "Subject is required",
+      "message_required": "Message is required",
+      "message_min": "Message must be at least 10 characters"
+    },
+    "social": {
+      "email": "franciscogabriel.dev@gmail.com",
+      "github": "https://github.com/franciscomarinho",
+      "linkedin": "https://linkedin.com/in/franciscomarinho",
+      "discord": "https://discord.com"
+    }
+  },
+
+  "footer": {
+    "made_with": "Made with",
+    "and": "and",
+    "rights": "All rights reserved.",
+    "back_to_top": "Back to top"
+  },
+
+  "accessibility": {
+    "skip_to_content": "Skip to main content",
+    "theme_toggle": "Toggle theme",
+    "language_switcher": "Select language",
+    "open_link_new_tab": "Opens in new tab",
+    "project_image_alt": "Project image for {title}",
+    "profile_photo_alt": "Profile photo of Francisco Marinho"
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "meta": {
+    "title": "Francisco Marinho — Desenvolvedor Frontend Sênior",
+    "description": "Portfólio de Francisco Marinho, Desenvolvedor Frontend Sênior especialista em React, Next.js e TypeScript com 5+ anos de experiência."
+  },
+
+  "nav": {
+    "about": "Sobre",
+    "projects": "Projetos",
+    "experience": "Experiência",
+    "contact": "Contato",
+    "download_cv": "Download CV",
+    "open_menu": "Abrir menu",
+    "close_menu": "Fechar menu"
+  },
+
+  "theme": {
+    "toggle_dark": "Ativar modo escuro",
+    "toggle_light": "Ativar modo claro"
+  },
+
+  "language": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "English",
+    "es": "Español"
+  },
+
+  "hero": {
+    "greeting": "Olá, eu sou",
+    "name": "Francisco Marinho",
+    "roles": [
+      "Desenvolvedor Frontend Sênior",
+      "Especialista em React & TypeScript",
+      "Engenheiro de Software",
+      "Arquiteto de Design Systems"
+    ],
+    "cta_projects": "Ver Projetos",
+    "cta_cv": "Download CV",
+    "scroll_hint": "Role para baixo"
+  },
+
+  "about": {
+    "label": "Sobre",
+    "title": "Quem sou eu",
+    "bio_1": "Engenheiro de Software com Mestrado em Informática pela UFAM, com 5+ anos de atuação em Desenvolvimento Front-End utilizando React.js, Next.js, Angular, JavaScript ES6+, TypeScript, Vite e Webpack. Especialista em arquiteturas modulares e criação de componentes reutilizáveis.",
+    "bio_2": "Tenho experiência sólida em gerenciamento de estado avançado via Context API, Zustand, Redux e Redux Saga, integração de APIs REST e GraphQL, otimização de performance (Lighthouse > 95), testes automatizados com Jest e Cypress, e workflows colaborativos com Git Flow e CI/CD.",
+    "skills_title": "Competências",
+    "location": "Manaus, Brasil",
+    "available": "Disponível para oportunidades",
+    "skills": {
+      "frontend": {
+        "label": "Frontend",
+        "items": [
+          "React.js",
+          "Next.js",
+          "TypeScript",
+          "JavaScript ES6+",
+          "HTML5",
+          "CSS3 / SCSS",
+          "Tailwind CSS",
+          "Styled Components",
+          "Angular"
+        ]
+      },
+      "state_tools": {
+        "label": "Estado & Ferramentas",
+        "items": [
+          "Redux & Redux Saga",
+          "Zustand",
+          "Context API",
+          "Storybook",
+          "Figma",
+          "Design System",
+          "Webpack",
+          "Vite"
+        ]
+      },
+      "backend_infra": {
+        "label": "Backend & Infra",
+        "items": [
+          "Node.js",
+          "Express",
+          "REST & GraphQL",
+          "Docker",
+          "AWS",
+          "GitHub Actions",
+          "CI/CD",
+          "Git Flow"
+        ]
+      },
+      "quality": {
+        "label": "Qualidade",
+        "items": [
+          "Jest",
+          "React Testing Library",
+          "Cypress E2E",
+          "Zod",
+          "ESLint",
+          "Prettier",
+          "WCAG 2.1",
+          "Lighthouse > 95"
+        ]
+      }
+    }
+  },
+
+  "projects": {
+    "label": "Projetos",
+    "title": "O que já construí",
+    "subtitle": "Uma seleção dos projetos que mais me orgulho.",
+    "filters": {
+      "all": "Todos",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full Stack"
+    },
+    "github_label": "Ver no GitHub",
+    "live_label": "Ver online",
+    "items": [
+      {
+        "id": "1",
+        "title": "UpRobotics",
+        "description": "Ferramenta web para programação visual de braços robóticos usando Google Blocks. Permite gerar código para Arduino UNO ou simulações 3D no Webots por meio de interface drag-and-drop intuitiva.",
+        "stack": ["React.js", "JavaScript", "Google Blockly", "Webots", "Arduino"],
+        "category": "fullstack",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=1"
+      },
+      {
+        "id": "2",
+        "title": "HobbySphere Social Network",
+        "description": "Rede social para entusiastas de hobbies com feeds personalizados, fóruns e conteúdos multimídia. Projeto do WebAcademy com backend robusto e frontend intuitivo.",
+        "stack": ["React.js", "TypeScript", "Node.js", "Docker", "MySQL", "Material UI"],
+        "category": "fullstack",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=2"
+      },
+      {
+        "id": "3",
+        "title": "Dashboard de Telemetria",
+        "description": "Dashboards responsivos integrados a dados de telemetria em tempo real, desenvolvidos no Sidia com React.js/Next.js e design system compartilhado via micro-frontends.",
+        "stack": ["React.js", "Next.js", "TypeScript", "Module Federation", "WebSocket"],
+        "category": "frontend",
+        "github": "https://github.com/franciscomarinho",
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=3"
+      },
+      {
+        "id": "4",
+        "title": "Plataforma SaaS para Roteiristas",
+        "description": "Plataforma SaaS desenvolvida na O2 Filmes com React.js e TypeScript. Componentes escaláveis, Redux + Saga, integração GraphQL e CI/CD automatizado.",
+        "stack": ["React.js", "TypeScript", "Redux Saga", "GraphQL", "Jest", "Docker"],
+        "category": "frontend",
+        "github": null,
+        "live": null,
+        "image": "https://picsum.photos/600/400?random=4"
+      },
+      {
+        "id": "5",
+        "title": "Portfólio Pessoal",
+        "description": "Este portfólio! Desenvolvido com Next.js 14, TypeScript, Tailwind CSS, Framer Motion, next-intl (PT/EN/ES) e design system inspirado na Apple.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "next-intl"],
+        "category": "frontend",
+        "github": "https://github.com/franciscomarinho",
+        "live": "https://franciscomarinho.dev",
+        "image": "https://picsum.photos/600/400?random=5"
+      }
+    ]
+  },
+
+  "experience": {
+    "label": "Experiência",
+    "title": "Trajetória profissional",
+    "subtitle": "Empresas e projetos que moldaram minha carreira.",
+    "present": "Presente",
+    "items": [
+      {
+        "id": "1",
+        "role": "Desenvolvedor Front-end Sênior",
+        "company": "HostGator",
+        "location": "Florianópolis",
+        "type": "CLT",
+        "start": "2025-10",
+        "end": null,
+        "description": "Desenvolvo e mantenho aplicações web em times de monetização, inovação e agentes de IA. Crio interfaces responsivas e escaláveis, implemento novas funcionalidades e contribuo para a evolução da arquitetura front-end.",
+        "highlights": [
+          "Jenkins, Design System, JavaScript ES6+, Redux Saga",
+          "Jest e React Testing Library com foco em Clean Code",
+          "ESLint, Prettier e GitFlow",
+          "Times de monetização, inovação e agentes de IA"
+        ]
+      },
+      {
+        "id": "2",
+        "role": "Desenvolvedor Front-end Pleno",
+        "company": "O2 Filmes",
+        "location": "São Paulo (remoto)",
+        "type": "PJ",
+        "start": "2024-09",
+        "end": "2025-12",
+        "description": "Atuei em plataforma SaaS para roteiristas, desenvolvendo componentes escaláveis com React.js e TypeScript, gerenciando fluxos com Redux + Saga e integrando APIs REST/GraphQL.",
+        "highlights": [
+          "React.js + TypeScript com componentes escaláveis",
+          "Redux + Saga para gerenciamento de fluxos",
+          "Integração REST/GraphQL e testes com Jest",
+          "CI/CD com GitHub Actions e Docker"
+        ]
+      },
+      {
+        "id": "3",
+        "role": "Desenvolvedor Front-end Pleno",
+        "company": "Atem Distribuidora de Petróleo",
+        "location": "Manaus (híbrido)",
+        "type": "CLT",
+        "start": "2022-05",
+        "end": "2025-05",
+        "description": "Liderei produtos em React.js/React Native e TypeScript, estruturando fluxos com Redux + Saga, bibliotecas de componentes e integrações REST/GraphQL. Atuei em squads ágeis com foco em performance e escalabilidade.",
+        "highlights": [
+          "React.js / React Native com TypeScript",
+          "Redux + Saga e bibliotecas de componentes",
+          "Otimização de bundles e automação de CI/CD",
+          "Squads ágeis — Scrum e Kanban"
+        ]
+      },
+      {
+        "id": "4",
+        "role": "Desenvolvedor de Software Jr.",
+        "company": "Sidia Instituto de Ciência e Tecnologia",
+        "location": "Manaus (presencial)",
+        "type": "CLT",
+        "start": "2021-04",
+        "end": "2022-05",
+        "description": "Criei dashboards responsivos integrados a telemetria em tempo real. Estruturei design system compartilhado, implementei micro-frontends com Module Federation e mantive testes e pipelines CI.",
+        "highlights": [
+          "React.js / Next.js com TypeScript",
+          "Design system compartilhado entre times",
+          "Micro-frontends com Module Federation",
+          "Pipelines CI e squads ágeis"
+        ]
+      },
+      {
+        "id": "5",
+        "role": "Pesquisador Bolsista (CAPES)",
+        "company": "iComp UFAM",
+        "location": "Manaus",
+        "type": "Bolsa",
+        "start": "2019-03",
+        "end": "2022-03",
+        "description": "Criei a ferramenta web UpRobotics com Google Blocks para facilitar a programação de braços robóticos, com geração de código para Arduino UNO e simulações 3D no Webots.",
+        "highlights": [
+          "Ferramenta web UpRobotics (Google Blockly)",
+          "Geração de código para Arduino UNO",
+          "Simulações 3D no Webots",
+          "Publicações no SBIE 2022 e SBESC 2020"
+        ]
+      }
+    ]
+  },
+
+  "education": {
+    "label": "Formação",
+    "title": "Formação acadêmica",
+    "items": [
+      {
+        "id": "1",
+        "degree": "Mestrado em Informática",
+        "institution": "Programa de Pós-graduação em Informática — UFAM",
+        "location": "Manaus",
+        "start": "2019-03",
+        "end": "2022-03",
+        "description": "Dissertação focada em robótica educacional. Publicações no SBIE 2022 e SBESC 2020."
+      },
+      {
+        "id": "2",
+        "degree": "Bacharelado em Engenharia de Software",
+        "institution": "Universidade Federal do Amazonas — UFAM",
+        "location": "Itacoatiara",
+        "start": "2013-11",
+        "end": "2019-01",
+        "description": ""
+      },
+      {
+        "id": "3",
+        "degree": "Técnico em Informática",
+        "institution": "Instituto Federal do Amazonas — IFAM",
+        "location": "Parintins",
+        "start": "2010-03",
+        "end": "2012-12",
+        "description": "Técnico em Informática Integrado ao Ensino Médio."
+      }
+    ]
+  },
+
+  "contact": {
+    "label": "Contato",
+    "title": "Vamos conversar?",
+    "subtitle": "Aberto a oportunidades, freelas e colaborações. Me envie uma mensagem!",
+    "form": {
+      "name_label": "Nome",
+      "name_placeholder": "Seu nome completo",
+      "email_label": "E-mail",
+      "email_placeholder": "seu@email.com",
+      "subject_label": "Assunto",
+      "subject_placeholder": "Sobre o que você quer falar?",
+      "message_label": "Mensagem",
+      "message_placeholder": "Escreva sua mensagem aqui...",
+      "submit": "Enviar mensagem",
+      "submitting": "Enviando...",
+      "success_title": "Mensagem enviada!",
+      "success_body": "Obrigado pelo contato. Responderei em breve.",
+      "error_title": "Ops, algo deu errado.",
+      "error_body": "Tente novamente ou me envie um e-mail diretamente."
+    },
+    "validation": {
+      "name_required": "Nome é obrigatório",
+      "name_min": "Nome deve ter pelo menos 2 caracteres",
+      "email_required": "E-mail é obrigatório",
+      "email_invalid": "E-mail inválido",
+      "subject_required": "Assunto é obrigatório",
+      "message_required": "Mensagem é obrigatória",
+      "message_min": "Mensagem deve ter pelo menos 10 caracteres"
+    },
+    "social": {
+      "email": "franciscogabriel.dev@gmail.com",
+      "github": "https://github.com/franciscomarinho",
+      "linkedin": "https://linkedin.com/in/franciscomarinho",
+      "discord": "https://discord.com"
+    }
+  },
+
+  "footer": {
+    "made_with": "Feito com",
+    "and": "e",
+    "rights": "Todos os direitos reservados.",
+    "back_to_top": "Voltar ao topo"
+  },
+
+  "accessibility": {
+    "skip_to_content": "Pular para o conteúdo principal",
+    "theme_toggle": "Alternar tema",
+    "language_switcher": "Selecionar idioma",
+    "open_link_new_tab": "Abre em nova aba",
+    "project_image_alt": "Imagem do projeto {title}",
+    "profile_photo_alt": "Foto de perfil de Francisco Marinho"
+  }
+}
