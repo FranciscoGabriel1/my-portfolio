@@ -7,6 +7,7 @@ import { ArrowDown, Download, ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FadeInView } from "@/components/animations/FadeInView";
+import { Particles } from "@/components/animations/Particles";
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -29,6 +30,7 @@ export function Hero() {
     >
       {/* Animated background blobs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <Particles />
         <motion.div
           animate={{ scale: [1, 1.12, 1], opacity: [0.12, 0.18, 0.12] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
