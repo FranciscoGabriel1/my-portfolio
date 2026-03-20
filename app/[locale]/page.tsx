@@ -11,15 +11,17 @@ export default function HomePage() {
     <>
       <Navbar />
 
-      <main id="main-content" className="pt-16">
-        <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Contact />
-      </main>
+      <div className="overflow-x-hidden">
+        <main id="main-content" className="pt-16">
+          <Hero />
+          <About />
+          <Projects />
+          <Experience />
+          <Contact />
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 }

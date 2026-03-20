@@ -72,7 +72,7 @@ export function Hero() {
             <FadeInView delay={0.2}>
               <h1
                 className="font-display font-black leading-none tracking-tight text-text-primary"
-                style={{ fontSize: "clamp(2.4rem, 6vw, 5.5rem)" }}
+                style={{ fontSize: "clamp(1.75rem, 8vw, 5.5rem)" }}
               >
                 {t("name")}
               </h1>

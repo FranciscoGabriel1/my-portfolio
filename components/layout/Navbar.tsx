@@ -38,16 +38,13 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
+      <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           isScrolled
             ? "glass border-b border-border"
             : "bg-transparent"
         )}
-        initial={{ y: -64, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
       >
         <nav
           aria-label="Navegação principal"
@@ -101,7 +98,10 @@ export function Navbar() {
               aria-label={mobileOpen ? t("close_menu") : t("open_menu")}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
-              onClick={() => setMobileOpen((v) => !v)}
+              onClick={(e) => {
+                setMobileOpen((v) => !v);
+                (e.currentTarget as HTMLButtonElement).blur();
+              }}
             >
               <AnimatePresence mode="wait" initial={false}>
                 {mobileOpen ? (
@@ -129,7 +129,7 @@ export function Navbar() {
             </Button>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Mobile menu overlay */}
       <AnimatePresence>
@@ -139,10 +139,10 @@ export function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 28, stiffness: 220 }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="fixed inset-0 z-40 flex flex-col bg-background px-6 pt-24 pb-10 md:hidden"
           >
             <ul className="flex flex-col gap-2" role="list">

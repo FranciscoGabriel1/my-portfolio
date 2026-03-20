@@ -16,8 +16,8 @@ interface FadeInViewProps {
 const directionOffset: Record<NonNullable<FadeInViewProps["direction"]>, { x: number; y: number }> = {
   up: { x: 0, y: 24 },
   down: { x: 0, y: -24 },
-  left: { x: 24, y: 0 },
-  right: { x: -24, y: 0 },
+  left: { x: 0, y: 24 },
+  right: { x: 0, y: 24 },
   none: { x: 0, y: 0 },
 };
 
