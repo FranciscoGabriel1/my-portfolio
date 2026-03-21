@@ -37,7 +37,8 @@ cp .env.local.example .env.local
 
 | Variable | Required | Description |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Only for translations | API key from [console.anthropic.com](https://console.anthropic.com) |
+| `DEEPL_API_KEY` | Only for translations | Free key at [deepl.com/pro-api](https://deepl.com/pro-api) |
+| `RESEND_API_KEY` | Contact form | Free key at [resend.com](https://resend.com) |
 
 ---
 
@@ -49,7 +50,9 @@ Edit `messages/pt.json` with your content in Portuguese, then run:
 npm run translate
 ```
 
-This calls the Claude API and overwrites `messages/en.json` and `messages/es.json` automatically.
+This calls the DeepL API and overwrites `messages/en.json` and `messages/es.json` automatically.
+
+Free plan: 500.000 characters/month — more than enough for a portfolio.
 
 ---
 
