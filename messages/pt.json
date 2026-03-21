@@ -127,8 +127,8 @@
         "stack": ["React.js", "JavaScript", "Google Blockly", "Webots", "Arduino"],
         "category": "fullstack",
         "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=1"
+        "live": "https://uprobotics.com.br/",
+        "image": "/images/projects/uprobotics.png"
       },
       {
         "id": "2",

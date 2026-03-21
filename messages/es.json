@@ -32,7 +32,7 @@
       "Arquitecto de sistemas de diseño"
     ],
     "available": "Disponible para oportunidades",
-    "tagline": "¿Necesitas un sitio web o una aplicación? Soy un profesional front-end con amplia experiencia. Puedo resolver tu problema utilizando las mejores tecnologías del mercado.",
+    "tagline": "¿Necesitas un sitio web o una aplicación? Soy un profesional front-end con amplia experiencia. Resuelvo tu problema utilizando las mejores tecnologías del mercado.",
     "cta_projects": "Ver proyectos",
     "cta_cv": "Descargar CV",
     "scroll_hint": "Desplácese hacia abajo"
@@ -104,7 +104,7 @@
   "projects": {
     "label": "Proyectos",
     "title": "Lo que ya he construido",
-    "subtitle": "Una selección de los proyectos de los que me siento más orgulloso.",
+    "subtitle": "Una selección de los proyectos de los que estoy más orgulloso.",
     "filters": {
       "all": "Todos",
       "frontend": "Frontend",
@@ -127,8 +127,8 @@
         ],
         "category": "fullstack",
         "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=1"
+        "live": "https://uprobotics.com.br/",
+        "image": "/images/projects/uprobotics.png"
       },
       {
         "id": "2",
@@ -215,7 +215,7 @@
         "description": "Desarrollo y mantengo aplicaciones web para los equipos de monetización, innovación y agentes de IA. Creo interfaces responsivas y escalables, implemento nuevas funcionalidades y contribuyo a la evolución de la arquitectura front-end.",
         "highlights": [
           "Jenkins, Sistema de Diseño, JavaScript ES6+, Redux Saga",
-          "Biblioteca de pruebas de Jest y React con enfoque en código limpio",
+          "Biblioteca de pruebas de Jest y React con un enfoque en el código limpio",
           "ESLint, Prettier y GitFlow",
           "Equipos de monetización, innovación y agentes de IA"
         ]
@@ -260,7 +260,7 @@
         "type": "CLT",
         "start": "2021-04",
         "end": "2022-05",
-        "description": "Creé cuadros de mando interactivos integrados con telemetría en tiempo real. Estructuré un sistema de diseño compartido, implementé micro-frontends con Module Federation y mantuve pruebas CI y pipelines.",
+        "description": "Creé cuadros de mando con capacidad de respuesta integrados con telemetría en tiempo real. Estructuré un sistema de diseño compartido, implementé micro-frontends con Module Federation y mantuve pruebas CI y pipelines.",
         "highlights": [
           "React.js / Next.js con TypeScript",
           "Sistema de diseño compartido entre equipos",
