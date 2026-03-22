@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations, useMessages, useLocale } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import { ArrowDown, Download, ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -10,6 +10,27 @@ import { Badge } from "@/components/ui/Badge";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { Particles } from "@/components/animations/Particles";
 import { CV_URL } from "@/lib/cv";
+
+function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const duration = 900;
+    const startTime = performance.now();
+    function frame(now: number) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }, [inView, target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -158,17 +179,19 @@ export function Hero() {
               {/* Stats */}
               <div className="mb-5 grid grid-cols-3 gap-2">
                 {[
-                  { value: "5+", label: "Anos" },
-                  { value: "4", label: "Empresas" },
-                  { value: "10+", label: "Projetos" },
-                ].map(({ value, label }) => (
+                  { target: 5, suffix: "+", labelKey: "stat_years" },
+                  { target: 4, suffix: "",  labelKey: "stat_companies" },
+                  { target: 30, suffix: "+", labelKey: "stat_projects" },
+                ].map(({ target, suffix, labelKey }) => (
                   <div
-                    key={label}
+                    key={labelKey}
                     className="flex flex-col items-center rounded-md bg-surface p-3 text-center"
                   >
-                    <span className="text-h3 font-bold text-accent-primary">{value}</span>
+                    <span className="text-h3 font-bold text-accent-primary">
+                      <CountUp target={target} suffix={suffix} />
+                    </span>
                     <span className="text-[0.6rem] uppercase tracking-widest text-text-muted">
-                      {label}
+                      {t(labelKey)}
                     </span>
                   </div>
                 ))}

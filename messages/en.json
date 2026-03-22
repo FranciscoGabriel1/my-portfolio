@@ -35,7 +35,10 @@
     "tagline": "Need a website or application? I'm a front-end professional with extensive experience. I can solve your problem using the best technologies on the market.",
     "cta_projects": "See Projects",
     "cta_cv": "Download CV",
-    "scroll_hint": "Scroll down"
+    "scroll_hint": "Scroll down",
+    "stat_years": "Years",
+    "stat_companies": "Companies",
+    "stat_projects": "Projects"
   },
   "about": {
     "label": "About",

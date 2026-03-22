@@ -35,7 +35,10 @@
     "tagline": "¿Necesitas un sitio web o una aplicación? Soy un profesional front-end con amplia experiencia. Puedo resolver tu problema utilizando las mejores tecnologías del mercado.",
     "cta_projects": "Ver proyectos",
     "cta_cv": "Descargar CV",
-    "scroll_hint": "Desplácese hacia abajo"
+    "scroll_hint": "Desplácese hacia abajo",
+    "stat_years": "Años",
+    "stat_companies": "Empresas",
+    "stat_projects": "Proyectos"
   },
   "about": {
     "label": "Acerca de",
