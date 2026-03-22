@@ -126,75 +126,120 @@
           "Arduino"
         ],
         "category": "fullstack",
-        "github": "https://github.com/franciscomarinho",
+        "github": "https://github.com/FranciscoGabriel1/uprobotics",
         "live": "https://uprobotics.com.br/",
         "image": "/images/projects/uprobotics.png"
       },
       {
         "id": "2",
-        "title": "HobbySphere Social Network",
-        "description": "Social network for hobby enthusiasts with personalized feeds, forums and multimedia content. WebAcademy project with robust backend and intuitive frontend.",
+        "title": "SaaS Platform for Screenwriters",
+        "description": "SaaS platform for screenwriters developed at O2 Filmes with React.js and TypeScript. Scalable components with Redux + Saga, REST/GraphQL integration and automated CI/CD pipelines.",
         "stack": [
           "React.js",
           "TypeScript",
-          "Node.js",
+          "Radix UI",
+          "Redux Saga",
+          "Jest",
           "Docker",
-          "MySQL",
-          "UI material"
+          "Ruby on Rails",
+          "Prosemirror"
         ],
         "category": "fullstack",
-        "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=2"
+        "github": null,
+        "live": "https://teksto.com/#/",
+        "image": "/images/projects/teksto.png"
       },
       {
         "id": "3",
-        "title": "Telemetry Dashboard",
-        "description": "Responsive dashboards integrated with real-time telemetry data, developed in Sidia with React.js/Next.js and a design system shared via micro-frontends.",
+        "title": "HostGator Client Dashboard",
+        "description": "Dashboard for HostGator customers with metrics visualization, service management and integrated support. Developed with a focus on user experience, performance and accessibility.",
         "stack": [
           "React.js",
-          "Next.js",
-          "TypeScript",
-          "Module Federation",
-          "WebSocket"
-        ],
-        "category": "frontend",
-        "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=3"
-      },
-      {
-        "id": "4",
-        "title": "SaaS Platform for Screenwriters",
-        "description": "SaaS platform developed at O2 Filmes with React.js and TypeScript. Scalable components, Redux + Saga, GraphQL integration and automated CI/CD.",
-        "stack": [
-          "React.js",
-          "TypeScript",
+          "JavaScript",
           "Redux Saga",
-          "GraphQL",
+          "Styled Components",
           "Jest",
-          "Docker"
+          "Design System",
+          "Docker",
+          "Jenkins"
         ],
         "category": "frontend",
         "github": null,
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=4"
+        "live": "https://cliente.hostgator.com.br/inicio",
+        "image": "/images/projects/dash_hg.png"
+      },
+      {
+        "id": "4",
+        "title": "HostGator shopping cart",
+        "description": "HostGator's shopping cart module for purchasing hosting products and services. Developed with React.js and Redux Saga, with a focus on conversion and a fluid shopping experience.",
+        "stack": [
+          "React.js",
+          "JavaScript",
+          "Redux Saga",
+          "Styled Components",
+          "Jest",
+          "Design System",
+          "Docker",
+          "Jenkins"
+        ],
+        "category": "frontend",
+        "github": null,
+        "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
+        "image": "/images/projects/carrinho_hg.png"
       },
       {
         "id": "5",
-        "title": "Personal Portfolio",
-        "description": "This portfolio! Developed with Next.js 14, TypeScript, Tailwind CSS, Framer Motion, next-intl (PT/EN/ES) and Apple-inspired design system.",
+        "title": "MBX Academy System",
+        "description": "Pecege Institute's learning management system (LMS) for corporate education, responsible for making available, transmitting and managing classes, events, assessments and reports.",
         "stack": [
-          "Next.js",
+          "React.js",
           "TypeScript",
+          "Zustand",
+          "Jotai",
+          "zod",
           "Tailwind CSS",
-          "Framer Motion",
-          "next-intl"
+          "DS Arandu",
+          "Azure",
+          "CI/CD",
+          "Docker",
+          "Observability with Sentry"
         ],
         "category": "frontend",
-        "github": "https://github.com/franciscomarinho",
-        "live": "https://franciscomarinho.dev",
-        "image": "https://picsum.photos/600/400?random=5"
+        "github": null,
+        "live": "https://newdashboard.mbx.academy/",
+        "image": "/images/projects/lms_pecege.png"
+      },
+      {
+        "id": "6",
+        "title": "Customer Portal - Atem",
+        "description": "Customer portal for Atem Distribuidora de Petróleo with React.js and TypeScript. It offers invoice viewing, order history and integration with AWS services for secure authentication.",
+        "stack": [
+          "React",
+          "TypeScript",
+          "Context API",
+          "UI material",
+          "Observability with DataDog",
+          "Cognito",
+          "AWS"
+        ],
+        "category": "frontend",
+        "github": null,
+        "live": "https://portal.grupoatem.com.br",
+        "image": "/images/projects/portal_atem.png"
+      },
+      {
+        "id": "7",
+        "title": "University Laboratory Site",
+        "description": "Institutional website for a university laboratory developed with Bootstrap, HTML5 and CSS3. It presents research, publications and members of the group with responsive design and accessible navigation.",
+        "stack": [
+          "Bootstrap",
+          "HTML5",
+          "CSS3"
+        ],
+        "category": "frontend",
+        "github": "https://github.com/FranciscoGabriel1/lab312",
+        "live": "https://lab312.vercel.app/",
+        "image": "/images/projects/lab312.png"
       }
     ]
   },

@@ -126,49 +126,69 @@
         "description": "Ferramenta web para programação visual de braços robóticos usando Google Blocks. Permite gerar código para Arduino UNO ou simulações 3D no Webots por meio de interface drag-and-drop intuitiva.",
         "stack": ["React.js", "JavaScript", "Google Blockly", "Webots", "Arduino"],
         "category": "fullstack",
-        "github": "https://github.com/franciscomarinho",
+        "github": "https://github.com/FranciscoGabriel1/uprobotics",
         "live": "https://uprobotics.com.br/",
         "image": "/images/projects/uprobotics.png"
       },
-      {
+            {
         "id": "2",
-        "title": "HobbySphere Social Network",
-        "description": "Rede social para entusiastas de hobbies com feeds personalizados, fóruns e conteúdos multimídia. Projeto do WebAcademy com backend robusto e frontend intuitivo.",
-        "stack": ["React.js", "TypeScript", "Node.js", "Docker", "MySQL", "Material UI"],
+        "title": "Plataforma SaaS para Roteiristas",
+        "description": "Plataforma SaaS para roteiristas desenvolvida na O2 Filmes com React.js e TypeScript. Componentes escaláveis com Redux + Saga, integração REST/GraphQL e pipelines CI/CD automatizados.",
+        "stack": ["React.js", "TypeScript", "Radix UI", "Redux Saga", "Jest", "Docker", "Ruby on Rails", "Prosemirror"],
         "category": "fullstack",
-        "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=2"
+        "github": null,
+        "live": "https://teksto.com/#/",
+        "image": "/images/projects/teksto.png"
       },
-      {
+            {
         "id": "3",
-        "title": "Dashboard de Telemetria",
-        "description": "Dashboards responsivos integrados a dados de telemetria em tempo real, desenvolvidos no Sidia com React.js/Next.js e design system compartilhado via micro-frontends.",
-        "stack": ["React.js", "Next.js", "TypeScript", "Module Federation", "WebSocket"],
+        "title": "Dashboard Cliente da HostGator",
+        "description": "Dashboard para clientes da HostGator com visualização de métricas, gerenciamento de serviços e suporte integrado. Desenvolvido com foco em experiência do usuário, performance e acessibilidade.",
+        "stack": ["React.js", "JavaScript", "Redux Saga", "Styled Components", "Jest", "Design System", "Docker", "Jenkins"],
         "category": "frontend",
-        "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=3"
+        "github": null,
+        "live": "https://cliente.hostgator.com.br/inicio",
+        "image": "/images/projects/dash_hg.png"
       },
       {
         "id": "4",
-        "title": "Plataforma SaaS para Roteiristas",
-        "description": "Plataforma SaaS desenvolvida na O2 Filmes com React.js e TypeScript. Componentes escaláveis, Redux + Saga, integração GraphQL e CI/CD automatizado.",
-        "stack": ["React.js", "TypeScript", "Redux Saga", "GraphQL", "Jest", "Docker"],
+        "title": "Carrinho de compras HostGator",
+        "description": "Módulo de carrinho de compras da HostGator para aquisição de produtos e serviços de hospedagem. Desenvolvido com React.js e Redux Saga, com foco em conversão e experiência de compra fluida.",
+          "stack": ["React.js", "JavaScript", "Redux Saga", "Styled Components", "Jest", "Design System", "Docker", "Jenkins"],
         "category": "frontend",
         "github": null,
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=4"
+        "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
+        "image": "/images/projects/carrinho_hg.png"
       },
       {
         "id": "5",
-        "title": "Portfólio Pessoal",
-        "description": "Este portfólio! Desenvolvido com Next.js 14, TypeScript, Tailwind CSS, Framer Motion, next-intl (PT/EN/ES) e design system inspirado na Apple.",
-        "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "next-intl"],
+        "title": "Sistema MBX Academy",
+        "description": "Sistema de gestão de aprendizagem (LMS) do Instituto Pecege, voltado à educação corporativa, responsável por disponibilizar, transmitir e gerenciar aulas, eventos, avaliações e relatórios.",
+        "stack": ["React.js","TypeScript", "Zustand", "Jotai","zod","Tailwind CSS", "DS Arandu", "Azure", "CI/CD", "Docker", "Observability com Sentry"],
         "category": "frontend",
-        "github": "https://github.com/franciscomarinho",
-        "live": "https://franciscomarinho.dev",
-        "image": "https://picsum.photos/600/400?random=5"
+        "github": null,
+        "live": "https://newdashboard.mbx.academy/",
+        "image": "/images/projects/lms_pecege.png"
+      },
+      {
+        "id": "6",
+        "title": "Portal do Cliente - Atem",
+        "description": "Portal do cliente da Atem Distribuidora de Petróleo com React.js e TypeScript. Oferece visualização de faturas, histórico de pedidos e integração com serviços AWS para autenticação segura.",
+        "stack": ["React", "TypeScript", "Context API", "Material UI", "Observability com DataDog", "Cognito", "AWS"],
+        "category": "frontend",
+        "github": null,
+        "live": "https://portal.grupoatem.com.br",
+        "image": "/images/projects/portal_atem.png"
+      },
+      {
+        "id": "7",
+        "title": "Site de Laboratório da Universidade",
+        "description": "Site institucional de laboratório universitário desenvolvido com Bootstrap, HTML5 e CSS3. Apresenta pesquisas, publicações e membros do grupo com design responsivo e navegação acessível.",
+        "stack": ["Bootstrap", "HTML5", "CSS3"],
+        "category": "frontend",
+        "github": "https://github.com/FranciscoGabriel1/lab312",
+        "live": "https://lab312.vercel.app/",
+        "image": "/images/projects/lab312.png"
       }
     ]
   },

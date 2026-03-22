@@ -32,7 +32,7 @@
       "Arquitecto de sistemas de diseño"
     ],
     "available": "Disponible para oportunidades",
-    "tagline": "¿Necesitas un sitio web o una aplicación? Soy un profesional front-end con amplia experiencia. Resuelvo tu problema utilizando las mejores tecnologías del mercado.",
+    "tagline": "¿Necesitas un sitio web o una aplicación? Soy un profesional front-end con amplia experiencia. Puedo resolver tu problema utilizando las mejores tecnologías del mercado.",
     "cta_projects": "Ver proyectos",
     "cta_cv": "Descargar CV",
     "scroll_hint": "Desplácese hacia abajo"
@@ -104,7 +104,7 @@
   "projects": {
     "label": "Proyectos",
     "title": "Lo que ya he construido",
-    "subtitle": "Una selección de los proyectos de los que estoy más orgulloso.",
+    "subtitle": "Una selección de los proyectos de los que me siento más orgulloso.",
     "filters": {
       "all": "Todos",
       "frontend": "Frontend",
@@ -126,75 +126,120 @@
           "Arduino"
         ],
         "category": "fullstack",
-        "github": "https://github.com/franciscomarinho",
+        "github": "https://github.com/FranciscoGabriel1/uprobotics",
         "live": "https://uprobotics.com.br/",
         "image": "/images/projects/uprobotics.png"
       },
       {
         "id": "2",
-        "title": "Red social HobbySphere",
-        "description": "Red social para aficionados con feeds personalizados, foros y contenidos multimedia. Proyecto WebAcademy con backend robusto y frontend intuitivo.",
+        "title": "Plataforma SaaS para guionistas",
+        "description": "Plataforma SaaS para guionistas desarrollada en O2 Filmes con React.js y TypeScript. Componentes escalables con Redux + Saga, integración REST/GraphQL y pipelines CI/CD automatizados.",
         "stack": [
           "React.js",
           "TypeScript",
-          "Node.js",
+          "Radix UI",
+          "Saga Redux",
+          "Jest",
           "Docker",
-          "MySQL",
-          "Material de interfaz de usuario"
+          "Ruby en Rails",
+          "Prosemirror"
         ],
         "category": "fullstack",
-        "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=2"
+        "github": null,
+        "live": "https://teksto.com/#/",
+        "image": "/images/projects/teksto.png"
       },
       {
         "id": "3",
-        "title": "Panel de telemetría",
-        "description": "Cuadros de mando responsivos integrados con datos de telemetría en tiempo real, desarrollados en Sidia con React.js/Next.js y un sistema de diseño compartido a través de microfrontales.",
+        "title": "Panel de Control de HostGator",
+        "description": "Panel de control para clientes de HostGator con visualización de métricas, gestión de servicios y soporte integrado. Desarrollado centrándose en la experiencia del usuario, el rendimiento y la accesibilidad.",
         "stack": [
           "React.js",
-          "Siguiente.js",
-          "TypeScript",
-          "Módulo Federación",
-          "WebSocket"
-        ],
-        "category": "frontend",
-        "github": "https://github.com/franciscomarinho",
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=3"
-      },
-      {
-        "id": "4",
-        "title": "Plataforma SaaS para guionistas",
-        "description": "Plataforma SaaS desarrollada en O2 Filmes con React.js y TypeScript. Componentes escalables, Redux + Saga, integración GraphQL y CI/CD automatizado.",
-        "stack": [
-          "React.js",
-          "TypeScript",
+          "JavaScript",
           "Saga Redux",
-          "GraphQL",
+          "Componentes estilizados",
           "Jest",
-          "Docker"
+          "Sistema de diseño",
+          "Docker",
+          "Jenkins"
         ],
         "category": "frontend",
         "github": null,
-        "live": null,
-        "image": "https://picsum.photos/600/400?random=4"
+        "live": "https://cliente.hostgator.com.br/inicio",
+        "image": "/images/projects/dash_hg.png"
+      },
+      {
+        "id": "4",
+        "title": "Cesta de la compra HostGator",
+        "description": "Módulo de carrito de compras de HostGator para la compra de productos y servicios de hosting. Desarrollado con React.js y Redux Saga, con un enfoque en la conversión y una experiencia de compra fluida.",
+        "stack": [
+          "React.js",
+          "JavaScript",
+          "Saga Redux",
+          "Componentes estilizados",
+          "Jest",
+          "Sistema de diseño",
+          "Docker",
+          "Jenkins"
+        ],
+        "category": "frontend",
+        "github": null,
+        "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
+        "image": "/images/projects/carrinho_hg.png"
       },
       {
         "id": "5",
-        "title": "Cartera personal",
-        "description": "¡Esta cartera! Desarrollado con Next.js 14, TypeScript, Tailwind CSS, Framer Motion, next-intl (PT/EN/ES) y sistema de diseño inspirado en Apple.",
+        "title": "Sistema MBX Academy",
+        "description": "Sistema de gestión del aprendizaje (LMS) del Instituto Pecege para la educación corporativa, responsable de poner a disposición, transmitir y gestionar clases, eventos, evaluaciones e informes.",
         "stack": [
-          "Siguiente.js",
+          "React.js",
           "TypeScript",
+          "Zustand",
+          "Jotai",
+          "zod",
           "Tailwind CSS",
-          "Movimiento Framer",
-          "next-intl"
+          "DS Arandu",
+          "Azure",
+          "CI/CD",
+          "Docker",
+          "Observabilidad con Sentry"
         ],
         "category": "frontend",
-        "github": "https://github.com/franciscomarinho",
-        "live": "https://franciscomarinho.dev",
-        "image": "https://picsum.photos/600/400?random=5"
+        "github": null,
+        "live": "https://newdashboard.mbx.academy/",
+        "image": "/images/projects/lms_pecege.png"
+      },
+      {
+        "id": "6",
+        "title": "Portal del cliente - Atem",
+        "description": "Portal de clientes para Atem Distribuidora de Petróleo con React.js y TypeScript. Ofrece visualización de facturas, historial de pedidos e integración con servicios de AWS para autenticación segura.",
+        "stack": [
+          "Reaccione",
+          "TypeScript",
+          "API de contexto",
+          "Material de interfaz de usuario",
+          "Observabilidad con DataDog",
+          "Cognito",
+          "AWS"
+        ],
+        "category": "frontend",
+        "github": null,
+        "live": "https://portal.grupoatem.com.br",
+        "image": "/images/proyectos/portal_atem.png"
+      },
+      {
+        "id": "7",
+        "title": "Laboratorio universitario",
+        "description": "Sitio web institucional para un laboratorio universitario desarrollado con Bootstrap, HTML5 y CSS3. Presenta investigaciones, publicaciones y miembros del grupo con diseño responsive y navegación accesible.",
+        "stack": [
+          "Bootstrap",
+          "HTML5",
+          "CSS3"
+        ],
+        "category": "frontend",
+        "github": "https://github.com/FranciscoGabriel1/lab312",
+        "live": "https://lab312.vercel.app/",
+        "image": "/images/projects/lab312.png"
       }
     ]
   },
@@ -215,7 +260,7 @@
         "description": "Desarrollo y mantengo aplicaciones web para los equipos de monetización, innovación y agentes de IA. Creo interfaces responsivas y escalables, implemento nuevas funcionalidades y contribuyo a la evolución de la arquitectura front-end.",
         "highlights": [
           "Jenkins, Sistema de Diseño, JavaScript ES6+, Redux Saga",
-          "Biblioteca de pruebas de Jest y React con un enfoque en el código limpio",
+          "Biblioteca de pruebas de Jest y React con un enfoque en código limpio",
           "ESLint, Prettier y GitFlow",
           "Equipos de monetización, innovación y agentes de IA"
         ]
@@ -260,7 +305,7 @@
         "type": "CLT",
         "start": "2021-04",
         "end": "2022-05",
-        "description": "Creé cuadros de mando con capacidad de respuesta integrados con telemetría en tiempo real. Estructuré un sistema de diseño compartido, implementé micro-frontends con Module Federation y mantuve pruebas CI y pipelines.",
+        "description": "Creé cuadros de mando interactivos integrados con telemetría en tiempo real. Estructuré un sistema de diseño compartido, implementé micro-frontends con Module Federation y mantuve pruebas CI y pipelines.",
         "highlights": [
           "React.js / Next.js con TypeScript",
           "Sistema de diseño compartido entre equipos",
