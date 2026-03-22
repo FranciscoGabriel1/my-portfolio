@@ -1,36 +1,16 @@
 "use client";
 
 import { useTranslations, useMessages, useLocale } from "next-intl";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { ArrowDown, Download, ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { Particles } from "@/components/animations/Particles";
+import { CountUp } from "@/components/animations/CountUp";
 import { CV_URL } from "@/lib/cv";
-
-function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const duration = 900;
-    const startTime = performance.now();
-    function frame(now: number) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * target));
-      if (progress < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }, [inView, target]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
-}
 
 export function Hero() {
   const t = useTranslations("hero");

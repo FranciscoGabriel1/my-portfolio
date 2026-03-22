@@ -116,6 +116,7 @@
     },
     "github_label": "Ver en GitHub",
     "live_label": "Ver en línea",
+    "filter_aria_label": "Filtrar proyectos",
     "items": [
       {
         "id": "1",
@@ -371,6 +372,8 @@
     "label": "Póngase en contacto con",
     "title": "¿Hablamos?",
     "subtitle": "Abierto a oportunidades, freelancing y colaboraciones. ¡Envíame un mensaje!",
+    "social_title": "Redes sociales",
+    "form_aria_label": "Formulario de contacto",
     "form": {
       "name_label": "Nombre",
       "name_placeholder": "Su nombre completo",

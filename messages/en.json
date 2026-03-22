@@ -116,6 +116,7 @@
     },
     "github_label": "View on GitHub",
     "live_label": "View online",
+    "filter_aria_label": "Filter projects",
     "items": [
       {
         "id": "1",
@@ -371,6 +372,8 @@
     "label": "Contact",
     "title": "Shall we talk?",
     "subtitle": "Open to opportunities, freelancing and collaborations. Send me a message!",
+    "social_title": "Social networks",
+    "form_aria_label": "Contact form",
     "form": {
       "name_label": "Name",
       "name_placeholder": "Your full name",

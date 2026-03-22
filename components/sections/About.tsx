@@ -4,6 +4,7 @@ import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { MapPin, Code2, Layers, Server, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { StaggerChildren } from "@/components/animations/StaggerChildren";
 import { cn } from "@/lib/utils";
@@ -41,10 +42,7 @@ export function About() {
       aria-label={t("label")}
       className="relative py-28 overflow-hidden"
     >
-      {/* Subtle background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent" />
-      </div>
+      <SectionDivider />
 
       <div className="container-content section-padding">
 

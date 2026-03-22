@@ -1,10 +1,11 @@
 "use client";
 
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations, useMessages, useLocale } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { GraduationCap, MapPin, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { cn } from "@/lib/utils";
 
@@ -30,16 +31,21 @@ interface EducationItem {
   description: string;
 }
 
-function formatPeriod(start: string, end: string | null, present: string): string {
-  const fmt = (d: string) => {
-    const [year, month] = d.split("-");
-    const date = new Date(Number(year), Number(month) - 1);
-    return date.toLocaleDateString("pt-BR", { month: "short", year: "numeric" });
+const formatPeriod = (
+  start: string,
+  end: string | null,
+  present: string,
+  locale: string
+): string => {
+  const formatDate = (dateStr: string) => {
+    const [year, month] = dateStr.split("-");
+    return new Date(Number(year), Number(month) - 1)
+      .toLocaleDateString(locale, { month: "short", year: "numeric" });
   };
-  return `${fmt(start)} — ${end ? fmt(end) : present}`;
-}
+  return `${formatDate(start)} — ${end ? formatDate(end) : present}`;
+};
 
-function TimelineLine() {
+const TimelineLine = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.05 });
 
@@ -56,11 +62,12 @@ function TimelineLine() {
       />
     </div>
   );
-}
+};
 
-export function Experience() {
+export const Experience = () => {
   const t = useTranslations("experience");
   const tEdu = useTranslations("education");
+  const locale = useLocale();
   const messages = useMessages() as unknown as {
     experience: { items: ExperienceItem[] };
     education: { items: EducationItem[] };
@@ -71,10 +78,7 @@ export function Experience() {
 
   return (
     <section id="experience" aria-label={t("label")} className="relative py-28">
-      {/* Top divider */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent" />
-      </div>
+      <SectionDivider />
 
       <div className="container-content section-padding">
 
@@ -90,12 +94,12 @@ export function Experience() {
           <TimelineLine />
 
           <div className="flex flex-col gap-10">
-            {experiences.map((item, i) => {
-              const isLeft = i % 2 === 0;
+            {experiences.map((item, index) => {
+              const isLeft = index % 2 === 0;
               return (
                 <FadeInView
                   key={item.id}
-                  delay={i * 0.08}
+                  delay={index * 0.08}
                   direction={isLeft ? "right" : "left"}
                   className={cn(
                     "relative flex flex-col",
@@ -106,6 +110,7 @@ export function Experience() {
                   {/* Card */}
                   <div className={cn("w-full lg:w-[46%]", isLeft ? "lg:pr-8" : "lg:pl-8")}>
                     <div className="glass rounded-lg p-5 transition-all duration-300 hover:border-accent-primary/20">
+
                       {/* Header */}
                       <div className="mb-3 flex items-start justify-between gap-3">
                         <div>
@@ -117,8 +122,7 @@ export function Experience() {
                           size="sm"
                           className="shrink-0"
                         >
-                          {item.end === null ? t("present") : ""}
-                          {item.end !== null && item.type}
+                          {item.end === null ? t("present") : item.type}
                         </Badge>
                       </div>
 
@@ -129,7 +133,7 @@ export function Experience() {
                           {item.location}
                         </span>
                         <span>
-                          {formatPeriod(item.start, item.end, t("present"))}
+                          {formatPeriod(item.start, item.end, t("present"), locale)}
                         </span>
                       </div>
 
@@ -140,10 +144,10 @@ export function Experience() {
 
                       {/* Highlights */}
                       <ul className="flex flex-col gap-1.5" aria-label="Destaques">
-                        {item.highlights.map((h) => (
-                          <li key={h} className="flex items-start gap-2 text-caption text-text-muted">
+                        {item.highlights.map((highlight) => (
+                          <li key={highlight} className="flex items-start gap-2 text-caption text-text-muted">
                             <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-success" aria-hidden />
-                            {h}
+                            {highlight}
                           </li>
                         ))}
                       </ul>
@@ -168,8 +172,8 @@ export function Experience() {
         </FadeInView>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {educations.map((edu, i) => (
-            <FadeInView key={edu.id} delay={i * 0.08}>
+          {educations.map((edu, index) => (
+            <FadeInView key={edu.id} delay={index * 0.08}>
               <div className="glass flex h-full flex-col gap-3 rounded-lg p-5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent-primary/10">
                   <GraduationCap className="h-4 w-4 text-accent-primary" aria-hidden />
@@ -183,7 +187,7 @@ export function Experience() {
                     <MapPin className="h-3 w-3" aria-hidden />
                     {edu.location}
                   </span>
-                  <span>{formatPeriod(edu.start, edu.end, "")}</span>
+                  <span>{formatPeriod(edu.start, edu.end, "", locale)}</span>
                 </div>
                 {edu.description && (
                   <p className="text-caption text-text-muted">{edu.description}</p>
@@ -196,4 +200,4 @@ export function Experience() {
       </div>
     </section>
   );
-}
+};

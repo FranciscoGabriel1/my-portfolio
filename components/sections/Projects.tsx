@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { cn } from "@/lib/utils";
 
@@ -21,46 +22,47 @@ interface Project {
   image: string;
 }
 
+interface Filter {
+  key: FilterKey;
+  label: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+  index: number;
+}
+
 type FilterKey = "all" | "frontend" | "backend" | "fullstack";
 
-export function Projects() {
+export const Projects = () => {
   const t = useTranslations("projects");
   const messages = useMessages() as unknown as { projects: { items: Project[] } };
   const projects = messages.projects.items;
 
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
 
-  const filters: { key: FilterKey; label: string }[] = [
-    { key: "all", label: t("filters.all") },
-    { key: "frontend", label: t("filters.frontend") },
-    { key: "backend", label: t("filters.backend") },
+  const filters: Filter[] = [
+    { key: "all",       label: t("filters.all") },
+    { key: "frontend",  label: t("filters.frontend") },
+    { key: "backend",   label: t("filters.backend") },
     { key: "fullstack", label: t("filters.fullstack") },
   ];
 
-  const filtered =
+  const filteredProjects =
     activeFilter === "all"
       ? projects
-      : projects.filter((p) => p.category === activeFilter);
+      : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <section
-      id="projects"
-      aria-label={t("label")}
-      className="relative py-28"
-    >
-      {/* Top divider */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-px w-full max-w-4xl -translate-x-1/2 bg-gradient-to-r from-transparent via-border to-transparent" />
-      </div>
+    <section id="projects" aria-label={t("label")} className="relative py-28">
+      <SectionDivider />
 
       <div className="container-content section-padding">
 
         {/* Section header */}
         <FadeInView className="mb-12 flex flex-col items-center text-center gap-3">
           <Badge variant="secondary">{t("label")}</Badge>
-          <h2 className="font-display text-h1 font-bold text-text-primary">
-            {t("title")}
-          </h2>
+          <h2 className="font-display text-h1 font-bold text-text-primary">{t("title")}</h2>
           <p className="max-w-md text-body text-text-secondary">{t("subtitle")}</p>
         </FadeInView>
 
@@ -68,7 +70,7 @@ export function Projects() {
         <FadeInView delay={0.1} className="mb-10 flex justify-center">
           <div
             role="tablist"
-            aria-label="Filtrar projetos"
+            aria-label={t("filter_aria_label")}
             className="glass flex items-center gap-1 rounded-lg p-1"
           >
             {filters.map(({ key, label }) => (
@@ -80,9 +82,7 @@ export function Projects() {
                 className={cn(
                   "relative rounded-md px-4 py-1.5 text-caption font-medium transition-colors duration-200",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary",
-                  activeFilter === key
-                    ? "text-white"
-                    : "text-text-secondary hover:text-text-primary"
+                  activeFilter === key ? "text-white" : "text-text-secondary hover:text-text-primary"
                 )}
               >
                 {activeFilter === key && (
@@ -108,34 +108,25 @@ export function Projects() {
             transition={{ duration: 0.3 }}
             className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} t={t} />
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </motion.div>
         </AnimatePresence>
       </div>
     </section>
   );
-}
+};
 
-function ProjectCard({
-  project,
-  index,
-  t,
-}: {
-  project: Project;
-  index: number;
-  t: ReturnType<typeof useTranslations<"projects">>;
-}) {
+const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const t = useTranslations("projects");
+
   return (
     <FadeInView delay={index * 0.07}>
-      <Card
-        hoverable
-        className="group flex h-full flex-col overflow-hidden"
-      >
+      <Card hoverable className="group flex h-full flex-col overflow-hidden">
+
         {/* Image */}
         <div className="relative h-44 w-full overflow-hidden">
-          {/* TODO: replace image src with your real project screenshot */}
           <Image
             src={project.image}
             alt={`Imagem do projeto ${project.title}`}
@@ -143,10 +134,8 @@ function ProjectCard({
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
-          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
 
-          {/* Category badge */}
           <div className="absolute left-3 top-3">
             <Badge
               variant="primary"
@@ -160,9 +149,7 @@ function ProjectCard({
 
         {/* Content */}
         <div className="flex flex-1 flex-col gap-3 p-5">
-          <h3 className="font-display text-h3 font-bold text-text-primary">
-            {project.title}
-          </h3>
+          <h3 className="font-display text-h3 font-bold text-text-primary">{project.title}</h3>
 
           <p className="flex-1 text-caption leading-relaxed text-text-secondary">
             {project.description}
@@ -171,9 +158,7 @@ function ProjectCard({
           {/* Stack badges */}
           <div className="flex flex-wrap gap-1.5">
             {project.stack.map((tech) => (
-              <Badge key={tech} variant="default" size="sm">
-                {tech}
-              </Badge>
+              <Badge key={tech} variant="default" size="sm">{tech}</Badge>
             ))}
           </div>
 
@@ -218,4 +203,4 @@ function ProjectCard({
       </Card>
     </FadeInView>
   );
-}
+};
