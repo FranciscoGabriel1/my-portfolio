@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations, useMessages, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowDown, Download, ArrowRight, MapPin } from "lucide-react";
@@ -9,9 +9,12 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { Particles } from "@/components/animations/Particles";
+import { CV_URL } from "@/lib/cv";
 
 export function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
+  const cvUrl = CV_URL[locale] ?? CV_URL.en;
   const messages = useMessages();
   const roles = (messages as unknown as { hero: { roles: string[] } }).hero.roles;
   const [roleIndex, setRoleIndex] = useState(0);
@@ -111,8 +114,7 @@ export function Hero() {
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Button>
               </a>
-              {/* TODO: copy curriculum PDF to /public/cv.pdf */}
-              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                 <Button variant="secondary" size="lg" className="w-full sm:w-auto">
                   <Download className="h-4 w-4" aria-hidden />
                   {t("cta_cv")}

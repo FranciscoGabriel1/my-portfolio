@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { CV_URL } from "@/lib/cv";
 
 const NAV_LINKS = [
   { label: "about", href: "#about" },
@@ -18,6 +19,8 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const t = useTranslations("nav");
+  const locale = useLocale();
+  const cvUrl = CV_URL[locale] ?? CV_URL.en;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -82,7 +85,7 @@ export function Navbar() {
           <div className="hidden items-center gap-1 md:flex">
             <LanguageSwitcher />
             <ThemeToggle />
-            <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label={t("download_cv")}>
+            <a href={cvUrl} target="_blank" rel="noopener noreferrer" aria-label={t("download_cv")}>
               <Button variant="outline" size="sm">
                 {t("download_cv")}
               </Button>
@@ -167,7 +170,7 @@ export function Navbar() {
             <div className="mt-8 flex items-center gap-3 border-t border-border pt-8">
               <LanguageSwitcher />
               <a
-                href="/cv.pdf"
+                href={cvUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleNavClick}
