@@ -105,145 +105,57 @@
   "projects": {
     "label": "Projetos",
     "title": "O que já construí",
-    "subtitle": "Uma seleção dos projetos que mais me orgulho.",
-    "filters": {
-      "all": "Todos",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "fullstack": "Full Stack"
-    },
-    "github_label": "Ver no GitHub",
-    "live_label": "Ver online",
-    "filter_aria_label": "Filtrar projetos",
-    "items": [
-      {
-        "id": "1",
+    "subtitle": "Produtos em produção, do carrinho de compras da HostGator a um editor de roteiros usado por roteiristas profissionais.",
+    "did_label": "O que eu fiz",
+    "others_label": "Outros projetos",
+    "visit": "Ver online",
+    "code": "Código no GitHub",
+    "items": {
+      "curriculoraiz": {
+        "title": "CurrículoRaiz",
+        "context": "Produto próprio · fundador e autor",
+        "description": "SaaS para montar currículos, com 9 modelos, exportação em PDF e Word e importação do PDF do LinkedIn.",
+        "did": "O produto inteiro, da tela ao PDF: editor em React com TypeScript, TanStack Query e Tiptap, e API em Node.js com Express e Prisma, que gera PDF com Puppeteer e Word com docx, com login pelo Google e pagamento pelo Mercado Pago.",
+        "image_alt": "Página inicial do CurrículoRaiz, com o título \"Um currículo com a sua cara\" e um modelo de currículo ao lado"
+      },
+      "hostgator-dashboard": {
+        "title": "Dashboard do cliente HostGator",
+        "context": "HostGator",
+        "description": "Painel em que clientes acompanham métricas, gerenciam serviços de hospedagem e pedem suporte.",
+        "did": "Interfaces em React com Redux Saga, componentes do design system e testes com Jest e React Testing Library.",
+        "image_alt": "Painel do cliente HostGator, com a busca do assistente e os atalhos de serviços"
+      },
+      "teksto": {
+        "title": "Plataforma para roteiristas",
+        "context": "Teksto · O2 Filmes",
+        "description": "Plataforma SaaS para roteiristas, com componentes escaláveis em React e TypeScript, fluxos com Redux e Saga e integração REST e GraphQL."
+      },
+      "hostgator-cart": {
+        "title": "Carrinho de compras",
+        "context": "HostGator",
+        "description": "Módulo de carrinho para a compra de produtos e serviços de hospedagem, com foco em conversão e em uma compra fluida."
+      },
+      "mbx-academy": {
+        "title": "LMS MBX Academy",
+        "context": "Instituto Pecege",
+        "description": "Sistema de gestão de aprendizagem para educação corporativa, que disponibiliza e gerencia aulas, eventos, avaliações e relatórios."
+      },
+      "atem-portal": {
+        "title": "Portal do cliente",
+        "context": "Atem",
+        "description": "Portal do cliente da Atem, com faturas, histórico de pedidos e autenticação pela AWS."
+      },
+      "uprobotics": {
         "title": "UpRobotics",
-        "description": "Ferramenta web para programação visual de braços robóticos usando Google Blocks. Permite gerar código para Arduino UNO ou simulações 3D no Webots por meio de interface drag-and-drop intuitiva.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Google Blockly",
-          "Webots",
-          "Arduino"
-        ],
-        "category": "fullstack",
-        "github": "https://github.com/FranciscoGabriel1/uprobotics",
-        "live": "https://uprobotics.com.br/",
-        "image": "/images/projects/uprobotics.png"
+        "context": "iComp UFAM · mestrado",
+        "description": "Ferramenta web de programação visual de braços robóticos com Google Blockly, que gera código para Arduino UNO ou simulações 3D no Webots."
       },
-      {
-        "id": "2",
-        "title": "Plataforma SaaS para Roteiristas",
-        "description": "Plataforma SaaS para roteiristas desenvolvida na O2 Filmes com React.js e TypeScript. Componentes escaláveis com Redux + Saga, integração REST/GraphQL e pipelines CI/CD automatizados.",
-        "stack": [
-          "React.js",
-          "TypeScript",
-          "Radix UI",
-          "Redux Saga",
-          "Jest",
-          "Docker",
-          "Ruby on Rails",
-          "Prosemirror"
-        ],
-        "category": "fullstack",
-        "github": null,
-        "live": "https://teksto.com/#/",
-        "image": "/images/projects/teksto.png"
-      },
-      {
-        "id": "3",
-        "title": "Dashboard Cliente da HostGator",
-        "description": "Dashboard para clientes da HostGator com visualização de métricas, gerenciamento de serviços e suporte integrado. Desenvolvido com foco em experiência do usuário, performance e acessibilidade.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Redux Saga",
-          "Styled Components",
-          "Jest",
-          "Design System",
-          "Docker",
-          "Jenkins"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://cliente.hostgator.com.br/inicio",
-        "image": "/images/projects/dash_hg.png"
-      },
-      {
-        "id": "4",
-        "title": "Carrinho de compras HostGator",
-        "description": "Módulo de carrinho de compras da HostGator para aquisição de produtos e serviços de hospedagem. Desenvolvido com React.js e Redux Saga, com foco em conversão e experiência de compra fluida.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Redux Saga",
-          "Styled Components",
-          "Jest",
-          "Design System",
-          "Docker",
-          "Jenkins"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
-        "image": "/images/projects/carrinho_hg.png"
-      },
-      {
-        "id": "5",
-        "title": "Sistema MBX Academy",
-        "description": "Sistema de gestão de aprendizagem (LMS) do Instituto Pecege, voltado à educação corporativa, responsável por disponibilizar, transmitir e gerenciar aulas, eventos, avaliações e relatórios.",
-        "stack": [
-          "React.js",
-          "TypeScript",
-          "Zustand",
-          "Jotai",
-          "zod",
-          "Tailwind CSS",
-          "DS Arandu",
-          "Azure",
-          "CI/CD",
-          "Docker",
-          "Observability com Sentry"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://newdashboard.mbx.academy/",
-        "image": "/images/projects/lms_pecege.png"
-      },
-      {
-        "id": "6",
-        "title": "Portal do Cliente - Atem",
-        "description": "Portal do cliente da Atem Distribuidora de Petróleo com React.js e TypeScript. Oferece visualização de faturas, histórico de pedidos e integração com serviços AWS para autenticação segura.",
-        "stack": [
-          "React",
-          "TypeScript",
-          "Context API",
-          "Material UI",
-          "Observability com DataDog",
-          "Cognito",
-          "AWS"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://portal.grupoatem.com.br",
-        "image": "/images/projects/portal_atem.png"
-      },
-      {
-        "id": "7",
-        "title": "Site de Laboratório da Universidade",
-        "description": "Site institucional de laboratório universitário desenvolvido com Bootstrap, HTML5 e CSS3. Apresenta pesquisas, publicações e membros do grupo com design responsivo e navegação acessível.",
-        "stack": [
-          "Bootstrap",
-          "HTML5",
-          "CSS3"
-        ],
-        "category": "frontend",
-        "github": "https://github.com/FranciscoGabriel1/lab312",
-        "live": "https://lab312.vercel.app/",
-        "image": "/images/projects/lab312.png"
+      "lab312": {
+        "title": "Site do laboratório",
+        "context": "Lab312 · UFAM",
+        "description": "Site institucional de laboratório universitário, com pesquisas, publicações e membros do grupo."
       }
-    ]
+    }
   },
   "experience": {
     "label": "Experiência",

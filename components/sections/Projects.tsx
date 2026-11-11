@@ -1,206 +1,137 @@
-"use client";
-
-import { useTranslations, useMessages } from "next-intl";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
-import { GithubIcon } from "@/components/ui/BrandIcons";
-import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/components/ui/Card";
-import { SectionDivider } from "@/components/ui/SectionDivider";
-import { FadeInView } from "@/components/animations/FadeInView";
-import { cn } from "@/lib/utils";
+import { ArrowUpRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { SplitText } from "@/components/motion/SplitText";
+import { FEATURED_PROJECT_ID, PROJECTS, type Project } from "@/lib/content/projects";
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  stack: string[];
-  category: string;
-  github: string | null;
-  live: string | null;
-  image: string;
-}
+const pad = (n: number) => String(n).padStart(2, "0");
 
-interface Filter {
-  key: FilterKey;
-  label: string;
-}
+/** Projetos, de servidor: um caso em destaque e os demais em lista numerada. */
+export async function Projects() {
+  const t = await getTranslations("projects");
+  const tA11y = await getTranslations("accessibility");
+  const newTab = tA11y("open_link_new_tab");
 
-interface ProjectCardProps {
-  project: Project;
-  index: number;
-}
-
-type FilterKey = "all" | "frontend" | "backend" | "fullstack";
-
-export const Projects = () => {
-  const t = useTranslations("projects");
-  const messages = useMessages() as unknown as { projects: { items: Project[] } };
-  const projects = messages.projects.items;
-
-  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
-
-  const filters: Filter[] = [
-    { key: "all",       label: t("filters.all") },
-    { key: "frontend",  label: t("filters.frontend") },
-    { key: "backend",   label: t("filters.backend") },
-    { key: "fullstack", label: t("filters.fullstack") },
-  ];
-
-  const filteredProjects =
-    activeFilter === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
+  const featured = PROJECTS.find((p) => p.id === FEATURED_PROJECT_ID) ?? PROJECTS[0];
+  const others = PROJECTS.filter((p) => p.id !== featured.id);
+  const item = (p: Project, key: string) => t(`items.${p.id}.${key}`);
 
   return (
-    <section id="projects" aria-label={t("label")} className="relative py-28">
-      <SectionDivider />
+    <section id="projects" aria-labelledby="projects-title" className="py-24 lg:py-40">
+      <div className="container-site">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-end">
+          <div>
+            <p className="type-eyebrow mb-5 text-accent-text">
+              <span aria-hidden="true">03 — </span>
+              {t("label")}
+            </p>
+            <SplitText id="projects-title" text={t("title")} className="type-display text-text" />
+          </div>
+          <p className="type-lead">{t("subtitle")}</p>
+        </div>
 
-      <div className="container-content section-padding">
+        <article
+          aria-labelledby={`project-${featured.id}`}
+          data-reveal="self"
+          className="mt-16 flex flex-col gap-5 lg:mt-24 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-16"
+        >
+          {/* No celular, o bloco de texto se desfaz (contents) para a imagem entrar logo após o título. */}
+          <div className="contents lg:flex lg:flex-col lg:gap-5">
+            <p className="type-eyebrow order-first">
+              <span aria-hidden="true">01 · </span>
+              {item(featured, "context")}
+            </p>
+            <h3 id={`project-${featured.id}`} className="type-title order-first text-text">
+              {item(featured, "title")}
+            </h3>
+            <p className="text-lg leading-relaxed text-text-2">{item(featured, "description")}</p>
 
-        {/* Section header */}
-        <FadeInView className="mb-12 flex flex-col items-center text-center gap-3">
-          <Badge variant="secondary">{t("label")}</Badge>
-          <h2 className="font-display text-h1 font-bold text-text-primary">{t("title")}</h2>
-          <p className="max-w-md text-body text-text-secondary">{t("subtitle")}</p>
-        </FadeInView>
+            {t.has(`items.${featured.id}.did`) && (
+              <dl className="border-t border-line pt-4">
+                <dt className="type-eyebrow">{t("did_label")}</dt>
+                <dd className="mt-2 leading-relaxed text-text">{item(featured, "did")}</dd>
+              </dl>
+            )}
 
-        {/* Filter tabs */}
-        <FadeInView delay={0.1} className="mb-10 flex justify-center">
-          <div
-            role="tablist"
-            aria-label={t("filter_aria_label")}
-            className="glass flex items-center gap-1 rounded-lg p-1"
-          >
-            {filters.map(({ key, label }) => (
-              <button
-                key={key}
-                role="tab"
-                aria-selected={activeFilter === key}
-                onClick={() => setActiveFilter(key)}
-                className={cn(
-                  "relative rounded-md px-4 py-1.5 text-caption font-medium transition-colors duration-200",
-                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent-primary",
-                  activeFilter === key ? "text-on-accent" : "text-text-secondary hover:text-text-primary"
-                )}
+            <p className="type-eyebrow leading-relaxed">{featured.stack.join(" · ")}</p>
+
+            {featured.url && (
+              <a
+                href={featured.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 self-start rounded-md font-semibold text-accent-text underline-offset-4 hover:underline"
               >
-                {activeFilter === key && (
-                  <motion.span
-                    layoutId="filter-pill"
-                    className="absolute inset-0 rounded-md bg-accent"
-                    transition={{ type: "spring", stiffness: 300, damping: 28 }}
+                {t("visit")}
+                <span className="sr-only">
+                  {" — "}
+                  {item(featured, "title")} ({newTab})
+                </span>
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
+              </a>
+            )}
+          </div>
+
+          <div className="order-first my-3 overflow-hidden rounded-2xl border border-line bg-surface lg:order-none lg:my-0">
+            <Image
+              src={featured.image.src}
+              alt={t.has(`items.${featured.id}.image_alt`) ? item(featured, "image_alt") : ""}
+              width={featured.image.width}
+              height={featured.image.height}
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="aspect-[16/10] h-auto w-full object-cover object-top-left"
+            />
+          </div>
+        </article>
+
+        <h3 className="type-eyebrow mt-20 lg:mt-28">{t("others_label")}</h3>
+        <ol data-reveal="children" className="mt-6 border-t border-line">
+          {others.map((project, index) => {
+            const href = project.url ?? project.github;
+            const title = item(project, "title");
+            return (
+              <li
+                key={project.id}
+                className="group relative grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-5 gap-y-1 border-b border-line py-5 transition-colors hover:bg-surface lg:grid-cols-[3rem_minmax(0,1fr)_auto_auto] lg:py-6"
+              >
+                <span aria-hidden="true" className="font-mono text-[0.78rem] text-text-3">
+                  {pad(index + 2)}
+                </span>
+                <div className="flex flex-col gap-1 lg:flex-row lg:items-baseline lg:gap-5">
+                  <h4 className="font-display text-xl font-bold text-text lg:text-2xl">
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md after:absolute after:inset-0 after:content-['']"
+                      >
+                        {title}
+                        <span className="sr-only">
+                          {" "}
+                          ({project.url ? newTab : `${t("code")}, ${newTab}`})
+                        </span>
+                      </a>
+                    ) : (
+                      title
+                    )}
+                  </h4>
+                  <p className="text-text-2">{item(project, "context")}</p>
+                </div>
+                <p className="type-eyebrow col-start-2 row-start-2 lg:col-start-auto lg:row-start-auto">
+                  {project.stack.join(" · ")}
+                </p>
+                {href && (
+                  <ArrowUpRight
+                    aria-hidden
+                    className="col-start-3 row-span-2 row-start-1 h-5 w-5 text-text-2 transition-transform group-hover:text-accent-text motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5 lg:col-start-auto lg:row-span-1 lg:row-start-auto"
                   />
                 )}
-                <span className="relative">{label}</span>
-              </button>
-            ))}
-          </div>
-        </FadeInView>
-
-        {/* Projects grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeFilter}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );
-};
-
-const ProjectCard = ({ project, index }: ProjectCardProps) => {
-  const t = useTranslations("projects");
-
-  return (
-    <FadeInView delay={index * 0.07}>
-      <Card hoverable className="group flex h-full flex-col overflow-hidden">
-
-        {/* Image */}
-        <div className="relative h-44 w-full overflow-hidden">
-          <Image
-            src={project.image}
-            alt={`Imagem do projeto ${project.title}`}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-
-          <div className="absolute left-3 top-3">
-            <Badge
-              variant="primary"
-              size="sm"
-              className="border-accent-primary/40 bg-black/60 text-white backdrop-blur-md"
-            >
-              {project.category}
-            </Badge>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="flex flex-1 flex-col gap-3 p-5">
-          <h3 className="font-display text-h3 font-bold text-text-primary">{project.title}</h3>
-
-          <p className="flex-1 text-caption leading-relaxed text-text-secondary">
-            {project.description}
-          </p>
-
-          {/* Stack badges */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.stack.map((tech) => (
-              <Badge key={tech} variant="default" size="sm">{tech}</Badge>
-            ))}
-          </div>
-
-          {/* Links */}
-          <div className="flex items-center gap-2 border-t border-border pt-3">
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${t("github_label")} — ${project.title}`}
-                className={cn(
-                  "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-caption font-medium",
-                  "text-text-secondary hover:text-text-primary hover:bg-surface-elevated",
-                  "transition-colors duration-200",
-                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent-primary"
-                )}
-              >
-                <GithubIcon className="h-3.5 w-3.5" aria-hidden />
-                GitHub
-              </a>
-            )}
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${t("live_label")} — ${project.title}`}
-                className={cn(
-                  "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-caption font-medium",
-                  "text-accent-primary hover:bg-accent-primary/10",
-                  "transition-colors duration-200",
-                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent-primary"
-                )}
-              >
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-                Live
-              </a>
-            )}
-          </div>
-        </div>
-      </Card>
-    </FadeInView>
-  );
-};
+}

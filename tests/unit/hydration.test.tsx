@@ -6,7 +6,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Navbar } from "@/components/layout/Navbar";
 import { Contact } from "@/components/sections/Contact";
 import { Experience } from "@/components/sections/Experience";
-import { Projects } from "@/components/sections/Projects";
 import en from "@/messages/en.json";
 import es from "@/messages/es.json";
 import pt from "@/messages/pt.json";
@@ -14,13 +13,12 @@ import pt from "@/messages/pt.json";
 // As mensagens têm listas (ex.: hero.roles), que o tipo do next-intl não descreve; o app faz o mesmo cast no layout.
 const MESSAGES = { pt, en, es } as unknown as Record<string, AbstractIntlMessages>;
 
-// Só os componentes de cliente hidratam. Hero e Sobre são de servidor (sem hidratação) e ficam fora.
+// Só os componentes de cliente hidratam. Hero, Sobre e Projetos são de servidor (sem hidratação) e ficam fora.
 function page(locale: string): ReactElement {
   return (
     <NextIntlClientProvider locale={locale} messages={MESSAGES[locale]} timeZone="America/Manaus">
       <Navbar />
       <main>
-        <Projects />
         <Experience />
         <Contact />
       </main>

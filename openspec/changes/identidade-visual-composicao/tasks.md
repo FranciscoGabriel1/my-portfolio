@@ -30,13 +30,17 @@
 
 ## 3. Projetos
 
-- [ ] 3.1 Criar `lib/content/projects.ts` com id, URL, GitHub, imagem e dimensões, stack, contexto e destaque; mover esses dados para fora de `messages/*.json`, deixando só texto
-- [ ] 3.2 Teste de unidade: todo projeto de `lib/content` tem título e descrição nos três idiomas, e nenhuma mensagem guarda caminho ou URL
-- [ ] 3.3 Adicionar o CurrículoRaiz (fatos públicos e stack do código do produto), com a imagem otimizada em `public/images/projects/`
-- [ ] 3.4 Seção Projetos como componente de servidor: caso em destaque (imagem, papel, descrição, stack e link) e lista numerada dos demais; links externos com o texto visível seguido de "abre em nova aba" só para leitor de tela; projeto sem URL fica sem link
-- [ ] 3.5 Remover o filtro por categoria, `Card`, `Badge` de categoria e o componente de projetos antigo
-- [ ] 3.6 Textos em pt, `npm run translate` e revisão; lint, tipos, testes e build
-- [ ] 3.7 Dono confere Projetos e escolhe o destaque (CurrículoRaiz ou HostGator)
+- [x] 3.1 Criar `lib/content/projects.ts` com id, URL, GitHub, imagem e dimensões, stack, contexto e destaque; mover esses dados para fora de `messages/*.json`, deixando só texto
+- [x] 3.2 Teste de unidade: todo projeto de `lib/content` tem título e descrição nos três idiomas, e nenhuma mensagem guarda caminho ou URL
+- [x] 3.3 Adicionar o CurrículoRaiz (fatos públicos e stack do código do produto), com a imagem otimizada em `public/images/projects/`
+  - Stack conferida nos `package.json` de `curriculoraiz-web` e `curriculoraiz-api`. Imagem em WebP (72 kB). Destaque provisório: CurrículoRaiz (`FEATURED_PROJECT_ID`), até o dono decidir na 3.7.
+- [x] 3.4 Seção Projetos como componente de servidor: caso em destaque (imagem, papel, descrição, stack e link) e lista numerada dos demais; links externos com o texto visível seguido de "abre em nova aba" só para leitor de tela; projeto sem URL fica sem link
+- [x] 3.5 Remover o filtro por categoria, `Card`, `Badge` de categoria e o componente de projetos antigo
+  - `Card` e `Badge` saíram de Projetos, mas os arquivos ficam até a 5.4, porque Experiência e Contato ainda os usam.
+- [x] 3.6 Textos em pt, `npm run translate` e revisão; lint, tipos, testes e build
+  - en/es à mão (mesmo motivo da 1.10). Smoke e axe verdes com a lista de violações conhecidas **vazia**: `label-content-name-mismatch` saiu junto com os links antigos (antecipa o resto da 6.5).
+- [x] 3.7 Dono confere Projetos e escolhe o destaque (CurrículoRaiz ou HostGator)
+  - Dono pediu para seguir em 2026-11-11 sem escolher; fica o CurrículoRaiz, a recomendação. Trocar é mudar `FEATURED_PROJECT_ID`.
 
 ## 4. Trajetória
 
@@ -49,7 +53,7 @@
 ## 5. Contato e limpeza
 
 - [ ] 5.1 Criar `lib/contact.ts` com `AGENDA_URL` vazio; "Agendar call" no cabeçalho e no Contato só quando houver URL
-- [ ] 5.2 Seção Contato: cartões dos canais (e-mail, LinkedIn, GitHub, Lattes, Discord) com rótulo e valor visível, "Baixar CV" e formulário em `<details>` "Prefere escrever por aqui?", sem mudar a lógica do formulário nem a API
+- [ ] 5.2 Seção Contato: cartões dos canais (e-mail, LinkedIn, GitHub, Lattes, Discord) com rótulo e valor visível, "Baixar CV" e formulário em `<details>` "Prefere escrever por aqui?", sem mudar a lógica do formulário nem a API; tirar as URLs de `contact.social` das mensagens e a exceção correspondente em `tests/unit/content.test.ts`
 - [ ] 5.3 Campos do formulário com `--line-strong` e foco com `--focus`; erro de validação mantém o `<details>` aberto
 - [ ] 5.4 Remover `framer-motion` do `package.json` e os componentes `Particles`, `CountUp`, `FadeInView`, `StaggerChildren` e `SectionDivider`, além dos aliases de tokens antigos
 - [ ] 5.5 Textos em pt, `npm run translate` e revisão; lint, tipos, testes e build

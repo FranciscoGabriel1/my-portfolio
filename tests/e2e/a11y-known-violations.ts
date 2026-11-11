@@ -4,6 +4,5 @@
  * uma violação nova, fora daqui, reprova o CI.
  */
 export const KNOWN_VIOLATIONS: Record<string, string> = {
-  // Links "Live"/"GitHub" dos projetos com aria-label que não contém o texto visível (9 elementos).
-  "label-content-name-mismatch": "conteudo-no-servidor-e-seo (aria-* traduzidos)",
+  // Vazia desde o bloco 3 de identidade-visual-composicao: contraste e nomes de link corrigidos.
 };

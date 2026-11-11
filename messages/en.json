@@ -104,146 +104,58 @@
   },
   "projects": {
     "label": "Projects",
-    "title": "What I've already built",
-    "subtitle": "A selection of the projects I'm most proud of.",
-    "filters": {
-      "all": "All",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "fullstack": "Full Stack"
-    },
-    "github_label": "View on GitHub",
-    "live_label": "View online",
-    "filter_aria_label": "Filter projects",
-    "items": [
-      {
-        "id": "1",
+    "title": "What I've built",
+    "subtitle": "Products in production, from HostGator's shopping cart to a script editor used by professional screenwriters.",
+    "did_label": "What I did",
+    "others_label": "Other projects",
+    "visit": "View live",
+    "code": "Code on GitHub",
+    "items": {
+      "curriculoraiz": {
+        "title": "CurrículoRaiz",
+        "context": "Own product · founder and author",
+        "description": "A SaaS for building résumés, with 9 templates, PDF and Word export and import from a LinkedIn PDF.",
+        "did": "The whole product, from screen to PDF: an editor in React with TypeScript, TanStack Query and Tiptap, and a Node.js API with Express and Prisma that generates PDF with Puppeteer and Word with docx, with Google sign-in and Mercado Pago payments.",
+        "image_alt": "CurrículoRaiz home page, with the headline \"Um currículo com a sua cara\" next to a résumé template"
+      },
+      "hostgator-dashboard": {
+        "title": "HostGator customer dashboard",
+        "context": "HostGator",
+        "description": "A dashboard where customers track metrics, manage hosting services and request support.",
+        "did": "Interfaces in React with Redux Saga, design system components and tests with Jest and React Testing Library.",
+        "image_alt": "HostGator customer dashboard, with the assistant search and service shortcuts"
+      },
+      "teksto": {
+        "title": "Screenwriting platform",
+        "context": "Teksto · O2 Filmes",
+        "description": "A SaaS platform for screenwriters, with scalable React and TypeScript components, Redux and Saga flows and REST and GraphQL integration."
+      },
+      "hostgator-cart": {
+        "title": "Shopping cart",
+        "context": "HostGator",
+        "description": "A cart module for buying hosting products and services, focused on conversion and a smooth checkout."
+      },
+      "mbx-academy": {
+        "title": "MBX Academy LMS",
+        "context": "Instituto Pecege",
+        "description": "A learning management system for corporate education that delivers and manages classes, events, assessments and reports."
+      },
+      "atem-portal": {
+        "title": "Customer portal",
+        "context": "Atem",
+        "description": "Atem's customer portal, with invoices, order history and authentication through AWS."
+      },
+      "uprobotics": {
         "title": "UpRobotics",
-        "description": "Web tool for visual programming of robotic arms using Google Blocks. It allows you to generate code for Arduino UNO or 3D simulations in Webots via an intuitive drag-and-drop interface.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Google Blockly",
-          "Webots",
-          "Arduino"
-        ],
-        "category": "fullstack",
-        "github": "https://github.com/FranciscoGabriel1/uprobotics",
-        "live": "https://uprobotics.com.br/",
-        "image": "/images/projects/uprobotics.png"
+        "context": "iComp UFAM · master's",
+        "description": "A web tool for visually programming robotic arms with Google Blockly, generating code for Arduino UNO or 3D simulations in Webots."
       },
-      {
-        "id": "2",
-        "title": "SaaS Platform for Screenwriters",
-        "description": "SaaS platform for screenwriters developed at O2 Filmes with React.js and TypeScript. Scalable components with Redux + Saga, REST/GraphQL integration and automated CI/CD pipelines.",
-        "stack": [
-          "React.js",
-          "TypeScript",
-          "Radix UI",
-          "Redux Saga",
-          "Jest",
-          "Docker",
-          "Ruby on Rails",
-          "Prosemirror"
-        ],
-        "category": "fullstack",
-        "github": null,
-        "live": "https://teksto.com/#/",
-        "image": "/images/projects/teksto.png"
-      },
-      {
-        "id": "3",
-        "title": "HostGator Client Dashboard",
-        "description": "Dashboard for HostGator customers with metrics visualization, service management and integrated support. Developed with a focus on user experience, performance and accessibility.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Redux Saga",
-          "Styled Components",
-          "Jest",
-          "Design System",
-          "Docker",
-          "Jenkins"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://cliente.hostgator.com.br/inicio",
-        "image": "/images/projects/dash_hg.png"
-      },
-      {
-        "id": "4",
-        "title": "HostGator shopping cart",
-        "description": "HostGator's shopping cart module for purchasing hosting products and services. Developed with React.js and Redux Saga, with a focus on conversion and a fluid shopping experience.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Redux Saga",
-          "Styled Components",
-          "Jest",
-          "Design System",
-          "Docker",
-          "Jenkins"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
-        "image": "/images/projects/carrinho_hg.png"
-      },
-      {
-        "id": "5",
-        "title": "MBX Academy System",
-        "description": "Pecege Institute's learning management system (LMS) for corporate education, responsible for making available, transmitting and managing classes, events, assessments and reports.",
-        "stack": [
-          "React.js",
-          "TypeScript",
-          "Zustand",
-          "Jotai",
-          "zod",
-          "Tailwind CSS",
-          "DS Arandu",
-          "Azure",
-          "CI/CD",
-          "Docker",
-          "Observability with Sentry"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://newdashboard.mbx.academy/",
-        "image": "/images/projects/lms_pecege.png"
-      },
-      {
-        "id": "6",
-        "title": "Customer Portal - Atem",
-        "description": "Customer portal for Atem Distribuidora de Petróleo with React.js and TypeScript. It offers invoice viewing, order history and integration with AWS services for secure authentication.",
-        "stack": [
-          "React",
-          "TypeScript",
-          "Context API",
-          "UI material",
-          "Observability with DataDog",
-          "Cognito",
-          "AWS"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://portal.grupoatem.com.br",
-        "image": "/images/projects/portal_atem.png"
-      },
-      {
-        "id": "7",
-        "title": "University Laboratory Site",
-        "description": "Institutional website for a university laboratory developed with Bootstrap, HTML5 and CSS3. It presents research, publications and members of the group with responsive design and accessible navigation.",
-        "stack": [
-          "Bootstrap",
-          "HTML5",
-          "CSS3"
-        ],
-        "category": "frontend",
-        "github": "https://github.com/FranciscoGabriel1/lab312",
-        "live": "https://lab312.vercel.app/",
-        "image": "/images/projects/lab312.png"
+      "lab312": {
+        "title": "Lab website",
+        "context": "Lab312 · UFAM",
+        "description": "Institutional website for a university lab, with research, publications and group members."
       }
-    ]
+    }
   },
   "experience": {
     "label": "Experience",

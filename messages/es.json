@@ -104,146 +104,58 @@
   },
   "projects": {
     "label": "Proyectos",
-    "title": "Lo que ya he construido",
-    "subtitle": "Una selección de los proyectos de los que me siento más orgulloso.",
-    "filters": {
-      "all": "Todos",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "fullstack": "Pila completa"
-    },
-    "github_label": "Ver en GitHub",
-    "live_label": "Ver en línea",
-    "filter_aria_label": "Filtrar proyectos",
-    "items": [
-      {
-        "id": "1",
+    "title": "Lo que he construido",
+    "subtitle": "Productos en producción, desde el carrito de compras de HostGator hasta un editor de guiones usado por guionistas profesionales.",
+    "did_label": "Lo que hice",
+    "others_label": "Otros proyectos",
+    "visit": "Ver en línea",
+    "code": "Código en GitHub",
+    "items": {
+      "curriculoraiz": {
+        "title": "CurrículoRaiz",
+        "context": "Producto propio · fundador y autor",
+        "description": "SaaS para crear currículums, con 9 plantillas, exportación a PDF y Word e importación del PDF de LinkedIn.",
+        "did": "El producto completo, de la pantalla al PDF: editor en React con TypeScript, TanStack Query y Tiptap, y API en Node.js con Express y Prisma que genera PDF con Puppeteer y Word con docx, con inicio de sesión de Google y pagos con Mercado Pago.",
+        "image_alt": "Página de inicio de CurrículoRaiz, con el título \"Um currículo com a sua cara\" y una plantilla de currículum al lado"
+      },
+      "hostgator-dashboard": {
+        "title": "Panel del cliente de HostGator",
+        "context": "HostGator",
+        "description": "Panel en el que los clientes siguen métricas, gestionan servicios de hosting y piden soporte.",
+        "did": "Interfaces en React con Redux Saga, componentes del design system y pruebas con Jest y React Testing Library.",
+        "image_alt": "Panel del cliente de HostGator, con la búsqueda del asistente y los accesos a servicios"
+      },
+      "teksto": {
+        "title": "Plataforma para guionistas",
+        "context": "Teksto · O2 Filmes",
+        "description": "Plataforma SaaS para guionistas, con componentes escalables en React y TypeScript, flujos con Redux y Saga e integración REST y GraphQL."
+      },
+      "hostgator-cart": {
+        "title": "Carrito de compras",
+        "context": "HostGator",
+        "description": "Módulo de carrito para comprar productos y servicios de hosting, enfocado en la conversión y en una compra fluida."
+      },
+      "mbx-academy": {
+        "title": "LMS MBX Academy",
+        "context": "Instituto Pecege",
+        "description": "Sistema de gestión del aprendizaje para educación corporativa, que ofrece y gestiona clases, eventos, evaluaciones e informes."
+      },
+      "atem-portal": {
+        "title": "Portal del cliente",
+        "context": "Atem",
+        "description": "Portal del cliente de Atem, con facturas, historial de pedidos y autenticación mediante AWS."
+      },
+      "uprobotics": {
         "title": "UpRobotics",
-        "description": "Herramienta web para la programación visual de brazos robóticos mediante Google Blocks. Permite generar código para Arduino UNO o simulaciones 3D en Webots mediante una intuitiva interfaz de arrastrar y soltar.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Google Blockly",
-          "Webots",
-          "Arduino"
-        ],
-        "category": "fullstack",
-        "github": "https://github.com/FranciscoGabriel1/uprobotics",
-        "live": "https://uprobotics.com.br/",
-        "image": "/images/projects/uprobotics.png"
+        "context": "iComp UFAM · maestría",
+        "description": "Herramienta web de programación visual de brazos robóticos con Google Blockly, que genera código para Arduino UNO o simulaciones 3D en Webots."
       },
-      {
-        "id": "2",
-        "title": "Plataforma SaaS para guionistas",
-        "description": "Plataforma SaaS para guionistas desarrollada en O2 Filmes con React.js y TypeScript. Componentes escalables con Redux + Saga, integración REST/GraphQL y pipelines CI/CD automatizados.",
-        "stack": [
-          "React.js",
-          "TypeScript",
-          "Radix UI",
-          "Saga Redux",
-          "Jest",
-          "Docker",
-          "Ruby en Rails",
-          "Prosemirror"
-        ],
-        "category": "fullstack",
-        "github": null,
-        "live": "https://teksto.com/#/",
-        "image": "/images/projects/teksto.png"
-      },
-      {
-        "id": "3",
-        "title": "Panel de Control de HostGator",
-        "description": "Panel de control para clientes de HostGator con visualización de métricas, gestión de servicios y soporte integrado. Desarrollado centrándose en la experiencia del usuario, el rendimiento y la accesibilidad.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Saga Redux",
-          "Componentes estilizados",
-          "Jest",
-          "Sistema de diseño",
-          "Docker",
-          "Jenkins"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://cliente.hostgator.com.br/inicio",
-        "image": "/images/projects/dash_hg.png"
-      },
-      {
-        "id": "4",
-        "title": "Cesta de la compra HostGator",
-        "description": "Módulo de carrito de compras de HostGator para la compra de productos y servicios de hosting. Desarrollado con React.js y Redux Saga, con un enfoque en la conversión y una experiencia de compra fluida.",
-        "stack": [
-          "React.js",
-          "JavaScript",
-          "Saga Redux",
-          "Componentes estilizados",
-          "Jest",
-          "Sistema de diseño",
-          "Docker",
-          "Jenkins"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
-        "image": "/images/projects/carrinho_hg.png"
-      },
-      {
-        "id": "5",
-        "title": "Sistema MBX Academy",
-        "description": "Sistema de gestión del aprendizaje (LMS) del Instituto Pecege para la educación corporativa, responsable de poner a disposición, transmitir y gestionar clases, eventos, evaluaciones e informes.",
-        "stack": [
-          "React.js",
-          "TypeScript",
-          "Zustand",
-          "Jotai",
-          "zod",
-          "Tailwind CSS",
-          "DS Arandu",
-          "Azure",
-          "CI/CD",
-          "Docker",
-          "Observabilidad con Sentry"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://newdashboard.mbx.academy/",
-        "image": "/images/projects/lms_pecege.png"
-      },
-      {
-        "id": "6",
-        "title": "Portal del cliente - Atem",
-        "description": "Portal de clientes para Atem Distribuidora de Petróleo con React.js y TypeScript. Ofrece visualización de facturas, historial de pedidos e integración con servicios de AWS para autenticación segura.",
-        "stack": [
-          "Reaccione",
-          "TypeScript",
-          "API de contexto",
-          "Material de interfaz de usuario",
-          "Observabilidad con DataDog",
-          "Cognito",
-          "AWS"
-        ],
-        "category": "frontend",
-        "github": null,
-        "live": "https://portal.grupoatem.com.br",
-        "image": "/images/projects/portal_atem.png"
-      },
-      {
-        "id": "7",
-        "title": "Laboratorio universitario",
-        "description": "Sitio web institucional para un laboratorio universitario desarrollado con Bootstrap, HTML5 y CSS3. Presenta investigaciones, publicaciones y miembros del grupo con diseño responsive y navegación accesible.",
-        "stack": [
-          "Bootstrap",
-          "HTML5",
-          "CSS3"
-        ],
-        "category": "frontend",
-        "github": "https://github.com/FranciscoGabriel1/lab312",
-        "live": "https://lab312.vercel.app/",
-        "image": "/images/projects/lab312.png"
+      "lab312": {
+        "title": "Sitio del laboratorio",
+        "context": "Lab312 · UFAM",
+        "description": "Sitio institucional de un laboratorio universitario, con investigaciones, publicaciones y miembros del grupo."
       }
-    ]
+    }
   },
   "experience": {
     "label": "Experiencia",
