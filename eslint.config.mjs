@@ -33,4 +33,10 @@ export default defineConfig([
     files: ["scripts/**"],
     rules: { "no-console": "off" },
   },
+  {
+    // Captura das telas da cena 3D: CommonJS que carrega, em tempo de execução, módulos de outro projeto
+    // (CurrículoRaiz). Roda só na máquina de quem regenera as telas, nunca no site.
+    files: ["scripts/scene-screens/**"],
+    rules: { "@typescript-eslint/no-require-imports": "off", "@typescript-eslint/no-explicit-any": "off" },
+  },
 ]);

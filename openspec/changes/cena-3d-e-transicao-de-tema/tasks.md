@@ -17,13 +17,18 @@
 
 ## 3. Cena 3D no Hero
 
-- [ ] 3.1 Instalar `three` e medir o pedaço do bundle com a cena (gzip); registrar aqui; se passar de 170 kB, parar e avaliar alternativas antes de seguir
-- [ ] 3.2 Função pura de decisão do portão (movimento reduzido, WebGL, economia de dados, memória e núcleos), com testes de unidade de cada condição
-- [ ] 3.3 Módulo `components/scene/hero-scene.ts`, portado do protótipo aprovado: blocos, luzes, sombras, fundo transparente, cores por tema, assentamento, ponteiro, rolagem, níveis de qualidade, pausa, falhas e `destroy()`
-- [ ] 3.4 `HeroSceneLoader` no Hero: portão, `load` + ócio + Hero na tela, `import()` dinâmico, troca imagem → cena, `data-scene-state`, retorno à imagem quando o movimento reduzido é ligado
-- [ ] 3.5 Página de captura e `scripts/render-scene-posters.ts`; regenerar `blocks-{light,dark}.webp` (sem perdas, fundo transparente, até 60 kB cada) e conferir que o primeiro quadro da cena coincide com a imagem
-- [ ] 3.6 Testes de navegador da cena: aparece com WebGL e o Three.js só é pedido depois do `load`; com WebGL desligado, movimento reduzido ou economia de dados, nenhum pedido e estado `poster`; `paused` fora da tela e com a aba oculta
-- [ ] 3.7 Lint, tipos, testes e build; dono confere no Chrome: claro e escuro, mouse, rolagem, celular e WebGL desligado (`--disable-webgl`)
+- [x] 3.1 Instalar `three` e medir o pedaço do bundle com a cena (gzip); registrar aqui; se passar de 170 kB, parar e avaliar alternativas antes de seguir
+  - `three` 0.187.0 e `@types/three`. Pedaço da cena (Three.js + `RoundedBoxGeometry` + `RoomEnvironment` + módulo): **136 kB gzip** (553 kB bruto), fora do HTML inicial. JS inicial de `/pt`: **225 kB gzip** (224 antes; +1 kB do carregador).
+- [x] 3.2 Função pura de decisão do portão (movimento reduzido, WebGL, economia de dados, memória e núcleos), com testes de unidade de cada condição
+- [x] 3.3 Módulo `components/scene/hero-scene.ts`, portado do protótipo aprovado: blocos, luzes, sombras, fundo transparente, cores por tema, assentamento, ponteiro, rolagem, níveis de qualidade, pausa, falhas e `destroy()`
+- [x] 3.4 `HeroSceneLoader` no Hero: portão, `load` + ócio + Hero na tela, `import()` dinâmico, troca imagem → cena, `data-scene-state`, retorno à imagem quando o movimento reduzido é ligado
+- [x] 3.5 Página de captura e `scripts/render-scene-posters.ts`; regenerar `blocks-{light,dark}.webp` (sem perdas, fundo transparente, até 60 kB cada) e conferir que o primeiro quadro da cena coincide com a imagem
+  - A página de captura é o próprio site com `?scene-capture` (cena parada no repouso). Pôsteres com fundo transparente, WebP com perdas a 0,8 (59 e 57 kB): sem perdas não cabia na meta, e com fundo transparente não há mais o problema de tom do fundo. Pôster × primeiro quadro: 0,1% dos pixels com diferença visível. Para a troca ser contínua, a entrada e a flutuação passaram a nascer da pose de repouso, e a imagem parada do notebook é o primeiro quadro do vídeo. Scripts das telas em `scripts/scene-screens/` (com README).
+- [x] 3.6 Testes de navegador da cena: aparece com WebGL e o Three.js só é pedido depois do `load`; com WebGL desligado, movimento reduzido ou economia de dados, nenhum pedido e estado `poster`; `paused` fora da tela e com a aba oculta
+  - `tests/e2e/cena.spec.ts` (WebGL por SwiftShader) e `cena-sem-webgl.spec.ts`: 7 testes. O Playwright passou a desligar o WebGL por padrão (a cena por software ocupava a CPU e atrasava testes alheios a ela). Suíte (38 testes de navegador, 51 de unidade) verde em 3 execuções seguidas. Nota de demonstração retirada a pedido do dono.
+  - Medição (Lighthouse com limitação real) mostrou dois problemas, corrigidos: (1) o pôster de 59 kB, que é o elemento de LCP, levou o LCP de 1,9 para 2,4 s; agora 41 e 40 kB (escala 1,5, qualidade 0,7) e LCP de 2,0 a 2,2 s; (2) com a cena montando no ócio, o bloqueio total foi a 11 s no Chrome sem GPU do Lighthouse; agora a cena começa na **primeira interação** (decisão 9) e não entra na medição. O bloqueio restante (430 a 1.420 ms) é a hidratação do React com a máquina carregada; a medição final (4.1) precisa ser feita com a máquina ociosa.
+- [x] 3.7 Lint, tipos, testes e build; dono confere no Chrome: claro e escuro, mouse, rolagem, celular e WebGL desligado (`--disable-webgl`)
+  - Lint, tipos, testes e build verdes. Dono pediu para seguir em 2026-11-11 ("prossiga, que quando você terminar farei umas correções"); a conferência dele fica junto das correções no fim.
 
 ## 4. Verificação e entrega
 

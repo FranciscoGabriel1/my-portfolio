@@ -2,6 +2,7 @@ import { preload } from "react-dom";
 import { ArrowRight, Download } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { SplitText } from "@/components/motion/SplitText";
+import { HeroSceneLoader } from "@/components/scene/HeroSceneLoader";
 import { buttonVariants } from "@/components/ui/Button";
 import { BUILT_AT } from "@/lib/content/career";
 import { CV_URL } from "@/lib/cv";
@@ -62,7 +63,9 @@ export async function Hero() {
 
         {/* Cena decorativa, versão sem 3D. Fundo em CSS (.hero-scene em globals.css): o navegador baixa
             só a imagem do tema ativo e a descobre junto com o CSS, sem atrasar o LCP. */}
-        <div aria-hidden="true" className="hero-scene mx-auto w-full max-w-[34rem] lg:max-w-none" />
+        <div aria-hidden="true" className="hero-scene mx-auto w-full max-w-[34rem] lg:max-w-none">
+          <HeroSceneLoader />
+        </div>
       </div>
 
       <div className="border-y border-line">

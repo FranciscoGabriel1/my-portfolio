@@ -199,6 +199,29 @@
   background-image: url('/images/scene/blocks-dark.webp');
 }
 
+/* Cena 3D por cima da imagem (components/scene): o canvas é maior que o contêiner (margem para a vista
+   explodida), não recebe cliques e entra com esmaecimento. Viva, a cena esconde a imagem de fundo. */
+.hero-scene {
+  position: relative;
+}
+
+.scene-canvas {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+}
+
+.hero-scene.is-live,
+.dark .hero-scene.is-live {
+  background-image: none;
+}
+
+.hero-scene.is-live .scene-canvas {
+  opacity: 1;
+}
+
 /* ─── Movimento ────────────────────────────────────────────────────────────────
    O HTML do servidor já é o estado final. O estado "antes da entrada" só existe
    depois que components/motion/MotionReady.tsx marca <html data-motion="ready">,

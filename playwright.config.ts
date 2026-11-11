@@ -23,5 +23,12 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  // WebGL desligado por padrão: a cena 3D (que no Chromium de teste roda por software e ocupa a CPU) fica de fora
+  // dos testes que não são dela. tests/e2e/cena.spec.ts religa o WebGL com `test.use`.
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"], launchOptions: { args: ["--disable-webgl", "--disable-webgl2"] } },
+    },
+  ],
 });
