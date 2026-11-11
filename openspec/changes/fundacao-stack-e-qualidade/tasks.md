@@ -34,12 +34,12 @@
 
 ## 5. Formulário de contato seguro
 
-- [ ] 5.1 Criar o schema compartilhado com códigos de erro e testes de cada regra da spec
+- [ ] 5.1 ~~Criar o schema compartilhado~~ Feito em `refinamentos-da-revisao` sem Zod (`lib/contact/validate.ts`, códigos de erro e testes): a rota só passa a importá-lo
 - [ ] 5.2 Criar `escapeHtml`, a limpeza do assunto e testes (incluindo `<script>` e quebra de linha com `Bcc:`)
 - [ ] 5.3 Criar o limitador de envios em memória (5 a cada 10 minutos, `Retry-After`) com testes de janela
 - [ ] 5.4 Reescrever `app/api/contact/route.ts`: tipo de conteúdo, tamanho, JSON, campo isca, schema, limite, escape, texto puro, variáveis de ambiente e erros genéricos (400, 413, 415, 429, 502, 503)
 - [ ] 5.5 Testes da rota cobrindo todos os cenários da spec `formulario-de-contato`, com o Resend simulado
-- [ ] 5.6 Atualizar `Contact.tsx`: schema compartilhado, campo isca fora do teclado e do leitor de tela, mensagens por status
+- [ ] 5.6 Atualizar `ContactForm.tsx` (já sem bibliotecas e com a validação compartilhada): campo isca fora do teclado e do leitor de tela, mensagens por status
 - [ ] 5.7 Adicionar as mensagens novas em `messages/pt.json` e gerar `en`/`es` (`npm run translate` ou revisão manual se não houver chave do DeepL)
 - [ ] 5.7a Fazer `scripts/translate.ts` preservar caminhos, URLs e e-mails (o DeepL traduziu `/images/projects/` para `/images/proyectos/` no `es.json`; dado corrigido no bloco 2, causa corrigida aqui) e cobrir com teste
 - [ ] 5.8 Teste de componente e de navegador: envio só com teclado, aviso anunciado e erros traduzidos em `/en` e `/es`

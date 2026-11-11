@@ -59,13 +59,10 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg">
       <div className="container-site flex h-(--header-h) items-center gap-3 nav:gap-6">
-        <a href="#hero" className="flex shrink-0 items-center gap-3 rounded-md font-semibold whitespace-nowrap text-text">
-          <span
-            aria-hidden="true"
-            className="grid h-9 w-9 place-items-center rounded-lg border border-line font-mono text-[13px] font-bold"
-          >
-            FM
-          </span>
+        <a
+          href="#hero"
+          className="shrink-0 rounded-md font-display text-[1.2rem] font-extrabold tracking-[-0.02em] whitespace-nowrap text-text"
+        >
           Francisco Marinho
         </a>
 

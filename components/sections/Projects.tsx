@@ -17,7 +17,7 @@ export async function Projects() {
   const item = (p: Project, key: string) => t(`items.${p.id}.${key}`);
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="py-24 lg:py-40">
+    <section id="projects" aria-labelledby="projects-title" className="band py-24 lg:py-40">
       <div className="container-site">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-end">
           <div>

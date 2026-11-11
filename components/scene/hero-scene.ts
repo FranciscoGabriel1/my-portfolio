@@ -20,8 +20,13 @@ import {
   MeshPhysicalMaterial,
   MeshStandardMaterial,
   PerspectiveCamera,
+  Object3D,
   PlaneGeometry,
   PMREMGenerator,
+  AdditiveBlending,
+  Color,
+  RepeatWrapping,
+  SpotLight,
   Quaternion,
   SRGBColorSpace,
   Scene,
@@ -64,12 +69,15 @@ const SCREENS = {
 const ASPECT = { laptop: 1.6, tablet: 820 / 1180, phone: 390 / 844 };
 
 /** Enquadramento e posições aprovados no protótipo (tarefa 1.3). */
-const CAM = { p: [11.5, 8.5, 18.5] as const, t: [2.0, 1.7, 0.0] as const, fov: 30 };
+const CAM = { p: [13.4, 10.4, 23.1] as const, t: [1.6, 2.0, 0.2] as const, fov: 30 };
+/* Celular e tablet ficam de pé, inclinados para trás: a altura do grupo deixa a borda de baixo logo acima do
+   chão (y ≈ 0,1). Abaixo do chão, a sombra de contato do notebook era desenhada por cima das telas. */
 const REST = {
   laptop: { p: [-1.6, 0, 0.4], ry: 0.3 },
-  tablet: { p: [5.0, 1.65, -2.4], ry: -0.42 },
-  phone: { p: [3.3, 0.75, 4.7], ry: -0.2 },
+  tablet: { p: [5.0, 3.1, -2.4], ry: -0.42 },
+  phone: { p: [3.3, 2.15, 4.7], ry: -0.2 },
 } as const;
+const TILT = { tablet: 1.25, phone: 1.12 };
 /** Margem do canvas em volta do contêiner, para a vista explodida não ser cortada na borda. */
 const OVERSCAN = 1.5;
 const LID_OPEN = -1.88;
@@ -113,11 +121,13 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
 
   /* ── Materiais ─────────────────────────────────────────────────────── */
   const M = {
-    aluminum: track(new MeshPhysicalMaterial({ color: "#7c7f84", metalness: 1, roughness: 0.32, clearcoat: 0.2, clearcoatRoughness: 0.4 })),
+    // Preto-espacial do MacBook Pro: alumínio anodizado escuro, fosco, com um verniz leve.
+    body: track(new MeshPhysicalMaterial({ color: "#3a3b3f", metalness: 1, roughness: 0.4, clearcoat: 0.25, clearcoatRoughness: 0.5 })),
+    hinge: track(new MeshStandardMaterial({ color: "#121214", metalness: 0.6, roughness: 0.5 })),
+    padBlack: track(new MeshPhysicalMaterial({ color: "#36373b", metalness: 1, roughness: 0.22, clearcoat: 0.4 })),
     aluminumDark: track(new MeshPhysicalMaterial({ color: "#4b4e53", metalness: 1, roughness: 0.38 })),
-    trackpad: track(new MeshPhysicalMaterial({ color: "#85888d", metalness: 1, roughness: 0.22 })),
-    keys: track(new MeshStandardMaterial({ color: "#17171a", metalness: 0.1, roughness: 0.55 })),
-    well: track(new MeshStandardMaterial({ color: "#0e0e10", roughness: 0.8 })),
+    keys: track(new MeshStandardMaterial({ color: "#151517", metalness: 0.1, roughness: 0.5 })),
+    well: track(new MeshStandardMaterial({ color: "#0b0b0c", roughness: 0.8 })),
     // Borda da tela: preto que não reage à luz, como o painel de um aparelho real (o brilho fica na camada de vidro).
     bezel: track(new MeshBasicMaterial({ color: "#050506" })),
     phoneBack: track(new MeshPhysicalMaterial({ color: "#23413b", metalness: 0.2, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.08 })),
@@ -178,20 +188,21 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
     s.mesh.material.needsUpdate = true;
   }
 
-  /* ── Notebook: alumínio inteiriço, tampa fina, teclado e trackpad ──── */
+  /* ── Notebook no estilo do MacBook Pro atual: preto-espacial, tampa fina, recorte da câmera, teclas de função
+     de altura cheia, grades de alto-falante dos dois lados do teclado e trackpad largo. Sem logotipos. ── */
   const laptop = new Group(); scene.add(laptop);
-  const LW = 8, LD = 5.6, LT = 0.17;
-  add(laptop, new Mesh(box(LW, LT, LD, 4, 0.08), M.aluminum), 0, LT / 2, 0);
-  add(laptop, new Mesh(box(7.0, 0.02, 2.75, 2, 0.01), M.well), 0, LT - 0.005, -1.05);
+  const LW = 8, LD = 5.6, LT = 0.2;
+  add(laptop, new Mesh(box(LW, LT, LD, 4, 0.09), M.body), 0, LT / 2, 0);
+  add(laptop, new Mesh(box(6.95, 0.02, 2.95, 2, 0.01), M.well), 0, LT - 0.005, -1.18);
   /* Teclas: uma malha instanciada (uma chamada de desenho para o teclado inteiro). */
   const rows = [
-    { z: -2.2, n: 14, d: 0.2, w: 0.42 },
-    { z: -1.8, n: 14, d: 0.36, w: 0.42 },
-    { z: -1.35, n: 14, d: 0.36, w: 0.42 },
-    { z: -0.9, n: 13, d: 0.36, w: 0.45 },
-    { z: -0.45, n: 12, d: 0.36, w: 0.48 },
+    { z: -2.42, n: 14, d: 0.3, w: 0.42 },
+    { z: -1.98, n: 14, d: 0.4, w: 0.42 },
+    { z: -1.5, n: 14, d: 0.4, w: 0.42 },
+    { z: -1.02, n: 13, d: 0.4, w: 0.455 },
+    { z: -0.54, n: 12, d: 0.4, w: 0.49 },
   ];
-  const bottomRow: Array<[number, number]> = [[-2.9, 0.48], [-2.35, 0.48], [-1.75, 0.6], [0, 2.7], [1.75, 0.6], [2.35, 0.48], [2.9, 0.48]];
+  const bottomRow: Array<[number, number]> = [[-2.95, 0.46], [-2.43, 0.46], [-1.85, 0.6], [0, 2.9], [1.85, 0.6], [2.43, 0.46], [2.95, 0.46]];
   const keyCount = rows.reduce((a, r) => a + r.n, 0) + bottomRow.length;
   const keysMesh = new InstancedMesh(box(1, 0.05, 1, 2, 0.02), M.keys, keyCount);
   const m4 = new Matrix4(), q = new Quaternion(), sc = new Vector3(), ps = new Vector3();
@@ -200,24 +211,82 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
     const total = r.n * r.w + (r.n - 1) * 0.06, x0 = -total / 2 + r.w / 2;
     for (let i = 0; i < r.n; i++) keysMesh.setMatrixAt(ki++, m4.compose(ps.set(x0 + i * (r.w + 0.06), LT + 0.02, r.z), q, sc.set(r.w, 1, r.d)));
   }
-  for (const [x, w] of bottomRow) keysMesh.setMatrixAt(ki++, m4.compose(ps.set(x, LT + 0.02, 0), q, sc.set(w, 1, 0.36)));
+  for (const [x, w] of bottomRow) keysMesh.setMatrixAt(ki++, m4.compose(ps.set(x, LT + 0.02, -0.06), q, sc.set(w, 1, 0.4)));
   keysMesh.instanceMatrix.needsUpdate = true;
   laptop.add(keysMesh);
-  add(laptop, new Mesh(box(3.2, 0.012, 1.95, 2, 0.006), M.trackpad), 0, LT + 0.002, 1.55);
-  /* Tampa articulada na borda de trás; a tela olha para -y no espaço da tampa. */
+  /* Grades de alto-falante: uma textura de furos repetida, nos dois lados do teclado. */
+  const grilleTex = (() => {
+    const c = document.createElement("canvas"); c.width = c.height = 16;
+    const g = c.getContext("2d")!;
+    g.fillStyle = "#3a3b3f"; g.fillRect(0, 0, 16, 16);
+    g.fillStyle = "#050506"; g.beginPath(); g.arc(8, 8, 4.2, 0, Math.PI * 2); g.fill();
+    const t = track(new CanvasTexture(c));
+    t.wrapS = t.wrapT = RepeatWrapping; t.colorSpace = SRGBColorSpace;
+    return t;
+  })();
+  for (const side of [-1, 1]) {
+    const t = grilleTex.clone(); track(t); t.repeat.set(5, 38); t.needsUpdate = true;
+    const grille = track(new MeshStandardMaterial({ map: t, metalness: 0.6, roughness: 0.6 }));
+    add(laptop, new Mesh(geo(new PlaneGeometry(0.36, 2.75)), grille), side * 3.69, LT + 0.001, -1.18).rotation.x = -Math.PI / 2;
+  }
+  add(laptop, new Mesh(box(3.6, 0.012, 2.2, 2, 0.006), M.padBlack), 0, LT + 0.002, 1.55);
+  /* Dobradiça escura entre a base e a tampa. */
+  const hinge = add(laptop, new Mesh(geo(new CylinderGeometry(0.11, 0.11, LW - 1.4, 24)), M.hinge), 0, LT, -LD / 2 + 0.06);
+  hinge.rotation.z = Math.PI / 2;
+  /* Tampa articulada na borda de trás; a tela olha para -y no espaço da tampa. Borda fina em cima e nos
+     lados, queixo embaixo, recorte da câmera invadindo a tela. */
   const lid = new Group(); lid.position.set(0, LT, -LD / 2 + 0.05); laptop.add(lid);
-  add(lid, new Mesh(box(LW, 0.1, LD - 0.1, 4, 0.05), M.aluminum), 0, 0.05, (LD - 0.1) / 2);
-  const lBez = add(lid, new Mesh(geo(new PlaneGeometry(LW - 0.03, LD - 0.13)), M.bezel), 0, -0.001, (LD - 0.1) / 2);
-  lBez.rotation.x = Math.PI / 2;
-  const LSW = 7.4;
-  const lScreen = screenMesh(LSW, LSW / ASPECT.laptop);
-  add(lid, lScreen.mesh, 0, -0.004, (LD - 0.1) / 2 + 0.16).rotation.x = Math.PI / 2;
+  const LIDD = LD - 0.1;
+  add(lid, new Mesh(box(LW, 0.075, LIDD, 4, 0.037), M.body), 0, 0.04, LIDD / 2);
+  add(lid, new Mesh(geo(new PlaneGeometry(LW - 0.05, LIDD - 0.05)), M.bezel), 0, -0.001, LIDD / 2).rotation.x = Math.PI / 2;
+  const LSW = 7.62, LSH = LSW / ASPECT.laptop, TOP = LIDD - 0.13;
+  const lScreen = screenMesh(LSW, LSH);
+  add(lid, lScreen.mesh, 0, -0.004, TOP - LSH / 2).rotation.x = Math.PI / 2;
   add(lid, new Mesh(lScreen.mesh.geometry, M.glare), 0, -0.008, lScreen.mesh.position.z).rotation.x = Math.PI / 2;
-  add(lid, new Mesh(box(0.9, 0.01, 0.16, 2, 0.05), M.bezel), 0, -0.006, LD - 0.24);
+  add(lid, new Mesh(box(0.78, 0.01, 0.2, 2, 0.06), M.bezel), 0, -0.007, TOP - 0.08);
+  add(lid, new Mesh(geo(new CylinderGeometry(0.035, 0.035, 0.01, 16)), M.lens), 0, -0.012, TOP - 0.06);
+
+  /* Luz da tela: um holofote saindo da tela sobre o teclado e um brilho aditivo pintado na base, mais forte
+     perto da dobradiça. Cor e força acompanham o brilho médio do que a tela mostra. (A luz de área do Three.js
+     pediria 110 kB de tabelas; isto não custa nada a mais no download.) */
+  const screenLight = new SpotLight("#ffffff", 0, 9, 1.15, 1, 2);
+  screenLight.position.set(0, -0.5, TOP - LSH / 2);
+  lid.add(screenLight);
+  const lightTarget = new Object3D(); lightTarget.position.set(0, LT, -0.6); laptop.add(lightTarget);
+  screenLight.target = lightTarget;
+  const glowTex = (() => {
+    const c = document.createElement("canvas"); c.width = 128; c.height = 128;
+    const g = c.getContext("2d")!;
+    const grd = g.createRadialGradient(64, 0, 4, 64, 0, 128);
+    grd.addColorStop(0, "rgba(255,255,255,0.9)"); grd.addColorStop(0.45, "rgba(255,255,255,0.28)"); grd.addColorStop(1, "rgba(255,255,255,0)");
+    g.fillStyle = grd; g.fillRect(0, 0, 128, 128);
+    return track(new CanvasTexture(c));
+  })();
+  const glowMat = track(new MeshBasicMaterial({ map: glowTex, transparent: true, blending: AdditiveBlending, depthWrite: false, toneMapped: false, opacity: 0 }));
+  add(laptop, new Mesh(geo(new PlaneGeometry(LW - 0.3, LD - 0.4)), glowMat), 0, LT + 0.06, 0).rotation.x = -Math.PI / 2;
+  const screenTone = { color: new Color("#f4f6ff"), level: 0.85 };
+  const sampler = document.createElement("canvas"); sampler.width = sampler.height = 4;
+  const sampleCtx = sampler.getContext("2d", { willReadFrequently: true });
+  let lastSample = 0;
+  /** Cor média da tela, num canvas de 4 × 4 px (vídeo a cada 500 ms; imagem parada, uma vez). */
+  function sampleScreen(now: number) {
+    const src = (video ?? (lScreen.mesh.material.map?.image as CanvasImageSource | undefined)) as CanvasImageSource | undefined;
+    if (!sampleCtx || !src || now - lastSample < 500) return;
+    lastSample = now;
+    try {
+      sampleCtx.drawImage(src, 0, 0, 4, 4);
+      const d = sampleCtx.getImageData(0, 0, 4, 4).data;
+      let r = 0, g = 0, b = 0;
+      for (let i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; b += d[i + 2]; }
+      const n = d.length / 4;
+      screenTone.color.setRGB(r / n / 255, g / n / 255, b / n / 255, SRGBColorSpace);
+      screenTone.level = (0.2126 * r + 0.7152 * g + 0.0722 * b) / n / 255;
+    } catch { /* quadro ainda indisponível: mantém o último tom */ }
+  }
 
   /* ── Tablet: bordas finas, alumínio grafite, duas câmeras atrás ─────── */
   const tablet = new Group(); scene.add(tablet);
-  const tabletTilt = new Group(); tabletTilt.rotation.x = 1.25; tablet.add(tabletTilt);
+  const tabletTilt = new Group(); tabletTilt.rotation.x = TILT.tablet; tablet.add(tabletTilt);
   const TW = 4.3, TD = 6.1, TT = 0.1;
   tabletTilt.add(new Mesh(box(TW, TT, TD, 4, 0.05), M.aluminumDark));
   add(tabletTilt, new Mesh(geo(new PlaneGeometry(TW - 0.06, TD - 0.06)), M.bezel), 0, TT / 2 + 0.001, 0).rotation.x = -Math.PI / 2;
@@ -232,7 +301,7 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
 
   /* ── Celular: traseira de vidro colorido, módulo de câmera, furo na tela ── */
   const phone = new Group(); scene.add(phone);
-  const phoneTilt = new Group(); phoneTilt.rotation.x = 1.12; phone.add(phoneTilt);
+  const phoneTilt = new Group(); phoneTilt.rotation.x = TILT.phone; phone.add(phoneTilt);
   const PW = 2.05, PD = 4.35, PT = 0.12;
   phoneTilt.add(new Mesh(box(PW, PT, PD, 6, 0.06), M.phoneFrame));
   add(phoneTilt, new Mesh(box(PW - 0.04, 0.02, PD - 0.04, 4, 0.01), M.phoneBack), 0, -PT / 2 + 0.005, 0);
@@ -262,10 +331,11 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
     m.rotation.x = -Math.PI / 2; scene.add(m); return m;
   }
 
+  /* `foot`: distância, no chão, do centro do grupo até a borda de baixo do aparelho em pé (onde fica a sombra). */
   const devices = [
-    { g: laptop, r: REST.laptop, sh: shadow(11, 8), spread: [-2.4, 0, 0.6], phase: 0 },
-    { g: tablet, r: REST.tablet, sh: shadow(5.5, 3), spread: [2.6, 0.8, -1.2], phase: 1.7 },
-    { g: phone, r: REST.phone, sh: shadow(3, 2.6), spread: [0.6, 0.4, 2.6], phase: 3.1 },
+    { g: laptop, r: REST.laptop, sh: shadow(11, 8), spread: [-2.4, 0, 0.6], phase: 0, foot: 0.3 },
+    { g: tablet, r: REST.tablet, sh: shadow(5.6, 1.9), spread: [2.6, 0.8, -1.2], phase: 1.7, foot: (TD / 2) * Math.cos(TILT.tablet) },
+    { g: phone, r: REST.phone, sh: shadow(2.9, 1.4), spread: [0.6, 0.4, 2.6], phase: 3.1, foot: (PD / 2) * Math.cos(TILT.phone) },
   ];
 
   let theme: SceneTheme = opts.theme;
@@ -295,14 +365,23 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
       const rise = Math.sin(Math.PI * life) * (0.35 + i * 0.15);
       d.g.position.set(d.r.p[0] + d.spread[0] * pe, d.r.p[1] + bob + rise + d.spread[1] * pe, d.r.p[2] + d.spread[2] * pe);
       d.g.rotation.y = d.r.ry + lifeIdle * Math.sin(t * 0.6 + d.phase) * 0.035 + pe * 0.25 * (i === 0 ? -1 : 1);
-      const lift = d.g.position.y - (i === 0 ? 0 : 0.35);
-      d.sh.position.set(d.g.position.x + (i === 0 ? 0.2 : 0.4), 0.005, d.g.position.z + (i === 0 ? 0.3 : 0.6));
+      const lift = d.g.position.y - d.r.p[1];
+      d.sh.position.set(d.g.position.x + Math.sin(d.g.rotation.y) * d.foot + 0.15, 0.005, d.g.position.z + Math.cos(d.g.rotation.y) * d.foot + 0.15);
+      d.sh.rotation.z = d.g.rotation.y;
       d.sh.scale.setScalar(1 + lift * 0.18);
       (d.sh.material as MeshBasicMaterial).opacity = shadowBase() * clamp(1.15 - lift * 0.35, 0.2, 1);
     });
     /* Tampa: na entrada, fecha um pouco e volta a abrir; fecha aos poucos enquanto o Hero sai da tela. */
     const open = LID_OPEN * (1 - 0.12 * Math.sin(Math.PI * life));
     lid.rotation.x = open + (LID_CLOSED - open) * pe * 0.85;
+    /* Luz da tela: some junto com a abertura da tampa. */
+    sampleScreen(now);
+    const opened = clamp((-lid.rotation.x + LID_CLOSED) / (-LID_OPEN + LID_CLOSED), 0, 1);
+    const glow = screenTone.level * opened * opened;
+    screenLight.color.copy(screenTone.color);
+    screenLight.intensity = glow * (theme === "light" ? 6 : 12);
+    glowMat.color.copy(screenTone.color);
+    glowMat.opacity = glow * (theme === "light" ? 0.16 : 0.45);
     /* Telas que rolam: descem devagar até o fim, param e voltam ao topo (ciclo de 16 s). */
     for (const s of screens) {
       const map = s.mesh.material.map;

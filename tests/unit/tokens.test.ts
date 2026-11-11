@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 // Lê os tokens de cor direto de app/globals.css, para o teste acompanhar qualquer mudança de valor.
 const css = readFileSync(path.join(process.cwd(), "app/globals.css"), "utf-8");
 
-function tokensOf(selector: ":root" | ".dark"): Record<string, string> {
+function tokensOf(selector: string): Record<string, string> {
   const start = css.indexOf(`\n${selector} {`);
   if (start < 0) throw new Error(`bloco ${selector} não encontrado em globals.css`);
   const block = css.slice(start, css.indexOf("\n}", start));
@@ -56,5 +56,16 @@ describe.each([
 
   it("usa o fundo aprovado pelo dono", () => {
     expect(tokens.bg.toLowerCase()).toBe(selector === ".dark" ? "#141311" : "#f4f1ea");
+  });
+});
+
+describe("faixa invertida (Contato e rodapé)", () => {
+  // A faixa usa a paleta do outro tema; as cópias precisam ser idênticas às originais para herdar o AA.
+  it("no tema claro, repete a paleta escura", () => {
+    expect(tokensOf("html:not(.dark) .band-invert")).toEqual(tokensOf(".dark"));
+  });
+
+  it("no tema escuro, repete a paleta clara", () => {
+    expect(tokensOf(".dark .band-invert")).toEqual(tokensOf(":root"));
   });
 });

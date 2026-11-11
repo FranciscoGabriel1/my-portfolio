@@ -19,6 +19,16 @@ describe("SplitText", () => {
     expect(words.map((w) => w.style.getPropertyValue("--i"))).toEqual(["0", "1"]);
   });
 
+  it("no modo letras, numera cada letra em sequência e o leitor de tela ainda lê a frase", () => {
+    const { container, getByRole } = render(<SplitText text="Ana Lu" as="h1" mode="load" letters />);
+    expect(getByRole("heading", { level: 1, name: "Ana Lu" })).toBeInTheDocument();
+    const chars = [...container.querySelectorAll<HTMLElement>(".split-char")];
+    expect(chars.map((c) => c.textContent).join("")).toBe("AnaLu");
+    expect(chars.map((c) => c.style.getPropertyValue("--c"))).toEqual(["0", "1", "2", "3", "4"]);
+    expect(container.firstElementChild).toHaveAttribute("data-split-letters");
+    expect(container.querySelector(".split-char")?.closest('[aria-hidden="true"]')).not.toBeNull();
+  });
+
   it("entra ao rolar no modo reveal e ao carregar no modo load", () => {
     const reveal = render(<SplitText text="Contato" />).container.firstElementChild;
     expect(reveal).toHaveAttribute("data-reveal", "split");

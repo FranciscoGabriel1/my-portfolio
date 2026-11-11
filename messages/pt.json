@@ -241,7 +241,7 @@
       "email_label": "E-mail",
       "email_placeholder": "seu@email.com",
       "subject_label": "Assunto",
-      "subject_placeholder": "Sobre o que você quer falar?",
+      "subject_placeholder": "Escolha um assunto",
       "message_label": "Mensagem",
       "message_placeholder": "Escreva sua mensagem aqui...",
       "submit": "Enviar mensagem",
@@ -249,16 +249,27 @@
       "success_title": "Mensagem enviada!",
       "success_body": "Obrigado pelo contato. Responderei em breve.",
       "error_title": "Ops, algo deu errado.",
-      "error_body": "Tente novamente ou me envie um e-mail diretamente."
+      "error_body": "Tente novamente ou me envie um e-mail diretamente.",
+      "subject_options": {
+        "job": "Oportunidade de trabalho",
+        "project": "Proposta de projeto",
+        "partnership": "Parceria ou colaboração",
+        "feedback": "Feedback sobre o portfólio",
+        "bug": "Problema no site",
+        "other": "Outro"
+      },
+      "subject_other_label": "Qual assunto?",
+      "subject_other_placeholder": "Escreva o assunto em poucas palavras"
     },
     "validation": {
-      "name_required": "Nome é obrigatório",
       "name_min": "Nome deve ter pelo menos 2 caracteres",
-      "email_required": "E-mail é obrigatório",
+      "name_max": "Nome pode ter até 100 caracteres",
       "email_invalid": "E-mail inválido",
-      "subject_required": "Assunto é obrigatório",
-      "message_required": "Mensagem é obrigatória",
-      "message_min": "Mensagem deve ter pelo menos 10 caracteres"
+      "subject_required": "Escolha um assunto",
+      "subject_other_required": "Escreva o assunto",
+      "subject_max": "Assunto pode ter até 150 caracteres",
+      "message_min": "Mensagem deve ter pelo menos 10 caracteres",
+      "message_max": "Mensagem pode ter até 5.000 caracteres"
     }
   },
   "footer": {

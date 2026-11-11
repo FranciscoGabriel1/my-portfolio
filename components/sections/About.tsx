@@ -18,7 +18,7 @@ export async function About() {
   const { about } = (await getMessages()) as unknown as AboutMessages;
 
   return (
-    <section id="about" aria-labelledby="about-title" className="py-24 lg:py-40">
+    <section id="about" aria-labelledby="about-title" className="band-alt py-24 lg:py-40">
       <div className="container-site">
         <p className="type-eyebrow mb-5 text-accent-text">
           <span aria-hidden="true">02 — </span>

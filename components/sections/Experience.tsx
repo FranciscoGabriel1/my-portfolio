@@ -38,7 +38,7 @@ export async function Experience() {
   const oldestFirst = [...EXPERIENCE].reverse();
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="py-24 lg:py-40">
+    <section id="experience" aria-labelledby="experience-title" className="band-alt py-24 lg:py-40">
       <div className="container-site">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-end">
           <div>

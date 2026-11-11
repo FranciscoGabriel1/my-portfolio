@@ -30,7 +30,7 @@ O TypeScript 7 é o compilador nativo novo. Se o plugin de TypeScript do Next 16
 Os 11 componentes animados continuam com framer-motion, na versão atual compatível com React 19. A troca por GSAP (decisão de direção de arte, com os efeitos aprovados no protótipo B) acontece na change de identidade, que vai reescrever esses componentes de qualquer forma. *Alternativa descartada:* migrar para `motion` agora e para GSAP depois, que mexeria duas vezes nos mesmos arquivos.
 
 ### 4. Um schema de contato compartilhado, com códigos em vez de textos
-`lib/contact/schema.ts` exporta o schema Zod com as regras da spec e devolve **códigos** de erro (`name_min`, `email_invalid`...). O cliente traduz os códigos com next-intl; o servidor devolve os códigos no JSON do 400. Assim o texto continua em `messages/` e as regras existem em um lugar só.
+`lib/contact/validate.ts` (sem Zod desde `refinamentos-da-revisao`: o dono pediu o formulário sem bibliotecas) exporta as regras da spec e devolve **códigos** de erro (`name_min`, `email_invalid`...). O cliente traduz os códigos com next-intl; o servidor devolve os códigos no JSON do 400. Assim o texto continua em `messages/` e as regras existem em um lugar só.
 - *Alternativa descartada:* schema criado dentro do componente com textos traduzidos (como hoje), que impede o servidor de reutilizá-lo.
 
 ### 5. Limite de envios em memória, com a limitação documentada

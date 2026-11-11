@@ -302,6 +302,28 @@ A troca entre claro e escuro virou um círculo que nasce no botão, com a **View
 Custo: cerca de 1 kB de código e nenhuma biblioteca. Com movimento reduzido ou num navegador sem a API, a troca é
 instantânea, como antes.
 
+### 2.12 Formulário sem bibliotecas (change `refinamentos-da-revisao`)
+
+- **Problema:** o formulário dependia de `react-hook-form`, `zod` e `@hookform/resolvers`. Mesmo com a validação
+  sob demanda (seção 2.8), eram três dependências e um pedaço extra de JavaScript para quatro campos.
+- **Solução:** as regras viraram uma função pura, `lib/contact/validate.ts`. Ela devolve códigos de erro (`name_min`,
+  `email_invalid`…), não textos, e o componente traduz os códigos com `messages/`. O estado é um `useState` comum. A
+  lista de assunto com ícones é um componente próprio, no padrão "select-only combobox" da APG. O mesmo módulo de
+  regras vai servir à rota da API.
+- **Resultado:** JavaScript inicial de **225 para 216 kB gzip** (−9 kB), medido como na seção 1. O pedaço de
+  validação que era baixado no primeiro foco do formulário deixou de existir.
+- **Para a entrevista:** "Primeiro, adiei a biblioteca (carregar sob demanda). Depois, perguntei se ela era
+  necessária. Para quatro campos, a plataforma e uma função pura bastam, e a mesma função roda no servidor."
+
+### 2.13 Luz da tela sem a luz de área do Three.js
+
+- **Problema:** o dono pediu que a tela do notebook iluminasse o teclado. O caminho óbvio, `RectAreaLight`, exige
+  as tabelas de `RectAreaLightTexturesLib`, com **110 kB gzip**. Isso quase dobraria o pedaço da cena (136 kB).
+- **Solução:** um `SpotLight` embutido, saindo da tela, e um brilho aditivo pintado na base. Os dois acompanham a
+  cor média da tela, lida a cada 500 ms num canvas de 4 × 4 px, e somem quando a tampa fecha.
+- **Resultado:** o pedaço da cena foi de 136 para 137,5 kB gzip, já contando o notebook novo inteiro. Os pôsteres
+  gerados de novo ficaram menores (37 e 35 kB, antes 41 e 40 kB).
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:

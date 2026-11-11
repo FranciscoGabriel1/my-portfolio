@@ -1,6 +1,7 @@
 import { preload } from "react-dom";
 import { ArrowRight, Download } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { NameWave } from "@/components/motion/NameWave";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroSceneLoader } from "@/components/scene/HeroSceneLoader";
 import { buttonVariants } from "@/components/ui/Button";
@@ -24,9 +25,9 @@ export async function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="flex min-h-[calc(100svh-var(--header-h))] flex-col"
+      className="band flex min-h-[calc(100svh-var(--header-h))] flex-col"
     >
-      <div className="container-site grid flex-1 items-center gap-10 py-16 lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] lg:gap-8 lg:py-24">
+      <div className="container-site grid flex-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-12 lg:py-24">
         <div className="flex flex-col gap-7">
           <p className="type-eyebrow flex items-center gap-2.5 text-text-2">
             <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-ok" />
@@ -37,9 +38,11 @@ export async function Hero() {
             as="h1"
             id="hero-title"
             mode="load"
+            letters
             text={t("name")}
             className="type-giant max-w-[9ch] text-text"
           />
+          <NameWave targetId="hero-title" />
 
           <p className="type-lead max-w-[60ch]">{t("tagline")}</p>
 

@@ -13,7 +13,7 @@ export async function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line">
+    <footer className="band-invert border-t border-line">
       <div className="container-site flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-10 font-mono text-[0.78rem] tracking-[0.06em] text-text-3">
         <p>
           © {year} Francisco Marinho · {t("location")}

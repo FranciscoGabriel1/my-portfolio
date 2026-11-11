@@ -18,7 +18,7 @@ export async function Contact() {
   const newTab = <span className="sr-only"> ({tA11y("open_link_new_tab")})</span>;
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="py-24 lg:py-40">
+    <section id="contact" aria-labelledby="contact-title" className="band-invert py-24 lg:py-40">
       <div className="container-site">
         <p className="type-eyebrow mb-5 text-accent-text">
           <span aria-hidden="true">05 — </span>

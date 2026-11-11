@@ -53,6 +53,7 @@
   --ok: #145c31; /* ≥ 4,5:1 até sobre o próprio tom a 10% */
   --danger: #b42318;
   --focus: #a8360a; /* o laranja de preenchimento dá 2,5:1 no creme */
+  --band-dot: #c2b9a7; /* trama decorativa das faixas */
   --header-h: 4.5rem;
   --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
@@ -76,7 +77,48 @@
   --ok: #5bc48a;
   --danger: #ff8a7a;
   --focus: #ff6b2c;
+  --band-dot: #3d3a33;
   color-scheme: dark;
+}
+
+/* Faixa invertida (Contato e rodapé): a paleta do outro tema, com os mesmos valores de :root e .dark
+   (tests/unit/tokens.test.ts confere que as cópias não se desencontram). */
+html:not(.dark) .band-invert {
+  --bg: #141311;
+  --surface: #1d1c19;
+  --surface-2: #272521;
+  --line: #34312c;
+  --line-strong: #958e81;
+  --text: #f2eee6;
+  --text-2: #bdb6a8;
+  --text-3: #958e81;
+  --accent: #ff6b2c;
+  --accent-text: #ff8a55;
+  --on-accent: #171612;
+  --ok: #5bc48a;
+  --danger: #ff8a7a;
+  --focus: #ff6b2c;
+  --band-dot: #3d3a33;
+  color-scheme: dark;
+}
+
+.dark .band-invert {
+  --bg: #f4f1ea;
+  --surface: #eae5da;
+  --surface-2: #dfd9cc;
+  --line: #cfc8b9;
+  --line-strong: #655f55;
+  --text: #171612;
+  --text-2: #4a463e;
+  --text-3: #655f55;
+  --accent: #ff6b2c;
+  --accent-text: #a8360a;
+  --on-accent: #171612;
+  --ok: #145c31;
+  --danger: #b42318;
+  --focus: #a8360a;
+  --band-dot: #c2b9a7;
+  color-scheme: light;
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
@@ -178,11 +220,59 @@
 /* ─── Layout ───────────────────────────────────────────────────────────────── */
 
 @utility container-site {
-  width: min(82rem, 100% - 2.5rem);
+  width: min(96rem, 100% - 2.5rem);
   margin-inline: auto;
 
   @media (min-width: 56.25rem) {
-    width: min(82rem, 100% - 8rem);
+    width: min(96rem, 100% - 8rem);
+  }
+}
+
+/* ─── Faixas das seções ──────────────────────────────────────────────────────
+   Cada seção é uma faixa de largura total: `band` (fundo da página) e `band-alt` (superfície vizinha) se
+   alternam, e o Contato fecha a página com a paleta do outro tema (`band-invert`). Uma trama de pontos fica
+   num canto da faixa (`--band-corner`) e desliza devagar; parada sem JavaScript e com movimento reduzido.
+   O pseudo-elemento é maior que a faixa em um passo da trama, e a faixa o recorta. */
+
+.band,
+.band-alt,
+.band-invert {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--bg);
+  color: var(--text);
+  --band-corner: 100% 0%;
+}
+
+.band-alt {
+  background: var(--surface);
+  --band-corner: 0% 100%;
+}
+
+.band::before,
+.band-alt::before,
+.band-invert::before {
+  content: '';
+  position: absolute;
+  inset: -28px 0 0 -28px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--band-dot) 1.2px, transparent 1.6px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 80% at var(--band-corner), #000 0%, transparent 72%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion='ready'] :is(.band, .band-alt, .band-invert)::before {
+    animation: band-drift 24s linear infinite;
+  }
+}
+
+/* Um passo da trama por ciclo: o fim coincide com o começo, sem salto. Só `transform`: não repinta. */
+@keyframes band-drift {
+  to {
+    transform: translate(28px, 28px);
   }
 }
 
@@ -227,16 +317,30 @@
    depois que components/motion/MotionReady.tsx marca <html data-motion="ready">,
    e só sem pedido de movimento reduzido. Se o JavaScript falhar, nada fica escondido. */
 
+/* A máscara esconde a palavra antes da entrada. A folga lateral, compensada pela margem negativa, evita
+   que o espaçamento negativo dos títulos corte a curva das letras nas pontas (o "o" do nome). */
 .split-mask {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
+  padding: 0 0.08em 0.1em;
+  margin: 0 -0.08em -0.1em;
 }
 
 .split-word {
   display: inline-block;
+}
+
+/* Letras do nome do Hero. `--wave` (0 a 1) vem de components/motion/NameWave.tsx: a letra sobe e puxa para a
+   cor de acento de texto (AA em texto grande nos dois temas). `translate` não disputa com o `transform` da
+   entrada, e nada muda de largura, então a linha não se rearranja. */
+.split-char {
+  display: inline-block;
+  translate: 0 calc(var(--wave, 0) * -0.09em);
+  color: color-mix(in oklab, var(--text), var(--accent-text) calc(var(--wave, 0) * 100%));
+  transition:
+    translate 0.5s var(--ease-out-strong),
+    color 0.5s var(--ease-out-soft);
 }
 
 /* A frase oculta para leitor de tela não entra na seleção (evita texto duplicado ao copiar). */
@@ -246,9 +350,15 @@
 
 @media (prefers-reduced-motion: no-preference) {
   /* Nome do Hero: entra ao carregar, só com CSS (funciona sem JavaScript). */
-  [data-split='load'] .split-word {
+  [data-split='load']:not([data-split-letters]) .split-word {
     animation: split-rise 0.9s var(--ease-out-strong) both;
     animation-delay: calc(var(--i, 0) * 50ms);
+  }
+
+  /* Letra por letra: cada uma sobe de dentro da máscara da palavra, girando de leve até assentar. */
+  [data-split='load'][data-split-letters] .split-char {
+    animation: char-rise 1s var(--ease-out-strong) both;
+    animation-delay: calc(80ms + var(--c, 0) * 38ms);
   }
 
   /* Blocos que sobem ao entrar na tela. */
@@ -303,6 +413,15 @@
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes char-rise {
+  from {
+    transform: translateY(115%) rotate(10deg);
+  }
+  to {
+    transform: none;
   }
 }
 
