@@ -228,6 +228,75 @@ html:not(.dark) .band-invert {
   }
 }
 
+/* ─── Logomarca: assinatura (components/layout/Signature.tsx) ───────────────
+   Temporária, até o dono ter uma oficial. Letras preenchidas com a cor do texto e sublinhado em traço; o hover
+   leva tudo para a cor de acento. A escrita e o brilho ficam em Movimento, mais abaixo. */
+
+.signature {
+  display: block;
+  height: 2.6rem;
+  width: auto;
+  overflow: visible;
+}
+
+.signature-letter {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-dasharray: 1;
+  transition:
+    fill 0.3s var(--ease-out-soft),
+    stroke 0.3s var(--ease-out-soft);
+}
+
+.signature-swoosh {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  transition: stroke 0.3s var(--ease-out-soft);
+}
+
+.signature-stop {
+  stop-color: var(--accent-text);
+  stop-opacity: 0;
+}
+
+.signature-stop-mid {
+  stop-opacity: 0.95;
+}
+
+.signature-shine {
+  opacity: 0;
+}
+
+a:hover > .signature .signature-letter {
+  fill: var(--accent-text);
+  stroke: var(--accent-text);
+}
+
+a:hover > .signature .signature-swoosh {
+  stroke: var(--accent-text);
+}
+
+@media (max-width: 30rem) {
+  .signature {
+    height: 2.2rem;
+  }
+}
+
+/* Alto contraste do sistema: a assinatura usa a cor de texto do sistema. */
+@media (forced-colors: active) {
+  .signature-letter {
+    fill: CanvasText;
+    stroke: CanvasText;
+  }
+  .signature-swoosh {
+    stroke: CanvasText;
+  }
+}
+
 /* ─── Faixas das seções ──────────────────────────────────────────────────────
    Cada seção é uma faixa de largura total: `band` (fundo da página) e `band-alt` (superfície vizinha) se
    alternam, e o Contato fecha a página com a paleta do outro tema (`band-invert`). Uma trama de pontos fica
@@ -480,6 +549,22 @@ html:not(.dark) .band-invert {
     transform: scaleX(0);
   }
 
+  /* Assinatura do cabeçalho: cada letra é traçada e preenchida em sequência, o sublinhado vem por último, e
+     depois um brilho atravessa as letras a cada 7 s. Só CSS. */
+  .signature-letter {
+    animation: signature-letter 0.7s cubic-bezier(0.55, 0.1, 0.35, 1) both;
+    animation-delay: calc(0.2s + var(--i, 0) * 85ms);
+  }
+  .signature-swoosh {
+    animation: signature-swoosh 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation-delay: calc(0.35s + var(--n, 0) * 85ms);
+  }
+  .signature-shine {
+    opacity: 1;
+    animation: signature-shine 7s ease-in-out infinite;
+    animation-delay: calc(1.6s + var(--n, 0) * 85ms);
+  }
+
   /* Competências: as tecnologias sobem uma a uma e sobem de leve no hover. */
   .tech-chip:hover {
     transform: translateY(-2px);
@@ -521,6 +606,41 @@ html:not(.dark) .band-invert {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes signature-letter {
+  0% {
+    stroke-dashoffset: 1;
+    fill-opacity: 0;
+  }
+  65% {
+    stroke-dashoffset: 0;
+    fill-opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill-opacity: 1;
+  }
+}
+
+@keyframes signature-swoosh {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* O brilho cruza a assinatura em 28% do ciclo e espera do outro lado até a próxima passada. */
+@keyframes signature-shine {
+  0% {
+    transform: translateX(0);
+  }
+  28%,
+  100% {
+    transform: translateX(var(--sweep));
   }
 }
 

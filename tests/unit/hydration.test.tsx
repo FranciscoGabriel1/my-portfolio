@@ -4,6 +4,7 @@ import { renderToString } from "react-dom/server";
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Navbar } from "@/components/layout/Navbar";
+import { Signature } from "@/components/layout/Signature";
 import { ContactForm } from "@/components/sections/ContactForm";
 import en from "@/messages/en.json";
 import es from "@/messages/es.json";
@@ -16,7 +17,7 @@ const MESSAGES = { pt, en, es } as unknown as Record<string, AbstractIntlMessage
 function page(locale: string): ReactElement {
   return (
     <NextIntlClientProvider locale={locale} messages={MESSAGES[locale]} timeZone="America/Manaus">
-      <Navbar />
+      <Navbar logo={<Signature />} />
       <main>
         <ContactForm />
       </main>

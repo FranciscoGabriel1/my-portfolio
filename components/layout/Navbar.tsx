@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ThemeToggle } from "./ThemeToggle";
@@ -18,7 +18,8 @@ const NAV_LINKS = [
   { key: "contact", href: "#contact" },
 ] as const;
 
-export function Navbar() {
+/** `logo`: a assinatura (components/layout/Signature.tsx), de servidor, para o desenho não entrar no JavaScript. */
+export function Navbar({ logo }: { logo: ReactNode }) {
   const t = useTranslations("nav");
   const tLanguage = useTranslations("language");
   const tA11y = useTranslations("accessibility");
@@ -59,18 +60,20 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg">
       <div className="container-site flex h-(--header-h) items-center gap-3 nav:gap-6">
-        <a
-          href="#hero"
-          className="shrink-0 rounded-md font-display text-[1.2rem] font-extrabold tracking-[-0.02em] whitespace-nowrap text-text"
-        >
-          Francisco Marinho
+        {/* Logomarca: assinatura desenhada (decorativa); o nome em texto fica para o leitor de tela. */}
+        <a href="#hero" className="shrink-0 rounded-md py-1 text-text">
+          {logo}
+          <span className="sr-only">Francisco Marinho</span>
         </a>
 
         <nav aria-label={t("label")} className="ml-auto hidden nav:block">
           <ul className="flex items-center gap-7">
             {NAV_LINKS.map(({ key, href }) => (
               <li key={key}>
-                <a href={href} className="rounded-md text-[0.95rem] text-text-2 transition-colors hover:text-text">
+                <a
+                  href={href}
+                  className="rounded-md text-[0.95rem] text-text-2 transition-colors hover:text-text"
+                >
                   {t(key)}
                 </a>
               </li>
@@ -79,14 +82,21 @@ export function Navbar() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1 nav:ml-0 nav:gap-2">
-          <LanguageSwitcher current={locale} label={tLanguage("label")} className="hidden nav:flex" />
+          <LanguageSwitcher
+            current={locale}
+            label={tLanguage("label")}
+            className="hidden nav:flex"
+          />
           <ThemeToggle />
           {AGENDA_URL && (
             <a
               href={AGENDA_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(buttonVariants({ variant: "primary", size: "sm" }), "hidden nav:inline-flex")}
+              className={cn(
+                buttonVariants({ variant: "primary", size: "sm" }),
+                "hidden nav:inline-flex"
+              )}
             >
               {t("schedule")}
               {newTab}
@@ -96,7 +106,10 @@ export function Navbar() {
             href={cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "hidden nav:inline-flex")}
+            className={cn(
+              buttonVariants({ variant: "secondary", size: "sm" }),
+              "hidden nav:inline-flex"
+            )}
           >
             {t("download_cv")}
             {newTab}
@@ -109,13 +122,22 @@ export function Navbar() {
             onClick={() => setOpen((value) => !value)}
             className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "px-3 nav:hidden")}
           >
-            {open ? <X className="h-4 w-4" aria-hidden /> : <Menu className="h-4 w-4" aria-hidden />}
+            {open ? (
+              <X className="h-4 w-4" aria-hidden />
+            ) : (
+              <Menu className="h-4 w-4" aria-hidden />
+            )}
             {t("menu")}
           </button>
         </div>
       </div>
 
-      <div id="mobile-menu" ref={panelRef} hidden={!open} className="border-t border-line bg-bg nav:hidden">
+      <div
+        id="mobile-menu"
+        ref={panelRef}
+        hidden={!open}
+        className="border-t border-line bg-bg nav:hidden"
+      >
         <div className="container-site flex flex-col gap-6 py-6">
           <nav aria-label={t("label")}>
             <ul className="flex flex-col">

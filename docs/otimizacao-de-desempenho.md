@@ -342,6 +342,28 @@ instantânea, como antes.
 - **Para a entrevista:** "Inline é ótimo para um ícone. Para dezenas, uma folha externa com `<use>` deixa o HTML
   leve, aproveita o cache e mantém a cor no CSS. E cortar o que não informa foi a otimização que mais rendeu."
 
+### 2.15 Logomarca em assinatura: escrita letra a letra sem JavaScript
+
+- **Problema:** a logomarca virou uma assinatura desenhada (temporária, a partir da fonte Mrs Saint Delafield,
+  OFL), com uma animação de escrita e um brilho que passa de tempos em tempos. O cabeçalho é um componente de
+  cliente: o desenho, importado ali, iria parar no JavaScript.
+- **Primeira versão (descartada pelo efeito, não pelo peso):** o SVG como **máscara CSS** sobre `currentColor`.
+  Custava 3,8 kB com gzip num arquivo em cache e nada no HTML, mas a máscara é um bloco só: dava para revelar da
+  esquerda para a direita, não para escrever letra por letra.
+- **Versão final:**
+  - `Signature` é um **componente de servidor** passado ao cabeçalho como prop (`<Navbar logo={<Signature />} />`).
+    O desenho vai no HTML, e o JavaScript não ganha nenhum byte.
+  - Uma letra por `<path>` com `pathLength="1"`. A escrita anima `stroke-dashoffset` (o contorno é traçado) e
+    depois `fill-opacity`, com atraso por letra. O sublinhado é um traço desenhado do mesmo jeito.
+  - O brilho é um retângulo com degradê que cruza a assinatura, recortado pelas letras (`clipPath`). O recorte
+    reaproveita as letras com `<use>`, sem repetir os desenhos: 194 → 177 kB de HTML bruto.
+  - Tudo em CSS, desligado com movimento reduzido. No alto contraste do sistema, a cor vira `CanvasText`.
+- **Resultado (build de produção):** JavaScript inicial **216 kB, sem mudança**. HTML de `/pt`: **151 → 177 kB bruto
+  (23 → 33 kB com gzip)**. O desenho aparece duas vezes no documento, no HTML e no payload do React, longe demais uma
+  da outra para o gzip aproveitar (janela de 32 kB).
+- **Para a entrevista:** "Componente de servidor passado como prop para um componente de cliente é o jeito de pôr
+  conteúdo pesado e estático dentro de uma ilha interativa sem que ele entre no bundle."
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:

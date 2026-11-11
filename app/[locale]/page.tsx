@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Signature } from "@/components/layout/Signature";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
@@ -18,7 +19,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      <Navbar />
+      <Navbar logo={<Signature />} />
 
       <div className="overflow-x-hidden">
         <main id="main-content">
