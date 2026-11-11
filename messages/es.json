@@ -12,7 +12,8 @@
     "open_menu": "Abrir menú",
     "close_menu": "Cerrar menú",
     "label": "Principal",
-    "menu": "Menú"
+    "menu": "Menú",
+    "schedule": "Agendar llamada"
   },
   "theme": {
     "toggle_dark": "Cambiar al tema oscuro",
@@ -218,42 +219,46 @@
     }
   },
   "contact": {
-    "label": "Póngase en contacto con",
+    "label": "Contacto",
     "title": "¿Hablamos?",
-    "subtitle": "Abierto a oportunidades, freelancing y colaboraciones. ¡Envíame un mensaje!",
-    "social_title": "Redes sociales",
+    "subtitle": "Abierto a oportunidades y colaboraciones. Escríbeme por el canal que prefieras.",
+    "channels": {
+      "email": "Correo",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "lattes": "Lattes",
+      "discord": "Discord"
+    },
+    "cv": "Descargar CV",
+    "agenda_label": "Agendar una llamada",
+    "agenda_value": "Elige un horario en mi agenda",
+    "write_toggle": "¿Prefieres escribir aquí?",
+    "noscript": "Sin JavaScript, el formulario no se envía. Escríbeme al correo de al lado.",
     "form_aria_label": "Formulario de contacto",
     "form": {
       "name_label": "Nombre",
-      "name_placeholder": "Su nombre completo",
-      "email_label": "Correo electrónico",
-      "email_placeholder": "seu@email.com",
+      "name_placeholder": "Tu nombre completo",
+      "email_label": "Correo",
+      "email_placeholder": "tu@correo.com",
       "subject_label": "Asunto",
       "subject_placeholder": "¿De qué quieres hablar?",
       "message_label": "Mensaje",
-      "message_placeholder": "Escriba aquí su mensaje...",
-      "submit": "Enviar un mensaje",
+      "message_placeholder": "Escribe aquí tu mensaje...",
+      "submit": "Enviar mensaje",
       "submitting": "Enviando...",
-      "success_title": "Mensaje enviado.",
-      "success_body": "Gracias por ponerse en contacto conmigo. Me pondré en contacto con usted en breve.",
-      "error_title": "Uy, algo salió mal.",
-      "error_body": "Inténtalo de nuevo o envíame un correo electrónico directamente."
+      "success_title": "¡Mensaje enviado!",
+      "success_body": "Gracias por escribirme. Te responderé pronto.",
+      "error_title": "Ups, algo salió mal.",
+      "error_body": "Inténtalo de nuevo o escríbeme directamente al correo."
     },
     "validation": {
-      "name_required": "Nombre requerido",
+      "name_required": "El nombre es obligatorio",
       "name_min": "El nombre debe tener al menos 2 caracteres",
-      "email_required": "Correo electrónico requerido",
-      "email_invalid": "Correo electrónico no válido",
-      "subject_required": "La asignatura es obligatoria",
+      "email_required": "El correo es obligatorio",
+      "email_invalid": "Correo no válido",
+      "subject_required": "El asunto es obligatorio",
       "message_required": "El mensaje es obligatorio",
       "message_min": "El mensaje debe tener al menos 10 caracteres"
-    },
-    "social": {
-      "email": "franciscogabriel.dev@gmail.com",
-      "github": "https://github.com/FranciscoGabriel1",
-      "linkedin": "https://www.linkedin.com/in/francisco-gabriel-software/",
-      "lattes": "http://lattes.cnpq.br/6111525331943224",
-      "discord": "https://discord.gg/jDjgZUjamz"
     }
   },
   "footer": {

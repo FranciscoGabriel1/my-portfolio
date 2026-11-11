@@ -12,7 +12,8 @@
     "open_menu": "Open menu",
     "close_menu": "Close menu",
     "label": "Main",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Book a call"
   },
   "theme": {
     "toggle_dark": "Switch to dark theme",
@@ -219,15 +220,26 @@
   },
   "contact": {
     "label": "Contact",
-    "title": "Shall we talk?",
-    "subtitle": "Open to opportunities, freelancing and collaborations. Send me a message!",
-    "social_title": "Social networks",
+    "title": "Let's talk?",
+    "subtitle": "Open to opportunities and collaborations. Reach me on whichever channel you prefer.",
+    "channels": {
+      "email": "Email",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "lattes": "Lattes",
+      "discord": "Discord"
+    },
+    "cv": "Download CV",
+    "agenda_label": "Book a call",
+    "agenda_value": "Pick a time on my calendar",
+    "write_toggle": "Prefer to write here?",
+    "noscript": "Without JavaScript, the form can't send. Please write to the email address next to it.",
     "form_aria_label": "Contact form",
     "form": {
       "name_label": "Name",
       "name_placeholder": "Your full name",
-      "email_label": "E-mail",
-      "email_placeholder": "seu@email.com",
+      "email_label": "Email",
+      "email_placeholder": "you@email.com",
       "subject_label": "Subject",
       "subject_placeholder": "What do you want to talk about?",
       "message_label": "Message",
@@ -240,20 +252,13 @@
       "error_body": "Try again or email me directly."
     },
     "validation": {
-      "name_required": "Name required",
+      "name_required": "Name is required",
       "name_min": "Name must be at least 2 characters long",
-      "email_required": "E-mail is mandatory",
-      "email_invalid": "Invalid e-mail",
-      "subject_required": "Subject is mandatory",
-      "message_required": "Message is mandatory",
+      "email_required": "Email is required",
+      "email_invalid": "Invalid email",
+      "subject_required": "Subject is required",
+      "message_required": "Message is required",
       "message_min": "Message must be at least 10 characters long"
-    },
-    "social": {
-      "email": "franciscogabriel.dev@gmail.com",
-      "github": "https://github.com/FranciscoGabriel1",
-      "linkedin": "https://www.linkedin.com/in/francisco-gabriel-software/",
-      "lattes": "http://lattes.cnpq.br/6111525331943224",
-      "discord": "https://discord.gg/jDjgZUjamz"
     }
   },
   "footer": {

@@ -7,6 +7,9 @@ import { Providers } from "@/components/providers";
 import { MotionReady } from "@/components/motion/MotionReady";
 import "@/app/globals.css";
 
+/** Grupos de mensagens usados por componentes de cliente (Navbar, ThemeToggle, ContactForm). */
+const CLIENT_NAMESPACES = ["nav", "language", "theme", "accessibility", "contact"] as const;
+
 // Fontes servidas pelo próprio site (next/font), só o subconjunto latin, que cobre pt, en e es.
 const heading = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -82,6 +85,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   // Permite gerar as páginas de cada idioma no build (renderização estática com next-intl).
   setRequestLocale(locale);
   const messages = await getMessages();
+  // Só as ilhas de cliente (cabeçalho e formulário) usam mensagens no navegador: o resto não vai no HTML.
+  const clientMessages = Object.fromEntries(
+    CLIENT_NAMESPACES.filter((key) => key in messages).map((key) => [key, messages[key]])
+  );
   const tA11y = await getTranslations("accessibility");
 
   return (
@@ -95,7 +102,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         </a>
         <MotionReady />
 
-        <Providers locale={locale} messages={messages}>
+        <Providers locale={locale} messages={clientMessages}>
           {children}
         </Providers>
       </body>

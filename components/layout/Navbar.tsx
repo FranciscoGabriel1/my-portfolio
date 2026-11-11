@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { buttonVariants } from "@/components/ui/Button";
+import { AGENDA_URL } from "@/lib/contact";
 import { CV_URL } from "@/lib/cv";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/routing";
@@ -83,6 +84,17 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-1 nav:ml-0 nav:gap-2">
           <LanguageSwitcher current={locale} label={tLanguage("label")} className="hidden nav:flex" />
           <ThemeToggle />
+          {AGENDA_URL && (
+            <a
+              href={AGENDA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ variant: "primary", size: "sm" }), "hidden nav:inline-flex")}
+            >
+              {t("schedule")}
+              {newTab}
+            </a>
+          )}
           <a
             href={cvUrl}
             target="_blank"

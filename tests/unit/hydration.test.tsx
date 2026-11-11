@@ -4,21 +4,21 @@ import { renderToString } from "react-dom/server";
 import { NextIntlClientProvider, type AbstractIntlMessages } from "next-intl";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Navbar } from "@/components/layout/Navbar";
-import { Contact } from "@/components/sections/Contact";
+import { ContactForm } from "@/components/sections/ContactForm";
 import en from "@/messages/en.json";
 import es from "@/messages/es.json";
 import pt from "@/messages/pt.json";
 
-// As mensagens têm listas (ex.: hero.roles), que o tipo do next-intl não descreve; o app faz o mesmo cast no layout.
+// As mensagens têm listas (ex.: about.skills), que o tipo do next-intl não descreve; o app faz o mesmo cast no layout.
 const MESSAGES = { pt, en, es } as unknown as Record<string, AbstractIntlMessages>;
 
-// Só os componentes de cliente hidratam. Hero, Sobre, Projetos e Trajetória são de servidor (sem hidratação) e ficam fora.
+// Só as ilhas de cliente hidratam: o cabeçalho e o formulário de contato. As seções são de servidor.
 function page(locale: string): ReactElement {
   return (
     <NextIntlClientProvider locale={locale} messages={MESSAGES[locale]} timeZone="America/Manaus">
       <Navbar />
       <main>
-        <Contact />
+        <ContactForm />
       </main>
     </NextIntlClientProvider>
   );

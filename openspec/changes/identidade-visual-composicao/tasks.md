@@ -53,12 +53,18 @@
 
 ## 5. Contato e limpeza
 
-- [ ] 5.1 Criar `lib/contact.ts` com `AGENDA_URL` vazio; "Agendar call" no cabeçalho e no Contato só quando houver URL
-- [ ] 5.2 Seção Contato: cartões dos canais (e-mail, LinkedIn, GitHub, Lattes, Discord) com rótulo e valor visível, "Baixar CV" e formulário em `<details>` "Prefere escrever por aqui?", sem mudar a lógica do formulário nem a API; tirar as URLs de `contact.social` das mensagens e a exceção correspondente em `tests/unit/content.test.ts`
-- [ ] 5.3 Campos do formulário com `--line-strong` e foco com `--focus`; erro de validação mantém o `<details>` aberto
-- [ ] 5.4 Remover `framer-motion` do `package.json` e os componentes `Particles`, `CountUp`, `FadeInView`, `StaggerChildren` e `SectionDivider`, além dos aliases de tokens antigos
-- [ ] 5.5 Textos em pt, `npm run translate` e revisão; lint, tipos, testes e build
-- [ ] 5.6 Dono confere o Contato, o formulário só com teclado e o comportamento com e sem link de agendamento
+- [x] 5.1 Criar `lib/contact.ts` com `AGENDA_URL` vazio; "Agendar call" no cabeçalho e no Contato só quando houver URL
+- [x] 5.2 Seção Contato: cartões dos canais (e-mail, LinkedIn, GitHub, Lattes, Discord) com rótulo e valor visível, "Baixar CV" e formulário em `<details>` "Prefere escrever por aqui?", sem mudar a lógica do formulário nem a API; tirar as URLs de `contact.social` das mensagens e a exceção correspondente em `tests/unit/content.test.ts`
+  - A seção virou componente de servidor, e só o formulário (`ContactForm`) é de cliente, com as mesmas regras e o mesmo envio. Sem JavaScript, um aviso em `<noscript>` indica o e-mail, e o formulário usa `method="post"` para nunca mandar a mensagem na URL.
+- [x] 5.3 Campos do formulário com `--line-strong` e foco com `--focus`; erro de validação mantém o `<details>` aberto
+  - Token `--danger` novo, coberto pelo teste de contraste. Conferido no navegador: Enter abre, o Tab seguinte vai para Nome, e o envio vazio mostra os 4 erros com o `<details>` aberto, em pt/en/es.
+- [x] 5.4 Remover `framer-motion` do `package.json` e os componentes `Particles`, `CountUp`, `FadeInView`, `StaggerChildren` e `SectionDivider`, além dos aliases de tokens antigos
+  - Também saíram `Card`, `Badge`, `BrandIcons`, `DiscordIcon`, `lib/social-links.ts`, a escala tipográfica antiga e as utilidades `glass`, `text-gradient`, `section-padding` e `container-content`.
+  - Desempenho (ações da 2.6): o navegador recebe só as mensagens das ilhas de cliente; a imagem escura da cena é pré-carregada com prioridade alta; Zod e o resolvedor do formulário carregam sob demanda (`lib/contact-validation.ts`, que o bloco 5 da fundação vai compartilhar com o servidor). Uma tentativa de carregar o formulário inteiro sob demanda foi descartada: ele levava de 200 a 300 ms para aparecer, e o Tab logo depois de abrir pulava o formulário.
+  - Resultado: JS de `/pt` 308 → **224 kB gzip**; bloqueio total 200 → 60-90 ms; LCP simulado 3,1 a 3,7 s (ainda acima de 2,5 s; o que resta pesar são 136 kB de fontes, para a 6.7).
+- [x] 5.5 Textos em pt, `npm run translate` e revisão; lint, tipos, testes e build
+  - en/es à mão. Corrigidos erros antigos do DeepL no formulário: placeholder de e-mail em português nos três idiomas, mistura de "usted" e "tú" e "Assunto" traduzido como "La asignatura".
+- [x] 5.6 Dono confere o Contato, o formulário só com teclado e o comportamento com e sem link de agendamento (dono pediu para seguir em 2026-11-11; link de agendamento ainda não fornecido, então "Agendar call" segue oculto)
 
 ## 6. Verificação e entrega
 

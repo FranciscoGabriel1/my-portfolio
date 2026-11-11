@@ -32,6 +32,7 @@ const RULES: Array<[string, string[], number]> = [
   ["text-3", ["bg", "surface"], 4.5],
   ["accent-text", ["bg", "surface", "surface-2"], 4.5],
   ["ok", ["bg", "surface", "surface-2"], 4.5],
+  ["danger", ["bg", "surface", "surface-2"], 4.5],
   ["on-accent", ["accent"], 4.5],
   ["line-strong", ["bg", "surface"], 3],
   ["focus", ["bg", "surface", "surface-2"], 3],

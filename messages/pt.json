@@ -12,7 +12,8 @@
     "open_menu": "Abrir menu",
     "close_menu": "Fechar menu",
     "label": "Principal",
-    "menu": "Menu"
+    "menu": "Menu",
+    "schedule": "Agendar call"
   },
   "theme": {
     "toggle_dark": "Mudar para o tema escuro",
@@ -220,8 +221,19 @@
   "contact": {
     "label": "Contato",
     "title": "Vamos conversar?",
-    "subtitle": "Aberto a oportunidades, freelas e colaborações. Me envie uma mensagem!",
-    "social_title": "Redes sociais",
+    "subtitle": "Aberto a oportunidades e colaborações. Me chame pelo canal que preferir.",
+    "channels": {
+      "email": "E-mail",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "lattes": "Lattes",
+      "discord": "Discord"
+    },
+    "cv": "Baixar CV",
+    "agenda_label": "Agendar call",
+    "agenda_value": "Escolha um horário na minha agenda",
+    "write_toggle": "Prefere escrever por aqui?",
+    "noscript": "Sem JavaScript, o formulário não envia. Escreva para o e-mail ao lado.",
     "form_aria_label": "Formulário de contato",
     "form": {
       "name_label": "Nome",
@@ -247,13 +259,6 @@
       "subject_required": "Assunto é obrigatório",
       "message_required": "Mensagem é obrigatória",
       "message_min": "Mensagem deve ter pelo menos 10 caracteres"
-    },
-    "social": {
-      "email": "franciscogabriel.dev@gmail.com",
-      "github": "https://github.com/FranciscoGabriel1",
-      "linkedin": "https://www.linkedin.com/in/francisco-gabriel-software/",
-      "lattes": "http://lattes.cnpq.br/6111525331943224",
-      "discord": "https://discord.gg/jDjgZUjamz"
     }
   },
   "footer": {

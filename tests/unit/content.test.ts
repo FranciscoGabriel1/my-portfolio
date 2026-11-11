@@ -30,10 +30,8 @@ describe("conteúdo estruturado em lib/content e texto em messages/", () => {
   });
 
   it.each(Object.keys(MESSAGES))("nenhuma mensagem em %s guarda caminho de arquivo ou URL", (locale) => {
-    const offenders = strings(MESSAGES[locale as keyof typeof MESSAGES]).filter(
-      ([path, text]) =>
-        // Exceção temporária: os canais do Contato saem das mensagens na tarefa 5.2.
-        !path.startsWith("contact.social.") && /https?:\/\/|\/images\/|\.(png|jpe?g|webp|svg)\b/i.test(text)
+    const offenders = strings(MESSAGES[locale as keyof typeof MESSAGES]).filter(([, text]) =>
+      /https?:\/\/|\/images\/|\.(png|jpe?g|webp|svg)\b/i.test(text)
     );
     expect(offenders).toEqual([]);
   });

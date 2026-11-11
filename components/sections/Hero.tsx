@@ -1,3 +1,4 @@
+import { preload } from "react-dom";
 import { ArrowRight, Download } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { SplitText } from "@/components/motion/SplitText";
@@ -14,6 +15,9 @@ export async function Hero() {
   const tA11y = await getTranslations("accessibility");
   const locale = await getLocale();
   const cvUrl = CV_URL[locale] ?? CV_URL.en;
+  // A cena é o elemento de LCP. Todo visitante novo entra no tema escuro (padrão), então a versão
+  // escura é pré-carregada com prioridade alta; quem escolheu o claro baixa 34 kB a mais, uma vez.
+  preload("/images/scene/blocks-dark.webp", { as: "image", fetchPriority: "high" });
 
   return (
     <section

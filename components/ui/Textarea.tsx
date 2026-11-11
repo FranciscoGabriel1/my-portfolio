@@ -16,7 +16,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="text-caption font-medium text-text-primary"
+            className="text-[0.92rem] font-semibold text-text"
           >
             {label}
           </label>
@@ -26,12 +26,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            "w-full rounded-md border bg-surface-elevated px-4 py-2.5 text-body text-text-primary placeholder:text-text-muted",
-            "transition-all duration-200 outline-hidden resize-y min-h-[120px]",
-            "border-border hover:border-border-strong",
-            "focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20",
-            error && "border-accent-danger focus:border-accent-danger focus:ring-accent-danger/20",
-            "disabled:opacity-40 disabled:cursor-not-allowed",
+            "w-full rounded-[10px] border border-line-strong bg-bg px-4 py-3 text-base text-text placeholder:text-text-3 min-h-[140px] resize-y",
+            "transition-colors duration-200",
+            error && "border-danger",
+            "disabled:cursor-not-allowed disabled:opacity-50",
             className
           )}
           aria-invalid={!!error}
@@ -40,12 +38,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
 
         {error && (
-          <p id={`${inputId}-error`} className="text-caption text-accent-danger" role="alert">
+          <p id={`${inputId}-error`} className="text-[0.9rem] text-danger" role="alert">
             {error}
           </p>
         )}
         {helper && !error && (
-          <p id={`${inputId}-helper`} className="text-caption text-text-muted">
+          <p id={`${inputId}-helper`} className="text-[0.9rem] text-text-3">
             {helper}
           </p>
         )}
