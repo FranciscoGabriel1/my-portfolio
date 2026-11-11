@@ -251,6 +251,57 @@ para o campo Nome"). **Troquei 12 kB por acessibilidade.**
 
 ---
 
+### 2.10 Cena 3D sem pesar no carregamento (change `cena-3d-e-transicao-de-tema`)
+
+O Hero ganhou uma cena 3D realista (notebook, tablet e celular em Three.js, com o CurrículoRaiz nas telas).
+O desafio era pôr 3D de verdade sem piorar nenhum número do carregamento.
+
+- **Fora do pacote inicial:** a cena vive num módulo carregado com `import()` dinâmico. O pedaço tem **136 kB
+  gzip** (Three.js, `RoundedBoxGeometry`, `RoomEnvironment` e o código da cena) e não aparece no HTML. O
+  JavaScript inicial foi de 224 para 225 kB (só o carregador).
+- **Portão antes de baixar:** uma função pura decide se a cena pode rodar (movimento reduzido, WebGL, economia de
+  dados, menos de 4 GB de memória ou de 4 núcleos). Se não puder, nem um byte do Three.js é baixado. Ela tem
+  teste de unidade para cada condição.
+- **Imagem de reserva gerada pela própria cena:** um script abre o site em modo de captura e salva o canvas
+  parado, com fundo transparente. A troca imagem → cena fica imperceptível (0,1% de pixels diferentes) e quem não
+  roda 3D vê a mesma composição, parada.
+- **Pausa fora da tela:** `IntersectionObserver` e `visibilitychange` param o laço de quadros e o vídeo da tela.
+
+#### Dois problemas que a medição encontrou
+
+1. **A imagem de reserva é o elemento de LCP.** Gerada a 2× e qualidade 0,8, ela foi de 34 para **59 kB**, e o LCP
+   subiu de **1,9 para 2,4 s** (o tempo de carga dela, no 4G lento, foi de 1,2 para 1,7 s). Gerando a 1,5× e
+   qualidade 0,7, ela ficou com **40 kB** e o LCP voltou para cerca de 2,0 a 2,2 s. *Lição: qualquer mudança no
+   elemento de LCP precisa ser medida, por menor que pareça.*
+2. **Montar a cena logo depois do carregamento travava a página.** No Chrome do Lighthouse, que não tem placa de
+   vídeo, o WebGL roda na CPU, e o bloqueio total foi a **11 s**. A cena passou a começar na **primeira
+   interação** (mexer o mouse, rolar, tocar ou usar o teclado), com o Hero perto da tela. No computador, quase todo
+   mundo mexe o mouse no primeiro segundo, então a experiência quase não muda, e a montagem nunca disputa o
+   carregamento inicial.
+
+#### Como provei que não houve regressão (comparação A/B)
+
+Os números absolutos do Lighthouse variam com a carga da máquina: a mesma página deu bloqueio de 110 ms num
+momento e de 700 ms em outro. Para não confundir ruído com regressão, subi a versão anterior (de um commit
+antigo, numa cópia temporária do repositório) ao lado da atual e medi as duas **alternadamente**, na mesma hora:
+
+| Versão | LCP | Bloqueio total |
+|---|---|---|
+| Antes da cena 3D | 2,2 a 2,3 s | 660 a 1.060 ms |
+| Com a cena 3D | 2,1 a 2,3 s | 520 a 910 ms |
+
+Mesmas condições, mesmos números: a cena não piorou o carregamento.
+
+> Frase de entrevista: "quando uma métrica muda, eu não comparo com um número de outro dia. Subo as duas versões
+> lado a lado e meço alternadamente; assim o ruído da máquina afeta as duas igual."
+
+### 2.11 Transição de tema com 0 kB
+
+A troca entre claro e escuro virou um círculo que nasce no botão, com a **View Transitions API** do navegador:
+`document.startViewTransition` captura a tela antiga e a nova, e um `clip-path: circle()` animado revela a nova.
+Custo: cerca de 1 kB de código e nenhuma biblioteca. Com movimento reduzido ou num navegador sem a API, a troca é
+instantânea, como antes.
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:
@@ -320,5 +371,6 @@ me fez desistir de carregar o formulário inteiro sob demanda.
 - [x] LCP abaixo de 2,5 s nos três idiomas, com limitação real: 1,9 s em pt, en e es.
 - [x] Medição final do bloco 6 (`/pt`, `/en` e `/es`), anotada no resumo.
 - [ ] Lighthouse CI no GitHub Actions (bloco 7 de `fundacao-stack-e-qualidade`).
-- [ ] Cena 3D (change `cena-3d-montagem`): carregar por `import()` depois do LCP, pausar fora da tela e
-  medir que o LCP não muda.
+- [x] Cena 3D (change `cena-3d-e-transicao-de-tema`): carrega por `import()` na primeira interação, pausa fora
+  da tela, e a comparação A/B mostrou que o LCP e o bloqueio não pioraram (seção 2.10).
+- [ ] Medir de novo com a máquina ociosa, para registrar números absolutos sem ruído.

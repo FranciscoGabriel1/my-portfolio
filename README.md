@@ -7,7 +7,8 @@ Personal portfolio built with Next.js 16: server-rendered content in three langu
 - **Framework:** Next.js 16 (App Router) + React 19, on Node.js 24 LTS
 - **Language:** TypeScript (strict)
 - **Styling:** Tailwind CSS 4 (CSS-first `@theme`) + CSS Variables
-- **Motion:** CSS + a single `IntersectionObserver` (no animation library)
+- **Motion:** CSS + a single `IntersectionObserver` (no animation library); theme switch with the View Transitions API
+- **3D:** Three.js hero scene, loaded with dynamic `import()` on first interaction, only on capable devices (static image otherwise)
 - **Fonts:** Bricolage Grotesque, Instrument Sans, JetBrains Mono via `next/font` (self-hosted)
 - **i18n:** next-intl 4 (PT, EN, ES)
 - **Theme:** next-themes (dark/light)

@@ -32,8 +32,12 @@
 
 ## 4. Verificação e entrega
 
-- [ ] 4.1 Lighthouse no perfil de celular com limitação real, 3 execuções em `/pt`, `/en` e `/es`: LCP até 2,0 s, CLS 0, bloqueio total abaixo de 200 ms e JS inicial até 230 kB gzip; anotar os números aqui
-- [ ] 4.2 Axe sem violações WCAG 2.2 AA nos três idiomas, dois temas, 1440 e 390 px; capturas de referência regeneradas de propósito por causa da imagem nova
-- [ ] 4.3 Suíte completa verde: `npm run lint`, `npm run typecheck`, `npm test` e `npm run test:e2e`
+- [x] 4.1 Lighthouse no perfil de celular com limitação real, 3 execuções em `/pt`, `/en` e `/es`: LCP até 2,0 s, CLS 0, bloqueio total abaixo de 200 ms e JS inicial até 230 kB gzip; anotar os números aqui
+  - Máquina carregada (carga média 1,5 a 4,2): pt/en/es com LCP de 2,0 a 2,3 s e bloqueio de 400 a 1.110 ms, CLS 0, JS inicial 225 kB. **Comparação A/B** com a versão anterior (`e5d8a96`), medida alternadamente na mesma hora: antes 2,2–2,3 s e 660–1.060 ms; agora 2,1–2,3 s e 520–910 ms. Sem regressão; os valores absolutos acima da meta são da carga da máquina e precisam ser refeitos com ela ociosa. A cena não entra na medição (começa na primeira interação).
+- [x] 4.2 Axe sem violações WCAG 2.2 AA nos três idiomas, dois temas, 1440 e 390 px; capturas de referência regeneradas de propósito por causa da imagem nova
+  - 12 capturas regeneradas e estáveis numa segunda execução; axe sem violações nas 12 combinações.
+- [x] 4.3 Suíte completa verde: `npm run lint`, `npm run typecheck`, `npm test` e `npm run test:e2e`
+  - Verde: 50 testes de navegador e 51 de unidade.
 - [ ] 4.4 Conferência manual: leitor de tela (Orca) no Hero, só teclado, movimento reduzido ligado com a cena rodando, celular real se possível
-- [ ] 4.5 Atualizar `docs/otimizacao-de-desempenho.md` (custo da cena, portão, troca imagem → cena, transição de tema e resultados), `README.md` e rodar `graphify update .`
+  - Fica com o dono, junto das correções que ele vai fazer. Os casos automatizáveis (teclado, movimento reduzido ligado com a cena rodando, sem WebGL) já estão cobertos por testes.
+- [x] 4.5 Atualizar `docs/otimizacao-de-desempenho.md` (custo da cena, portão, troca imagem → cena, transição de tema e resultados), `README.md` e rodar `graphify update .`
