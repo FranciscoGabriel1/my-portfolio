@@ -1,16 +1,17 @@
 # Francisco Marinho — Portfolio
 
-Personal portfolio built with Next.js 16, featuring multilingual support, Apple-inspired design system, and professional animations.
+Personal portfolio built with Next.js 16: server-rendered content in three languages, a warm design system with WCAG 2.2 AA contrast, and motion that never hides content without JavaScript or with reduced motion.
 
 ## Tech Stack
 
 - **Framework:** Next.js 16 (App Router) + React 19, on Node.js 24 LTS
 - **Language:** TypeScript (strict)
 - **Styling:** Tailwind CSS 4 (CSS-first `@theme`) + CSS Variables
-- **Animations:** Framer Motion
+- **Motion:** CSS + a single `IntersectionObserver` (no animation library)
+- **Fonts:** Bricolage Grotesque, Instrument Sans, JetBrains Mono via `next/font` (self-hosted)
 - **i18n:** next-intl 4 (PT, EN, ES)
 - **Theme:** next-themes (dark/light)
-- **Forms:** React Hook Form + Zod 4
+- **Forms:** React Hook Form + Zod 4 (validation loaded on demand)
 - **Tests:** Vitest + Testing Library, Playwright + axe
 - **Icons:** Lucide React
 
@@ -30,9 +31,10 @@ For full setup instructions, see [SETUP.md](./SETUP.md).
 - Multilingual (PT 🇧🇷 / EN 🇺🇸 / ES 🇪🇸) with auto-translation via the DeepL API
 - Dark / light mode toggle
 - Responsive (mobile, tablet, desktop)
-- Accessible (ARIA, skip-to-content, reduced motion)
-- Apple-inspired design system (colors, typography, spacing)
-- Sections: Hero, About, Projects, Experience, Contact
+- Accessible: WCAG 2.2 AA checked with axe, keyboard-only flows, translated ARIA, reduced motion
+- Readable without JavaScript: sections are React Server Components
+- Sections: Hero, About, Projects, Career (timeline ruler), Contact
+- Performance notes: [docs/otimizacao-de-desempenho.md](./docs/otimizacao-de-desempenho.md)
 
 ## Scripts
 

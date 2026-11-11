@@ -103,6 +103,8 @@ Botão com `aria-expanded` e `aria-controls`. Ao abrir, o foco vai para o primei
 
 Medido no perfil de celular do Lighthouse, na build de produção: LCP abaixo de 2,5 s, CLS abaixo de 0,1, bloqueio total abaixo de 200 ms (substituto de laboratório para o INP abaixo de 200 ms) e JavaScript da rota menor que o do fim da fundação. O peso do JavaScript é medido somando os chunks que `/pt` carrega, antes e depois. O número do fim da fundação é registrado na tarefa 1.1.
 
+**Método (definido no bloco 6):** o critério de aprovação é o Lighthouse no perfil de celular com **limitação real** de rede e CPU (`--throttling-method=devtools`: 4G lento e CPU 4× mais lenta aplicados de fato ao navegador). O valor **simulado** (Lantern, padrão do Lighthouse e do PageSpeed) é registrado ao lado como referência, mas não é o critério. Motivo: no bloco 6, duas builds com as mesmas requisições antes do LCP deram 2,6 e 3,4 s no simulado, enquanto a limitação real deu 1,9 s nas duas. O simulado oscila com a ordem dos eventos da medição rápida em que se baseia, e o real se repete. Números finais em `tasks.md`, na 6.7, e em `docs/otimizacao-de-desempenho.md`.
+
 ### 13. Protótipo e heurísticas de Nielsen
 
 O protótipo já foi aprovado pelo dono no navegador (HTML, `design/prototipos/`, além do `prototipo.pen` da direção). Não há tela nova fora dele. Avaliação das telas novas contra as heurísticas:

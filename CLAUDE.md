@@ -18,7 +18,7 @@ npm run translate  # gera en/es a partir de messages/pt.json (DeepL, pede DEEPL_
 Next.js 14.2 (App Router), React 18, Tailwind v3, framer-motion 11, next-intl, next-themes, react-hook-form + Zod,
 lucide-react e Resend. `lint` e `build` passam. A rota `/[locale]` carrega 206 kB de JS.
 
-Lacunas conhecidas, que o upgrade precisa resolver:
+Lacunas encontradas no ponto de partida (as de acessibilidade e de documentação já foram resolvidas):
 
 - **Qualidade:** sem testes e sem CI. O `package-lock.json` está no `.gitignore`, então o build não é reproduzível.
 - **SEO:** sem `sitemap`, `robots`, `hreflang`, canônica ou imagem OG. Os metadados de `app/[locale]/layout.tsx` ficam
@@ -34,6 +34,13 @@ Lacunas conhecidas, que o upgrade precisa resolver:
   que a pessoa digitou direto no HTML do e-mail, sem escapar.
 - **Documentação desatualizada:** o `README.md` fala em tradução pela API do Claude (é DeepL), e o `SETUP.md` fala em
   `public/cv.pdf` (o CV são links do Drive em `lib/cv.ts`).
+
+## Estado atual (2026-11-11)
+
+Stack nova (Next 16, React 19, Tailwind 4, Node 24) e identidade "Composição" aplicadas: seções de servidor, sem
+framer-motion, tokens AA testados, `aria-*` traduzidos, movimento reduzido e sem JavaScript cobertos por testes de
+navegador. Ainda pendente: formulário seguro no servidor, cabeçalhos de segurança e CI (blocos 5 a 7 de
+`fundacao-stack-e-qualidade`), SEO e a cena 3D. Otimizações e números em `docs/otimizacao-de-desempenho.md`.
 
 ## Direção do upgrade
 

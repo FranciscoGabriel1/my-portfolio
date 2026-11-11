@@ -68,13 +68,23 @@
 
 ## 6. Verificação e entrega
 
-- [ ] 6.1 Teste de navegador com JavaScript desligado: todas as seções visíveis e links funcionando, em pt/en/es
-- [ ] 6.2 Teste de navegador com movimento reduzido: nenhum elemento com `transform` ou opacidade parcial depois do carregamento
-- [ ] 6.3 Teste de navegador: Tab até um link abaixo da dobra deixa o link visível; o menu de celular abre e fecha só com teclado
-- [ ] 6.4 Teste que procura "validar", "preencher" e "Lorem" no HTML gerado das três páginas
-- [ ] 6.5 Tirar `color-contrast` e `label-content-name-mismatch` de `tests/e2e/a11y-known-violations.ts`; axe sem violações WCAG 2.2 AA em pt/en/es, claro/escuro, 1440 e 390
-- [ ] 6.6 Regerar as capturas de referência (`npm run test:e2e:update`) depois da aprovação do dono, e atualizar `tests/e2e/screenshot.css` para o Hero novo
-- [ ] 6.7 Lighthouse celular em `/pt`, `/en` e `/es` dentro do orçamento (LCP < 2,5 s, CLS < 0,1, bloqueio < 200 ms) e JavaScript da rota menor que o da tarefa 1.1; anotar os números
+- [x] 6.1 Teste de navegador com JavaScript desligado: todas as seções visíveis e links funcionando, em pt/en/es
+  - `tests/e2e/alternativas.spec.ts`: as cinco seções visíveis, nada com opacidade parcial e nenhum link vazio, em pt/en/es.
+- [x] 6.2 Teste de navegador com movimento reduzido: nenhum elemento com `transform` ou opacidade parcial depois do carregamento
+  - Também confere que nenhuma animação está rodando depois do carregamento.
+- [x] 6.3 Teste de navegador: Tab até um link abaixo da dobra deixa o link visível; o menu de celular abre e fecha só com teclado
+  - Mais: o formulário abre com Enter e o Tab seguinte vai para Nome.
+- [x] 6.4 Teste que procura "validar", "preencher" e "Lorem" no HTML gerado das três páginas
+- [x] 6.5 Tirar `color-contrast` e `label-content-name-mismatch` de `tests/e2e/a11y-known-violations.ts`; axe sem violações WCAG 2.2 AA em pt/en/es, claro/escuro, 1440 e 390
+  - As duas regras saíram nos blocos 1 e 3. O axe agora roda também em 390 px: 12 combinações, zero violações.
+- [x] 6.6 Regerar as capturas de referência (`npm run test:e2e:update`) depois da aprovação do dono, e atualizar `tests/e2e/screenshot.css` para o Hero novo
+  - `screenshot.css` esvaziado: o seletor antigo esconderia a faixa "Onde já construí", e nada mais muda sozinho. As 12 capturas foram regeneradas e passaram numa segunda execução.
+- [x] 6.7 Lighthouse celular em `/pt`, `/en` e `/es` dentro do orçamento (LCP < 2,5 s, CLS < 0,1, bloqueio < 200 ms) e JavaScript da rota menor que o da tarefa 1.1; anotar os números
+  - Critério (decisão 12 atualizada): limitação real (`--throttling-method=devtools`). **LCP 1,9 s em pt, en e es**, CLS 0, bloqueio 110 a 140 ms, nota 97 a 98. JS de `/pt`: 224 kB gzip, contra 308 na 1.1. O simulado (Lantern) ficou entre 3,2 e 3,7 s e é registrado só como referência: ele deu 2,6 e 3,4 s para duas builds com as mesmas requisições.
+  - Experimento das fontes, medido e descartado: um recorte próprio da Bricolage (31 kB contra 75 kB) não mudou o LCP real (1,9 s) e deixava os títulos pequenos mais justos. Detalhes em `docs/otimizacao-de-desempenho.md`, seção 2.6.
 - [ ] 6.8 Conferência manual no Chrome: pt/en/es, claro/escuro, celular e computador, só teclado, leitor de tela (Orca) no Hero, Projetos e Contato, movimento reduzido e WebGL desligado (`--disable-webgl`)
-- [ ] 6.9 `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` e `npm run test:e2e` verdes
-- [ ] 6.10 Atualizar `README.md` (stack sem framer-motion, fontes, seções) e `CLAUDE.md` (lacunas resolvidas: contraste, movimento reduzido); rodar `graphify update .`
+  - Feito por mim: Chromium com `--disable-webgl` (sem erro, cena como imagem) e árvore de acessibilidade de `/es` (um h1, quatro h2, marcos banner/main/contentinfo, tudo em espanhol). **Falta o dono**: ouvir com o Orca e conferir no Chrome dele.
+- [x] 6.9 `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` e `npm run test:e2e` verdes
+  - lint, tipos, 44 testes de unidade e 39 de navegador (12 axe, 10 alternativas, 5 smoke, 12 capturas).
+- [x] 6.10 Atualizar `README.md` (stack sem framer-motion, fontes, seções) e `CLAUDE.md` (lacunas resolvidas: contraste, movimento reduzido); rodar `graphify update .`
+  - README (stack sem framer-motion, fontes, link para o registro de desempenho), CLAUDE.md (seção "Estado atual") e `graphify update .`.

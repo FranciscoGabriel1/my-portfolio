@@ -15,7 +15,8 @@ Nenhum valor é estimativa.
 > que ele usa. O JavaScript inicial caiu 27% (308 → 224 kB gzip), o tempo de bloqueio caiu de 200
 > para cerca de 70 ms e o LCP medido no navegador foi de 1,25 s para 0,18 s. Tudo isso sem perder
 > acessibilidade: o site funciona sem JavaScript, com movimento reduzido e só com teclado, e o axe
-> não acusa nenhuma violação WCAG 2.2 AA.
+> não acusa nenhuma violação WCAG 2.2 AA. Com limitação real de rede e CPU de celular, o LCP fica em
+> 1,9 s nos três idiomas, e a nota de desempenho, entre 97 e 98.
 
 | Métrica (celular, Lighthouse 12) | Antes | Depois |
 |---|---|---|
@@ -24,9 +25,11 @@ Nenhum valor é estimativa.
 | Tempo total de bloqueio (TBT) | 200 ms | **60 a 90 ms** |
 | Tempo de execução de scripts | 1.197 ms | cerca de 580 ms |
 | LCP observado (navegador real, sem limitação) | 1.251 ms | **180 ms** |
-| LCP simulado (4G lento + CPU 4× mais lenta) | 3,2 s | 3,1 a 3,7 s (meta: < 2,5 s, ainda pendente) |
+| LCP com limitação real (4G lento + CPU 4× mais lenta) | não medido | **1,9 s** em pt, en e es (meta: < 2,5 s) |
+| LCP simulado pelo Lighthouse (Lantern) | 3,2 s | 3,2 a 3,7 s (oscila; ver seção 1) |
 | CLS | 0 | 0 |
-| Nota de desempenho | 90 | 89 a 94 |
+| Nota de desempenho (limitação real) | — | **97 a 98** |
+| Nota de desempenho (simulada) | 90 | 89 a 94 |
 | Nota de acessibilidade | 97 | **100** |
 | HTML da página | 129 kB | 117 kB |
 
@@ -76,6 +79,17 @@ O Lighthouse mostra dois valores de LCP:
 Por isso, o LCP simulado não cai na mesma proporção do observado: ainda há cerca de 510 kB disputando
 banda antes da imagem principal (218 kB de JS, 136 kB de fontes, 73 kB de imagens). Em entrevista, a
 frase é: *"no celular lento, o gargalo deixou de ser CPU e passou a ser bytes na rede"*.
+
+**Terceira forma: limitação real (`--throttling-method=devtools`).** Em vez de simular, o Lighthouse
+aplica de fato o 4G lento e a CPU 4× mais lenta ao navegador e mede. Foi ela que resolveu uma dúvida:
+duas builds com **as mesmas requisições** antes do LCP deram 2,6 s e 3,4 s no simulado, e **1,9 s nas
+duas** com limitação real, repetido em três execuções. O simulado oscila com a ordem dos eventos da
+medição rápida em que se baseia. Por isso, o critério de aprovação do projeto passou a ser a limitação
+real, e o simulado fica registrado ao lado.
+
+> Frase de entrevista: "não confio numa métrica de laboratório sem saber como ela é calculada. Quando
+> o número simulado oscilou quase 1 s entre builds idênticas em rede, medi com limitação real e
+> separei o ruído do efeito".
 
 ---
 
@@ -163,9 +177,26 @@ menor (a da página de 390 px pede a imagem de 384 ou 750 px de largura).
 - Só as duas primeiras são pré-carregadas. A monoespaçada, usada em rótulos pequenos, não.
 - `display: swap` com o ajuste automático da fonte reserva do `next/font`: o texto aparece logo, e a
   troca não move o layout. **CLS 0** em todas as medições.
-- **Custo pendente:** 136 kB de fontes, sendo 75 kB só da Bricolage variável (eixos de peso e de
-  tamanho óptico). É o maior peso que ainda disputa banda antes do LCP. Próximo passo: avaliar pesos
-  fixos (700 e 800) em vez da fonte variável.
+- **Custo:** 136 kB de fontes, sendo 75 kB só da Bricolage variável (eixos de peso e de tamanho óptico).
+
+#### Experimento: cortar a fonte dos títulos (medido e descartado)
+
+| Versão da Bricolage | Peso | Aparência | LCP com limitação real |
+|---|---|---|---|
+| Variável completa (a aprovada) | 75 kB | a aprovada | 1,9 s |
+| Pesos fixos 700 e 800 (Google) | 41 kB | títulos gigantes mais largos e genéricos | não medido¹ |
+| Recorte próprio: pesos 700 a 800 variáveis, tamanho óptico fixo em 96 (HarfBuzz) | 31 kB | igual nos títulos grandes, um pouco mais justa nos pequenos | 1,9 s |
+
+¹ Medida só no simulado, que oscilou (2,6 a 2,9 s), e descartada pela mudança visual.
+
+Como fiz o recorte: o pacote `subset-font` (HarfBuzz) gera um WOFF2 só com os caracteres latinos,
+restringe o eixo de peso a 700–800 e fixa o tamanho óptico em 96, o valor que a fonte variável já usa
+nos títulos grandes. O arquivo entra pelo `next/font/local`.
+
+**Decisão: fiquei com a fonte variável completa.** O recorte economizava 44 kB, mas o LCP medido com
+limitação real foi o mesmo (1,9 s), porque a imagem principal já carrega em paralelo, e os títulos
+pequenos mudavam de forma. *Lição: bytes a menos que não mudam a métrica do usuário não justificam
+mudar a identidade aprovada.*
 
 ### 2.7 Mandar ao navegador só as traduções que ele usa
 
@@ -258,9 +289,9 @@ Testes automatizados a cada etapa: hidratação sem divergência nos três idiom
 me fez desistir de carregar o formulário inteiro sob demanda.
 
 **"O que você faria a seguir?"**
-1. Cortar fontes: Bricolage em pesos fixos, que hoje somam 75 kB.
-2. Medir de novo e só então decidir se vale reduzir o JavaScript do framework.
-3. Pôr o Lighthouse no CI, para cada mudança mostrar o efeito nas métricas.
+1. Pôr o Lighthouse no CI, com limitação real, para cada mudança mostrar o efeito nas métricas.
+2. Acompanhar dados de campo (Core Web Vitals de usuários reais) quando o site estiver publicado.
+3. Na cena 3D, provar com medição que ela carrega depois do LCP e não muda o número.
 
 ---
 
@@ -286,8 +317,8 @@ me fez desistir de carregar o formulário inteiro sob demanda.
 
 ## 6. Pendências (atualizar quando concluir)
 
-- [ ] LCP simulado abaixo de 2,5 s nos três idiomas: cortar o peso das fontes.
-- [ ] Medição final do bloco 6 (`/pt`, `/en` e `/es`), anotada aqui.
+- [x] LCP abaixo de 2,5 s nos três idiomas, com limitação real: 1,9 s em pt, en e es.
+- [x] Medição final do bloco 6 (`/pt`, `/en` e `/es`), anotada no resumo.
 - [ ] Lighthouse CI no GitHub Actions (bloco 7 de `fundacao-stack-e-qualidade`).
 - [ ] Cena 3D (change `cena-3d-montagem`): carregar por `import()` depois do LCP, pausar fora da tela e
   medir que o LCP não muda.

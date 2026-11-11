@@ -21,7 +21,7 @@ export async function openStable(page: Page, path: string, theme: (typeof THEMES
     window.scrollTo(0, 0);
   });
   await page.waitForLoadState("networkidle");
-  // Os contadores do Hero animam por 3 s (mais sob carga): espera o texto do Hero parar de mudar.
+  // Espera o texto do Hero parar de mudar (rede de segurança contra qualquer animação de texto).
   await page.evaluate(async () => {
     const read = () => document.querySelector("#hero")?.textContent ?? "";
     const deadline = Date.now() + 15_000;

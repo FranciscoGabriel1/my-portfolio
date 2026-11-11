@@ -1,5 +1,4 @@
-/* Aplicado só durante as capturas de referência: esconde o que muda sozinho a cada execução,
-   sem cobrir o resto do Hero (nome, texto, botões e cartão continuam comparados). */
-#hero > div[aria-hidden] { visibility: hidden !important; } /* bolhas e partículas animadas */
-#hero .text-gradient { visibility: hidden !important; } /* cargo que alterna a cada 3 s */
-#hero > div:last-child > div { visibility: hidden !important; } /* seta do indicador de rolagem, que pula */
+/* Aplicado só durante as capturas de referência, para esconder o que muda sozinho a cada execução.
+   Desde a identidade-visual-composicao, nada na página muda sozinho: as capturas usam movimento
+   reduzido, então o nome, as entradas e a régua já aparecem no estado final. Fica vazio de propósito;
+   se algo aleatório voltar (ex.: a cena 3D), esconda aqui, com o motivo ao lado. */
