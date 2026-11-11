@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import type { ButtonHTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 
 /** Estilos de botão; também usados em links com cara de botão (`<a className={buttonVariants()}>`). */
 export const buttonVariants = cva(
@@ -35,8 +35,9 @@ export const buttonVariants = cva(
   }
 );
 
+// ComponentProps<"button"> inclui `ref`, que no React 19 é uma prop comum.
 interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+  extends ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {
   loading?: boolean;
 }

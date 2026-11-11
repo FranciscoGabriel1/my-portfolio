@@ -34,6 +34,8 @@ describe("MotionReady", () => {
     document.querySelector("a")!.focus();
 
     expect(document.getElementById("abaixo")).toHaveAttribute("data-revealed");
+    // Sem esmaecer: a revelação pelo foco desliga a transição.
+    expect(document.getElementById("abaixo")).toHaveAttribute("data-reveal-instant");
   });
 
   it("desmontado, deixa de esconder o conteúdo", () => {

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cena 3D do Hero · protótipo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Tokens iguais aos de app/globals.css */
+  :root { --bg:#f4f1ea; --surface:#eae5da; --line:#cfc8b9; --line-strong:#655f55; --text:#171612; --text-2:#4a463e; --text-3:#655f55; --accent:#ff6b2c; --accent-text:#a8360a; --on-accent:#171612; --ok:#145c31; --focus:#a8360a; color-scheme:light; }
+  .dark { --bg:#141311; --surface:#1d1c19; --line:#34312c; --line-strong:#958e81; --text:#f2eee6; --text-2:#bdb6a8; --text-3:#958e81; --accent:#ff6b2c; --accent-text:#ff8a55; --on-accent:#171612; --ok:#5bc48a; --focus:#ff6b2c; color-scheme:dark; }
+  *,*::before,*::after { box-sizing:border-box; }
+  html { background:var(--bg); }
+  body { margin:0; background:var(--bg); color:var(--text); font:400 17px/1.55 "Instrument Sans", system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+  :focus-visible { outline:2px solid var(--focus); outline-offset:3px; border-radius:6px; }
+  a { color:inherit; }
+  .wrap { width:min(82rem, 100% - 2.5rem); margin-inline:auto; }
+  @media (min-width:900px) { .wrap { width:min(82rem, 100% - 8rem); } }
+  header { position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--line); }
+  header .wrap { height:72px; display:flex; align-items:center; gap:24px; }
+  .brand { display:flex; gap:12px; align-items:center; font-weight:600; text-decoration:none; }
+  .mark { width:36px; height:36px; border:1px solid var(--line); border-radius:8px; display:grid; place-items:center; font:700 13px "JetBrains Mono", monospace; }
+  nav { margin-left:auto; display:flex; gap:28px; color:var(--text-2); font-size:.95rem; }
+  nav a { text-decoration:none; }
+  .theme { width:40px; height:40px; border-radius:10px; border:0; background:transparent; color:var(--text-2); display:grid; place-items:center; cursor:pointer; }
+  .theme:hover { background:var(--surface); color:var(--text); }
+  .theme svg { width:18px; height:18px; }
+  .dark .sun, :root:not(.dark) .moon { display:none; }
+  @media (max-width:900px) { nav { display:none; } .theme { margin-left:auto; } }
+
+  [data-hero] { min-height:calc(100svh - 72px); display:flex; flex-direction:column; }
+  .hero-grid { flex:1; display:grid; gap:40px; align-items:center; padding-block:64px; }
+  @media (min-width:1024px) { .hero-grid { grid-template-columns:minmax(0,11fr) minmax(0,9fr); gap:32px; padding-block:96px; } }
+  .eyebrow { font:400 .78rem/1.4 "JetBrains Mono", monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--text-2); display:flex; gap:10px; align-items:center; margin:0; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--ok); }
+  h1 { margin:28px 0; font:800 clamp(3.4rem,10vw,9.5rem)/.9 "Bricolage Grotesque", system-ui; letter-spacing:-.035em; max-width:9ch; }
+  .lead { font-size:clamp(1.05rem,1.5vw,1.3rem); line-height:1.5; color:var(--text-2); max-width:60ch; margin:0 0 28px; }
+  .btns { display:flex; gap:12px; flex-wrap:wrap; }
+  .btn { min-height:48px; padding:0 24px; border-radius:10px; display:inline-flex; align-items:center; gap:8px; font-weight:600; text-decoration:none; border:1px solid transparent; }
+  .btn-p { background:var(--accent); color:var(--on-accent); }
+  .btn-s { border-color:var(--line-strong); }
+  .strip { border-block:1px solid var(--line); }
+  .strip .wrap { display:flex; flex-wrap:wrap; gap:12px 28px; align-items:center; padding-block:20px; font:700 1.1rem "Bricolage Grotesque"; color:var(--text-2); }
+  .strip .eyebrow { color:var(--text-3); }
+
+  /* Cena: imagem (reserva) e canvas por cima, no mesmo contêiner. */
+  .hero-scene { position:relative; aspect-ratio:1200/1100; width:100%; max-width:34rem; margin-inline:auto; background:url('../../../public/images/scene/blocks-light.webp') center/contain no-repeat; }
+  .dark .hero-scene { background-image:url('../../../public/images/scene/blocks-dark.webp'); }
+  @media (min-width:1024px) { .hero-scene { max-width:none; } }
+  .scene-canvas { position:absolute; display:block; opacity:0; transition:opacity .4s cubic-bezier(.2,.8,.2,1); }
+  .hero-scene.is-live { background-image:none !important; }
+  .hero-scene.is-live .scene-canvas { opacity:1; }
+
+  main { overflow-x:clip; }
+  .scene-fig { margin:0; display:grid; gap:12px; }
+  .scene-note { font:400 .78rem/1.4 "Instrument Sans", system-ui; color:var(--text-3); text-align:right; position:relative; z-index:1; }
+  .after { padding-block:160px; }
+  .after h2 { font:800 clamp(2.3rem,5.2vw,4.6rem)/.98 "Bricolage Grotesque"; letter-spacing:-.03em; margin:0 0 24px; }
+  .after p { color:var(--text-2); max-width:60ch; }
+
+  /* Transição circular do tema */
+  ::view-transition-old(root), ::view-transition-new(root) { animation:none; mix-blend-mode:normal; }
+  .vt-capturing *, .vt-capturing *::before, .vt-capturing *::after { transition:none !important; }
+
+  /* Painel de QA do protótipo (não vai para o site) */
+  .qa { position:fixed; left:16px; bottom:16px; z-index:60; background:#f7f6f3; color:#1a1a1a; font:12px/1.4 system-ui; padding:8px 12px; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,.35); max-width:min(380px, calc(100vw - 32px)); }
+  .qa b { color:#A8360A; }
+  .qa a { color:#1a1a1a; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#topo"><span class="mark" aria-hidden="true">FM</span>Francisco Marinho</a>
+    <nav aria-label="Principal"><a href="#sobre">Sobre</a><a href="#sobre">Projetos</a><a href="#sobre">Trajetória</a><a href="#sobre">Contato</a></nav>
+    <button class="theme" type="button" aria-label="Mudar para o tema claro">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section data-hero id="topo" aria-labelledby="nome">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Aberto a oportunidades · Manaus, Brasil</p>
+        <h1 id="nome">Francisco Marinho</h1>
+        <p class="lead">Desenvolvedor frontend sênior. Penso interfaces como peças que se encaixam: comecei programando braços robóticos com blocos no mestrado e hoje construo produtos com design system na HostGator.</p>
+        <div class="btns"><a class="btn btn-p" href="#sobre">→ Ver projetos</a><a class="btn btn-s" href="#sobre">Baixar CV</a></div>
+      </div>
+      <figure class="scene-fig">
+        <div class="hero-scene" aria-hidden="true" data-scene-state="loading"></div>
+        <figcaption class="scene-note">Telas: CurrículoRaiz, produto que criei, com dados de demonstração.</figcaption>
+      </figure>
+    </div>
+    <div class="strip"><div class="wrap"><span class="eyebrow">Onde já construí</span><span>HostGator</span><span>O2 Filmes</span><span>Atem</span><span>Sidia</span><span>iComp UFAM</span></div></div>
+  </section>
+
+  <section class="after" id="sobre">
+    <div class="wrap">
+      <h2>Role para ver os blocos se afastarem.</h2>
+      <p>Seção de apoio do protótipo: dá altura à página para testar o afastamento dos blocos com a rolagem nativa, a pausa da cena fora da tela e a troca de tema de qualquer ponto.</p>
+      <p style="height:120vh"></p>
+    </div>
+  </section>
+</main>
+
+<div class="qa" id="qa"><b>Protótipo:</b> cena 3D + transição de tema. Estado da cena: <span id="state">…</span><br>
+  <a href="?">realista</a> · <a href="?cena=aparelhos">aparelhos simples</a> · <a href="?cena=camadas">camadas</a> · <a href="?poster">só imagem</a> · <a href="?reduce">simular movimento reduzido</a> · <a href="?coarse">qualidade de celular</a></div>
+
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/" } }</script>
+<script type="module">
+  // Três composições para comparar: realista (padrão), aparelhos simples (?cena=aparelhos) e camadas (?cena=camadas).
+  const cena = new URLSearchParams(location.search).get('cena');
+  const sceneModule = cena === 'camadas' ? './scene.js' : cena === 'aparelhos' ? './scene-dispositivos.js' : './scene-realista.js';
+
+  const params = new URLSearchParams(location.search);
+  const root = document.documentElement;
+  const mqReduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduce = () => mqReduce.matches || params.has('reduce');
+  const container = document.querySelector('.hero-scene');
+  const stateEl = document.getElementById('state');
+  const setState = (s) => { container.dataset.sceneState = s; stateEl.textContent = s; };
+
+  /* ── Tema e transição circular ───────────────────────────────────────────── */
+  const capture = params.get('capture');
+  if (capture) root.classList.toggle('dark', capture === 'dark');
+  else if (localStorage.getItem('proto-theme') === 'light') root.classList.remove('dark');
+  const btn = document.querySelector('.theme');
+  const label = () => btn.setAttribute('aria-label', root.classList.contains('dark') ? 'Mudar para o tema claro' : 'Mudar para o tema escuro');
+  label();
+  let api = null, current = null;
+
+  function applyTheme(next) {
+    root.classList.add('vt-capturing');
+    root.classList.toggle('dark', next === 'dark');
+    root.style.colorScheme = next;
+    localStorage.setItem('proto-theme', next);
+    label();
+    api?.setTheme(next);
+    requestAnimationFrame(() => root.classList.remove('vt-capturing'));
+  }
+
+  btn.addEventListener('click', () => {
+    const next = root.classList.contains('dark') ? 'light' : 'dark';
+    if (!document.startViewTransition || reduce()) { applyTheme(next); return; }
+    const r = btn.getBoundingClientRect();
+    const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    current?.skipTransition();
+    const t = document.startViewTransition(() => applyTheme(next));
+    current = t;
+    t.ready.then(() => {
+      root.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        { duration: 600, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', pseudoElement: '::view-transition-new(root)' });
+    }).catch(() => {});
+    t.finished.finally(() => { if (current === t) current = null; });
+  });
+
+  /* ── Portão da cena ──────────────────────────────────────────────────────── */
+  function hasWebGL() {
+    try { const c = document.createElement('canvas'); const gl = c.getContext('webgl2') || c.getContext('webgl'); if (!gl) return false; gl.getExtension('WEBGL_lose_context')?.loseContext(); return true; } catch { return false; }
+  }
+  function canRun() {
+    if (params.has('poster') || reduce()) return false;
+    if (navigator.connection?.saveData) return false;
+    if ((navigator.deviceMemory ?? 8) < 4 || (navigator.hardwareConcurrency ?? 8) < 4) return false;
+    return hasWebGL();
+  }
+
+  async function boot() {
+    if (!canRun() && !capture) { setState('poster'); return; }
+    const [THREE, { createHeroScene }] = await Promise.all([import('three'), import(sceneModule)]);
+    api = await createHeroScene(THREE, container, {
+      theme: root.classList.contains('dark') ? 'dark' : 'light',
+      coarse: params.has('coarse') || matchMedia('(pointer: coarse)').matches,
+      capture: !!capture, noDowngrade: !!capture || params.has('nodowngrade'), // QA: navegador sem GPU
+
+      onState: (s) => { setState(s); if (s === 'poster') api = null; },
+    });
+    if (capture) setState('captured');
+  }
+  mqReduce.addEventListener('change', () => { if (mqReduce.matches && api) { api.destroy(); api = null; setState('poster'); } });
+
+  const start = () => ('requestIdleCallback' in window ? requestIdleCallback(boot, { timeout: 2000 }) : setTimeout(boot, 200));
+  if (document.readyState === 'complete') start(); else addEventListener('load', start);
+</script>
+</body>
+</html>

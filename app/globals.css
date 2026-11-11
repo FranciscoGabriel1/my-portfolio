@@ -256,6 +256,14 @@
     transform: scaleX(0);
   }
 
+  /* Revelado pelo foco do teclado: aparece na hora, sem esperar a animação. */
+  [data-motion='ready'] [data-reveal-instant],
+  [data-motion='ready'] [data-reveal-instant] > *,
+  [data-motion='ready'] [data-reveal-instant] .split-word,
+  [data-motion='ready'] [data-reveal-instant] .ruler-bar {
+    transition: none !important;
+  }
+
   /* Títulos revelados palavra por palavra ao entrar na tela. */
   [data-motion='ready'] [data-reveal='split'] .split-word {
     transition: transform 0.9s var(--ease-out-strong);
@@ -273,6 +281,22 @@
   to {
     transform: translateY(0);
   }
+}
+
+/* Transição circular do tema (components/layout/ThemeToggle.tsx): o navegador captura a tela antiga e a
+   nova, e o recorte circular é animado por JavaScript na tela nova. Sem fusão de cores e sem a animação padrão. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Durante a captura do tema novo, nenhuma transição de cor fica pela metade. */
+.theme-capturing,
+.theme-capturing *,
+.theme-capturing *::before,
+.theme-capturing *::after {
+  transition: none !important;
 }
 
 /* Rede de segurança: com movimento reduzido, nada se move nem fica escondido. */
