@@ -158,125 +158,64 @@
     }
   },
   "experience": {
-    "label": "Experiencia",
-    "title": "Carrera profesional",
-    "subtitle": "Empresas y proyectos que han marcado mi carrera.",
-    "present": "Presente",
-    "items": [
-      {
-        "id": "1",
-        "role": "Desarrollador Front-end Senior",
-        "company": "HostGator",
+    "label": "Trayectoria",
+    "title": "Dónde he construido",
+    "subtitle": "Cada barra es un período real, de 2019 a hoy.",
+    "present": "hoy",
+    "items": {
+      "hostgator": {
+        "role": "Desarrollador Front-end Sénior",
         "location": "Florianópolis",
-        "type": "CLT",
-        "start": "2025-10",
-        "end": null,
-        "description": "Desarrollo y mantengo aplicaciones web para los equipos de monetización, innovación y agentes de IA. Creo interfaces responsivas y escalables, implemento nuevas funcionalidades y contribuyo a la evolución de la arquitectura front-end.",
-        "highlights": [
-          "Jenkins, Sistema de Diseño, JavaScript ES6+, Redux Saga",
-          "Biblioteca de pruebas de Jest y React con un enfoque en código limpio",
-          "ESLint, Prettier y GitFlow",
-          "Equipos de monetización, innovación y agentes de IA"
-        ]
+        "type": "Tiempo completo (CLT)",
+        "description": "Desarrollo y mantengo aplicaciones web en equipos de monetización, innovación y agentes de IA, y contribuyo a la evolución de la arquitectura front-end."
       },
-      {
-        "id": "2",
-        "role": "Desarrollador Front-end completo",
-        "company": "O2 Films",
-        "location": "São Paulo (a distancia)",
-        "type": "PJ",
-        "start": "2024-09",
-        "end": "2025-12",
-        "description": "Trabajé en una plataforma SaaS para guionistas, desarrollando componentes escalables con React.js y TypeScript, gestionando flujos con Redux + Saga e integrando APIs REST/GraphQL.",
-        "highlights": [
-          "React.js + TypeScript con componentes escalables",
-          "Redux + Saga para la gestión de flujos",
-          "Integración REST/GraphQL y pruebas con Jest",
-          "CI/CD con GitHub Actions y Docker"
-        ]
+      "o2": {
+        "role": "Desarrollador Front-end Semi Sénior",
+        "location": "São Paulo (remoto)",
+        "type": "Contratista (PJ)",
+        "description": "Plataforma SaaS para guionistas: componentes escalables con React y TypeScript, flujos con Redux + Saga e integración REST/GraphQL."
       },
-      {
-        "id": "3",
-        "role": "Desarrollador Front-end completo",
-        "company": "Atem Distribuidora de Petróleo",
-        "location": "Manaos (híbrido)",
-        "type": "CLT",
-        "start": "2022-05",
-        "end": "2025-05",
-        "description": "He liderado productos en React.js/React Native y TypeScript, estructurando flujos con Redux + Saga, librerías de componentes e integraciones REST/GraphQL. He trabajado en escuadrones ágiles con foco en performance y escalabilidad.",
-        "highlights": [
-          "React.js / React Native con TypeScript",
-          "Redux + Saga y bibliotecas de componentes",
-          "Optimización de paquetes y automatización de CI/CD",
-          "Cuadrillas ágiles - Scrum y Kanban"
-        ]
+      "atem": {
+        "role": "Desarrollador Front-end Semi Sénior",
+        "location": "Manaus (híbrido)",
+        "type": "Tiempo completo (CLT)",
+        "description": "Lideré productos en React, React Native y TypeScript, con bibliotecas de componentes, optimización de bundles y automatización de CI/CD."
       },
-      {
-        "id": "4",
-        "role": "Desarrollador de software junior",
-        "company": "Instituto Sidia de Ciencia y Tecnología",
-        "location": "Manaos (en persona)",
-        "type": "CLT",
-        "start": "2021-04",
-        "end": "2022-05",
-        "description": "Creé cuadros de mando interactivos integrados con telemetría en tiempo real. Estructuré un sistema de diseño compartido, implementé micro-frontends con Module Federation y mantuve pruebas CI y pipelines.",
-        "highlights": [
-          "React.js / Next.js con TypeScript",
-          "Sistema de diseño compartido entre equipos",
-          "Microfronteras con federación de módulos",
-          "Canalizaciones CI y escuadrones ágiles"
-        ]
+      "sidia": {
+        "role": "Desarrollador de Software Junior",
+        "location": "Manaus (presencial)",
+        "type": "Tiempo completo (CLT)",
+        "description": "Dashboards con telemetría en tiempo real, design system compartido entre equipos y micro-frontends con Module Federation."
       },
-      {
-        "id": "5",
-        "role": "Becario de investigación (CAPES)",
-        "company": "iComp UFAM",
-        "location": "Manaos",
-        "type": "Beca",
-        "start": "2019-03",
-        "end": "2022-03",
-        "description": "He creado la herramienta web UpRobotics con Google Blocks para facilitar la programación de brazos robóticos, con generación de código para Arduino UNO y simulaciones 3D en Webots.",
-        "highlights": [
-          "Herramienta web UpRobotics (Google Blockly)",
-          "Generación de código para Arduino UNO",
-          "Simulaciones 3D en Webots",
-          "Publicaciones en SBIE 2022 y SBESC 2020"
-        ]
+      "icomp": {
+        "role": "Investigador becario (CAPES)",
+        "location": "Manaus",
+        "bar_note": "investigación",
+        "description": "Creé UpRobotics, una herramienta web con Google Blockly para programar brazos robóticos, con generación de código para Arduino y simulación en Webots."
       }
-    ]
+    }
   },
   "education": {
     "label": "Formación",
-    "title": "Formación académica",
-    "items": [
-      {
-        "id": "1",
+    "items": {
+      "masters": {
         "degree": "Máster en Informática",
-        "institution": "Programa de Postgrado en Informática - UFAM",
-        "location": "Manaos",
-        "start": "2019-03",
-        "end": "2022-03",
-        "description": "Tesis centrada en la robótica educativa. Publicaciones en SBIE 2022 y SBESC 2020."
+        "institution": "PPGI — UFAM",
+        "location": "Manaus",
+        "description": "Robótica educativa, con publicaciones en el SBIE 2022 y el SBESC 2020."
       },
-      {
-        "id": "2",
-        "degree": "Licenciado en Ingeniería Informática",
-        "institution": "Universidad Federal de Amazonas - UFAM",
-        "location": "Itacoatiara",
-        "start": "2013-11",
-        "end": "2019-01",
-        "description": ""
+      "bachelor": {
+        "degree": "Licenciatura en Ingeniería de Software",
+        "institution": "UFAM",
+        "location": "Itacoatiara"
       },
-      {
-        "id": "3",
-        "degree": "Técnico informático",
-        "institution": "Instituto Federal de Amazonas - IFAM",
+      "technical": {
+        "degree": "Técnico en Informática",
+        "institution": "IFAM",
         "location": "Parintins",
-        "start": "2010-03",
-        "end": "2012-12",
-        "description": "Técnico Informático Integrado."
+        "description": "Integrado a la enseñanza media."
       }
-    ]
+    }
   },
   "contact": {
     "label": "Póngase en contacto con",

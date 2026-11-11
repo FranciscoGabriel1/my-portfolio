@@ -158,125 +158,64 @@
     }
   },
   "experience": {
-    "label": "Experiência",
-    "title": "Trajetória profissional",
-    "subtitle": "Empresas e projetos que moldaram minha carreira.",
-    "present": "Presente",
-    "items": [
-      {
-        "id": "1",
+    "label": "Trajetória",
+    "title": "Onde construí",
+    "subtitle": "Cada barra é um período real, de 2019 até hoje.",
+    "present": "hoje",
+    "items": {
+      "hostgator": {
         "role": "Desenvolvedor Front-end Sênior",
-        "company": "HostGator",
         "location": "Florianópolis",
         "type": "CLT",
-        "start": "2025-10",
-        "end": null,
-        "description": "Desenvolvo e mantenho aplicações web em times de monetização, inovação e agentes de IA. Crio interfaces responsivas e escaláveis, implemento novas funcionalidades e contribuo para a evolução da arquitetura front-end.",
-        "highlights": [
-          "Jenkins, Design System, JavaScript ES6+, Redux Saga",
-          "Jest e React Testing Library com foco em Clean Code",
-          "ESLint, Prettier e GitFlow",
-          "Times de monetização, inovação e agentes de IA"
-        ]
+        "description": "Desenvolvo e mantenho aplicações web em times de monetização, inovação e agentes de IA, e contribuo para a evolução da arquitetura front-end."
       },
-      {
-        "id": "2",
+      "o2": {
         "role": "Desenvolvedor Front-end Pleno",
-        "company": "O2 Filmes",
         "location": "São Paulo (remoto)",
         "type": "PJ",
-        "start": "2024-09",
-        "end": "2025-12",
-        "description": "Atuei em plataforma SaaS para roteiristas, desenvolvendo componentes escaláveis com React.js e TypeScript, gerenciando fluxos com Redux + Saga e integrando APIs REST/GraphQL.",
-        "highlights": [
-          "React.js + TypeScript com componentes escaláveis",
-          "Redux + Saga para gerenciamento de fluxos",
-          "Integração REST/GraphQL e testes com Jest",
-          "CI/CD com GitHub Actions e Docker"
-        ]
+        "description": "Plataforma SaaS para roteiristas: componentes escaláveis com React e TypeScript, fluxos com Redux + Saga e integração REST/GraphQL."
       },
-      {
-        "id": "3",
+      "atem": {
         "role": "Desenvolvedor Front-end Pleno",
-        "company": "Atem Distribuidora de Petróleo",
         "location": "Manaus (híbrido)",
         "type": "CLT",
-        "start": "2022-05",
-        "end": "2025-05",
-        "description": "Liderei produtos em React.js/React Native e TypeScript, estruturando fluxos com Redux + Saga, bibliotecas de componentes e integrações REST/GraphQL. Atuei em squads ágeis com foco em performance e escalabilidade.",
-        "highlights": [
-          "React.js / React Native com TypeScript",
-          "Redux + Saga e bibliotecas de componentes",
-          "Otimização de bundles e automação de CI/CD",
-          "Squads ágeis — Scrum e Kanban"
-        ]
+        "description": "Liderei produtos em React, React Native e TypeScript, com bibliotecas de componentes, otimização de bundles e automação de CI/CD."
       },
-      {
-        "id": "4",
+      "sidia": {
         "role": "Desenvolvedor de Software Jr.",
-        "company": "Sidia Instituto de Ciência e Tecnologia",
         "location": "Manaus (presencial)",
         "type": "CLT",
-        "start": "2021-04",
-        "end": "2022-05",
-        "description": "Criei dashboards responsivos integrados a telemetria em tempo real. Estruturei design system compartilhado, implementei micro-frontends com Module Federation e mantive testes e pipelines CI.",
-        "highlights": [
-          "React.js / Next.js com TypeScript",
-          "Design system compartilhado entre times",
-          "Micro-frontends com Module Federation",
-          "Pipelines CI e squads ágeis"
-        ]
+        "description": "Dashboards com telemetria em tempo real, design system compartilhado entre times e micro-frontends com Module Federation."
       },
-      {
-        "id": "5",
-        "role": "Pesquisador Bolsista (CAPES)",
-        "company": "iComp UFAM",
+      "icomp": {
+        "role": "Pesquisador bolsista (CAPES)",
         "location": "Manaus",
-        "type": "Bolsa",
-        "start": "2019-03",
-        "end": "2022-03",
-        "description": "Criei a ferramenta web UpRobotics com Google Blocks para facilitar a programação de braços robóticos, com geração de código para Arduino UNO e simulações 3D no Webots.",
-        "highlights": [
-          "Ferramenta web UpRobotics (Google Blockly)",
-          "Geração de código para Arduino UNO",
-          "Simulações 3D no Webots",
-          "Publicações no SBIE 2022 e SBESC 2020"
-        ]
+        "bar_note": "pesquisa",
+        "description": "Criei o UpRobotics, ferramenta web com Google Blockly para programar braços robóticos, com geração de código para Arduino e simulação no Webots."
       }
-    ]
+    }
   },
   "education": {
     "label": "Formação",
-    "title": "Formação acadêmica",
-    "items": [
-      {
-        "id": "1",
+    "items": {
+      "masters": {
         "degree": "Mestrado em Informática",
-        "institution": "Programa de Pós-graduação em Informática — UFAM",
+        "institution": "PPGI — UFAM",
         "location": "Manaus",
-        "start": "2019-03",
-        "end": "2022-03",
-        "description": "Dissertação focada em robótica educacional. Publicações no SBIE 2022 e SBESC 2020."
+        "description": "Robótica educacional, com publicações no SBIE 2022 e no SBESC 2020."
       },
-      {
-        "id": "2",
+      "bachelor": {
         "degree": "Bacharelado em Engenharia de Software",
-        "institution": "Universidade Federal do Amazonas — UFAM",
-        "location": "Itacoatiara",
-        "start": "2013-11",
-        "end": "2019-01",
-        "description": ""
+        "institution": "UFAM",
+        "location": "Itacoatiara"
       },
-      {
-        "id": "3",
+      "technical": {
         "degree": "Técnico em Informática",
-        "institution": "Instituto Federal do Amazonas — IFAM",
+        "institution": "IFAM",
         "location": "Parintins",
-        "start": "2010-03",
-        "end": "2012-12",
-        "description": "Técnico em Informática Integrado ao Ensino Médio."
+        "description": "Integrado ao ensino médio."
       }
-    ]
+    }
   },
   "contact": {
     "label": "Contato",

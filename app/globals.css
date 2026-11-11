@@ -321,6 +321,16 @@
   [data-motion='ready'] [data-reveal='children'] > :nth-child(5) { transition-delay: 240ms; }
   [data-motion='ready'] [data-reveal='children'] > :nth-child(n + 6) { transition-delay: 300ms; }
 
+  /* Régua da Trajetória: as barras crescem da esquerda, uma após a outra. */
+  [data-motion='ready'] [data-reveal='ruler'] .ruler-bar {
+    transform-origin: left center;
+    transition: transform 0.9s var(--ease-out-strong);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+  [data-motion='ready'] [data-reveal='ruler']:not([data-revealed]) .ruler-bar {
+    transform: scaleX(0);
+  }
+
   /* Títulos revelados palavra por palavra ao entrar na tela. */
   [data-motion='ready'] [data-reveal='split'] .split-word {
     transition: transform 0.9s var(--ease-out-strong);

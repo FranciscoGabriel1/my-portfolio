@@ -44,11 +44,12 @@
 
 ## 4. Trajetória
 
-- [ ] 4.1 Criar `lib/content/career.ts` (empresa, cargo, local, regime, início e fim em `AAAA-MM`, atual) e mover os dados estruturais da experiência e da formação para fora das mensagens
-- [ ] 4.2 Função pura do período para posição na régua, com testes usando as datas reais (Atem de mai 2022 a mai 2025, HostGator de out 2025 até o mês do build)
-- [ ] 4.3 Seção Trajetória como componente de servidor: régua `aria-hidden` (oculta abaixo de 900 px) com barras que crescem em sequência, lista ordenada das experiências e formação
-- [ ] 4.4 Textos em pt (sem a frase das sobreposições até o dono confirmar), `npm run translate` e revisão; lint, tipos, testes e build
-- [ ] 4.5 Dono confere a Trajetória em 1440 e 390, e com movimento reduzido
+- [x] 4.1 Criar `lib/content/career.ts` (empresa, cargo, local, regime, início e fim em `AAAA-MM`, atual) e mover os dados estruturais da experiência e da formação para fora das mensagens
+- [x] 4.2 Função pura do período para posição na régua, com testes usando as datas reais (Atem de mai 2022 a mai 2025, HostGator de out 2025 até o mês do build)
+- [x] 4.3 Seção Trajetória como componente de servidor: régua `aria-hidden` (oculta abaixo de 900 px) com barras que crescem em sequência, lista ordenada das experiências e formação
+- [x] 4.4 Textos em pt (sem a frase das sobreposições até o dono confirmar), `npm run translate` e revisão; lint, tipos, testes e build
+  - en/es à mão. Em en/es, CLT e PJ ganham explicação ("Full-time (CLT)", "Contractor (PJ)"). O subtítulo, que fala das barras, aparece só onde a régua aparece (a partir de 900 px).
+- [x] 4.5 Dono confere a Trajetória em 1440 e 390, e com movimento reduzido (dono pediu para seguir em 2026-11-11)
 
 ## 5. Contato e limpeza
 

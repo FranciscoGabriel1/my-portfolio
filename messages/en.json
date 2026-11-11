@@ -158,125 +158,64 @@
     }
   },
   "experience": {
-    "label": "Experience",
-    "title": "Professional career",
-    "subtitle": "Companies and projects that have shaped my career.",
-    "present": "Present",
-    "items": [
-      {
-        "id": "1",
+    "label": "Career",
+    "title": "Where I've built",
+    "subtitle": "Each bar is a real period, from 2019 to today.",
+    "present": "now",
+    "items": {
+      "hostgator": {
         "role": "Senior Front-end Developer",
-        "company": "HostGator",
         "location": "Florianópolis",
-        "type": "CLT",
-        "start": "2025-10",
-        "end": null,
-        "description": "I develop and maintain web applications for monetization, innovation and AI agent teams. I create responsive and scalable interfaces, implement new features and contribute to the evolution of front-end architecture.",
-        "highlights": [
-          "Jenkins, Design System, JavaScript ES6+, Redux Saga",
-          "Jest and React Testing Library with a focus on Clean Code",
-          "ESLint, Prettier and GitFlow",
-          "Monetization teams, innovation and AI agents"
-        ]
+        "type": "Full-time (CLT)",
+        "description": "I build and maintain web applications on the monetization, innovation and AI agents teams, and contribute to the evolution of the front-end architecture."
       },
-      {
-        "id": "2",
-        "role": "Full Front-end Developer",
-        "company": "O2 Films",
+      "o2": {
+        "role": "Mid-level Front-end Developer",
         "location": "São Paulo (remote)",
-        "type": "PJ",
-        "start": "2024-09",
-        "end": "2025-12",
-        "description": "I worked on a SaaS platform for scriptwriters, developing scalable components with React.js and TypeScript, managing flows with Redux + Saga and integrating REST/GraphQL APIs.",
-        "highlights": [
-          "React.js + TypeScript with scalable components",
-          "Redux + Saga for flow management",
-          "REST/GraphQL integration and testing with Jest",
-          "CI/CD with GitHub Actions and Docker"
-        ]
+        "type": "Contractor (PJ)",
+        "description": "SaaS platform for screenwriters: scalable React and TypeScript components, Redux + Saga flows and REST/GraphQL integration."
       },
-      {
-        "id": "3",
-        "role": "Full Front-end Developer",
-        "company": "Atem Distribuidora de Petróleo",
+      "atem": {
+        "role": "Mid-level Front-end Developer",
         "location": "Manaus (hybrid)",
-        "type": "CLT",
-        "start": "2022-05",
-        "end": "2025-05",
-        "description": "I've led products in React.js/React Native and TypeScript, structuring flows with Redux + Saga, component libraries and REST/GraphQL integrations. I've worked in agile squads with a focus on performance and scalability.",
-        "highlights": [
-          "React.js / React Native with TypeScript",
-          "Redux + Saga and component libraries",
-          "Bundle optimization and CI/CD automation",
-          "Agile squads - Scrum and Kanban"
-        ]
+        "type": "Full-time (CLT)",
+        "description": "Led products in React, React Native and TypeScript, with component libraries, bundle optimization and CI/CD automation."
       },
-      {
-        "id": "4",
-        "role": "Jr. Software Developer",
-        "company": "Sidia Institute of Science and Technology",
-        "location": "Manaus (in person)",
-        "type": "CLT",
-        "start": "2021-04",
-        "end": "2022-05",
-        "description": "I created responsive dashboards integrated with real-time telemetry. I structured a shared design system, implemented micro-frontends with Module Federation and maintained CI tests and pipelines.",
-        "highlights": [
-          "React.js / Next.js with TypeScript",
-          "Design system shared between teams",
-          "Micro-frontends with Module Federation",
-          "CI pipelines and agile squads"
-        ]
+      "sidia": {
+        "role": "Junior Software Developer",
+        "location": "Manaus (on-site)",
+        "type": "Full-time (CLT)",
+        "description": "Real-time telemetry dashboards, a design system shared across teams and micro-frontends with Module Federation."
       },
-      {
-        "id": "5",
-        "role": "Research Fellow (CAPES)",
-        "company": "iComp UFAM",
+      "icomp": {
+        "role": "Research fellow (CAPES)",
         "location": "Manaus",
-        "type": "Scholarship",
-        "start": "2019-03",
-        "end": "2022-03",
-        "description": "I created the web tool UpRobotics with Google Blocks to facilitate the programming of robotic arms, with code generation for Arduino UNO and 3D simulations in Webots.",
-        "highlights": [
-          "UpRobotics web tool (Google Blockly)",
-          "Code generation for Arduino UNO",
-          "3D simulations in Webots",
-          "Publications in SBIE 2022 and SBESC 2020"
-        ]
+        "bar_note": "research",
+        "description": "Built UpRobotics, a web tool with Google Blockly for programming robotic arms, generating code for Arduino and simulations in Webots."
       }
-    ]
+    }
   },
   "education": {
-    "label": "Training",
-    "title": "Academic background",
-    "items": [
-      {
-        "id": "1",
-        "degree": "Master's in Computer Science",
-        "institution": "Postgraduate Program in Informatics - UFAM",
+    "label": "Education",
+    "items": {
+      "masters": {
+        "degree": "Master's in Informatics",
+        "institution": "PPGI — UFAM",
         "location": "Manaus",
-        "start": "2019-03",
-        "end": "2022-03",
-        "description": "Dissertation focused on educational robotics. Publications in SBIE 2022 and SBESC 2020."
+        "description": "Educational robotics, with papers at SBIE 2022 and SBESC 2020."
       },
-      {
-        "id": "2",
-        "degree": "Bachelor of Software Engineering",
-        "institution": "Federal University of Amazonas - UFAM",
-        "location": "Itacoatiara",
-        "start": "2013-11",
-        "end": "2019-01",
-        "description": ""
+      "bachelor": {
+        "degree": "Bachelor's in Software Engineering",
+        "institution": "UFAM",
+        "location": "Itacoatiara"
       },
-      {
-        "id": "3",
+      "technical": {
         "degree": "Computer Technician",
-        "institution": "Federal Institute of Amazonas - IFAM",
+        "institution": "IFAM",
         "location": "Parintins",
-        "start": "2010-03",
-        "end": "2012-12",
-        "description": "High School Integrated Computer Technician."
+        "description": "Integrated with high school."
       }
-    ]
+    }
   },
   "contact": {
     "label": "Contact",
