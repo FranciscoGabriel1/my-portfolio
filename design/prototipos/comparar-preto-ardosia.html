@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preto ou ardósia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  .p-atual   { --bg:#141311; --surface:#1D1C19; --line:#34312C; --text:#F2EEE6; --text-2:#BDB6A8; --text-3:#958E81; --accent-text:#FF8A55; --ok:#5BC48A; }
+  .p-ardosia { --bg:#1E2126; --surface:#272A30; --line:#3F444C; --text:#EEF0F2; --text-2:#B9BFC7; --text-3:#98A0AA; --accent-text:#FF8A55; --ok:#5BC48A; }
+  :root { --accent:#FF6B2C; --on-accent:#171612; --ease:cubic-bezier(.2,.8,.2,1); --x:50%;
+    --display:"Bricolage Grotesque", system-ui, sans-serif; --body:"Instrument Sans", system-ui, sans-serif; --mono:"JetBrains Mono", ui-monospace, monospace; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:#141311; font-family:var(--body); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:6px; }
+
+  .compare { position:relative; overflow:hidden; }
+  .page { background:var(--bg); color:var(--text); padding-bottom:140px; }
+  .page.b { position:absolute; inset:0; clip-path:inset(0 0 0 var(--x)); }
+  .divider { position:absolute; top:0; bottom:0; left:var(--x); width:0; z-index:3; pointer-events:none; }
+  .divider::before { content:""; position:absolute; top:0; bottom:0; left:-1px; width:2px; background:#FF6B2C; }
+  .knob { position:sticky; top:50vh; margin-left:-22px; width:44px; height:44px; border-radius:50%; background:#FF6B2C; color:#171612; display:grid; place-items:center; font:700 18px var(--body); pointer-events:auto; cursor:ew-resize; touch-action:none; box-shadow:0 6px 20px #0008; }
+  .badge { position:fixed; top:14px; z-index:5; font:700 12px var(--mono); letter-spacing:.1em; padding:8px 12px; border-radius:8px; background:#f7f6f3; color:#1a1a1a; box-shadow:0 6px 20px #0006; }
+  .badge.l { left:14px; } .badge.r { right:14px; }
+
+  .mono { font-family:var(--mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-3); }
+  .wrap { max-width:1440px; margin:0 auto; padding:0 64px; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:64px 64px 24px; max-width:1440px; margin:0 auto; }
+  .brand { display:flex; gap:12px; align-items:center; font-weight:600; font-size:15px; text-decoration:none; }
+  .mono-mark { width:36px; height:36px; border:1px solid var(--line); border-radius:8px; display:grid; place-items:center; font:700 13px var(--mono); }
+  .links { display:flex; gap:36px; list-style:none; padding:0; }
+  .links a { color:var(--text-2); text-decoration:none; font-size:15px; }
+  .btn { display:inline-flex; align-items:center; gap:10px; padding:16px 24px; border-radius:10px; font:600 16px var(--body); text-decoration:none; border:1px solid transparent; }
+  .btn-primary { background:var(--accent); color:var(--on-accent); }
+  .btn-ghost { border-color:var(--line); color:var(--text); }
+  .btn-sm { padding:10px 16px; font-size:14px; }
+
+  .hero { display:grid; grid-template-columns:minmax(0,660px) minmax(0,1fr); align-items:center; gap:24px; min-height:680px; padding-left:64px; max-width:1440px; margin:0 auto; }
+  .status { display:flex; gap:10px; align-items:center; color:var(--text-2); }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--ok); }
+  h1 { font:800 clamp(64px, 9vw, 128px)/.9 var(--display); letter-spacing:-.03em; margin:28px 0; }
+  .lead { font-size:21px; line-height:1.45; color:var(--text-2); max-width:620px; }
+  .ctas { display:flex; gap:12px; margin-top:36px; flex-wrap:wrap; }
+  .scene img { width:100%; height:auto; display:block; }
+  .proof { border-top:1px solid var(--line); }
+  .proof .wrap { display:flex; gap:28px; align-items:center; padding-top:22px; padding-bottom:22px; flex-wrap:wrap; }
+  .proof b { font-weight:600; font-size:17px; color:var(--text-2); }
+
+  .projects { padding-top:96px; }
+  h2 { font:800 clamp(44px, 6vw, 76px)/.95 var(--display); letter-spacing:-.03em; margin:16px 0 56px; }
+  .case { display:grid; grid-template-columns:480px minmax(0,1fr); gap:56px; align-items:center; margin-bottom:64px; }
+  h3 { font:700 40px/1.04 var(--display); letter-spacing:-.02em; margin:18px 0; }
+  .desc { font-size:18px; line-height:1.5; color:var(--text-2); }
+  dl div { display:grid; grid-template-columns:130px 1fr; gap:20px; padding:14px 0; border-top:1px solid var(--line); }
+  dl { margin-top:20px; }
+  dd { line-height:1.5; }
+  dd.todo { font-style:italic; color:var(--text-3); }
+  .shot { aspect-ratio:600/370; border-radius:16px; border:1px solid var(--line); background:var(--surface) url("../../public/images/projects/dash_hg.png") center/cover; box-shadow:0 30px 60px #0007; }
+  .list { list-style:none; padding:0; }
+  .list li { display:flex; justify-content:space-between; align-items:center; gap:24px; padding:22px 0; border-top:1px solid var(--line); }
+  .list .l { display:flex; gap:24px; align-items:baseline; flex-wrap:wrap; }
+  .list .t { font-size:24px; font-weight:600; }
+  .list .w { color:var(--text-3); }
+
+  .panel { position:fixed; left:50%; bottom:16px; transform:translateX(-50%); z-index:6; width:min(760px, calc(100vw - 32px)); background:#f7f6f3; color:#1a1a1a; border-radius:14px; box-shadow:0 12px 40px #0008; padding:12px 16px; display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; }
+  .panel button { font:600 13px var(--body); padding:8px 12px; border-radius:8px; border:1px solid #cfccc4; background:#fff; color:#1a1a1a; cursor:pointer; }
+  .panel input { width:100%; accent-color:#FF6B2C; }
+  .panel p { grid-column:1 / -1; font:400 12px var(--mono); color:#444; text-align:center; }
+
+  @media (max-width:900px) {
+    nav, .wrap { padding-left:20px; padding-right:20px; }
+    nav { padding-top:64px; }
+    .links, .tools { display:none; }
+    .hero { grid-template-columns:1fr; padding:8px 20px 0; min-height:auto; }
+    h1 { font-size:64px; }
+    .lead { font-size:17px; line-height:1.5; }
+    .ctas { flex-direction:column; }
+    .ctas .btn { justify-content:center; }
+    .scene img { margin:-14% 0 -10%; }
+    .case { grid-template-columns:1fr; gap:24px; }
+    h3 { font-size:30px; }
+    dl div { grid-template-columns:1fr; gap:6px; }
+    .list .t { font-size:18px; }
+    .panel { grid-template-columns:1fr; }
+    .panel button { display:none; }
+  }
+</style>
+</head>
+<body>
+<span class="badge l" aria-hidden="true">◀ PRETO ATUAL · #141311</span>
+<span class="badge r" aria-hidden="true">ARDÓSIA · #1E2126 ▶</span>
+
+<div class="compare" id="cmp">
+  <main class="page a p-atual" id="pageA">
+    <nav aria-label="Principal">
+      <a class="brand" href="#"><span class="mono-mark" aria-hidden="true">FM</span>Francisco Marinho</a>
+      <ul class="links"><li><a href="#">Sobre</a></li><li><a href="#">Projetos</a></li><li><a href="#">Trajetória</a></li><li><a href="#">Contato</a></li></ul>
+      <div class="tools"><a class="btn btn-ghost btn-sm" href="#">Baixar CV</a></div>
+    </nav>
+    <section class="hero">
+      <div>
+        <p class="mono status"><span class="dot" aria-hidden="true"></span>Aberto a oportunidades · Manaus, BR · Remoto</p>
+        <h1>Francisco<br>Marinho</h1>
+        <p class="lead">Desenvolvedor frontend sênior. Penso interfaces como peças que se encaixam: comecei programando braços robóticos com blocos no mestrado e hoje construo produtos com design system na HostGator.</p>
+        <div class="ctas"><a class="btn btn-primary" href="#">Ver projetos →</a><a class="btn btn-ghost" href="#">Baixar CV</a></div>
+      </div>
+      <div class="scene"><img data-cool="cena-blocos-transparente-fria.png" src="cena-blocos-transparente.png" width="1200" height="1100" alt=""></div>
+    </section>
+    <div class="proof"><div class="wrap"><span class="mono">Onde já construí</span><b>HostGator</b><b>O2 Filmes</b><b>Atem</b><b>Sidia</b><b>iComp UFAM</b></div></div>
+    <section class="projects wrap">
+      <p class="mono" style="color:var(--accent-text)">02 — Projetos</p>
+      <h2>O que já construí</h2>
+      <article class="case">
+        <div>
+          <p class="mono">01 · HostGator · 2025 — hoje</p>
+          <h3>Dashboard do cliente HostGator</h3>
+          <p class="desc">Painel em que clientes acompanham métricas, gerenciam serviços de hospedagem e pedem suporte.</p>
+          <dl>
+            <div><dt class="mono">O que eu fiz</dt><dd>Interfaces em React com Redux Saga, componentes do design system e testes com Jest e React Testing Library.</dd></div>
+            <div><dt class="mono">Resultado</dt><dd class="todo">[dado real de impacto — preencher com você ou omitir]</dd></div>
+          </dl>
+        </div>
+        <div class="shot" role="img" aria-label="Tela do dashboard do cliente HostGator"></div>
+      </article>
+      <ul class="list">
+        <li><span class="l"><span class="mono">02</span><span class="t">CurrículoRaiz</span><span class="w">SaaS de currículos · fundador e autor</span></span><span class="mono">React · Node.js · Prisma</span></li>
+        <li><span class="l"><span class="mono">03</span><span class="t">Plataforma para roteiristas</span><span class="w">Teksto · O2 Filmes</span></span><span class="mono">React · TypeScript</span></li>
+        <li><span class="l"><span class="mono">04</span><span class="t">Carrinho de compras</span><span class="w">HostGator</span></span><span class="mono">React · Redux Saga</span></li>
+      </ul>
+    </section>
+  </main>
+  <div class="divider" aria-hidden="true"><div class="knob" id="knob">⇆</div></div>
+</div>
+
+<div class="panel" role="group" aria-label="Comparar fundos">
+  <button type="button" data-x="100">Só preto atual</button>
+  <input id="range" type="range" min="0" max="100" value="50" aria-label="Posição do divisor: à esquerda o preto atual, à direita a ardósia">
+  <button type="button" data-x="0">Só ardósia</button>
+  <p>Contraste do texto principal: preto 16,0:1 · ardósia 14,1:1. Texto discreto: 5,7:1 · 6,1:1. Os dois passam no AA.</p>
+</div>
+
+<script>
+  const cmp = document.getElementById("cmp");
+  const a = document.getElementById("pageA");
+  const b = a.cloneNode(true);
+  b.removeAttribute("id");
+  b.className = "page b p-ardosia";
+  b.inert = true;
+  b.setAttribute("aria-hidden", "true");
+  const img = b.querySelector("img[data-cool]");
+  img.src = img.dataset.cool;
+  cmp.insertBefore(b, cmp.querySelector(".divider"));
+
+  const range = document.getElementById("range");
+  const set = (v) => {
+    v = Math.max(0, Math.min(100, v));
+    cmp.style.setProperty("--x", v + "%");
+    range.value = v;
+  };
+  range.addEventListener("input", () => set(+range.value));
+  document.querySelectorAll("[data-x]").forEach((btn) => btn.addEventListener("click", () => set(+btn.dataset.x)));
+
+  const knob = document.getElementById("knob");
+  let dragging = false;
+  knob.addEventListener("pointerdown", (e) => { dragging = true; knob.setPointerCapture(e.pointerId); });
+  knob.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const r = cmp.getBoundingClientRect();
+    set(((e.clientX - r.left) / r.width) * 100);
+  });
+  knob.addEventListener("pointerup", () => { dragging = false; });
+  set(50);
+</script>
+</body>
+</html>

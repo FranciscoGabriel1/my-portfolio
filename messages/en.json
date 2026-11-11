@@ -6,21 +6,20 @@
   "nav": {
     "about": "About",
     "projects": "Projects",
-    "experience": "Experience",
+    "experience": "Career",
     "contact": "Contact",
     "download_cv": "Download CV",
     "open_menu": "Open menu",
-    "close_menu": "Close menu"
+    "close_menu": "Close menu",
+    "label": "Main",
+    "menu": "Menu"
   },
   "theme": {
-    "toggle_dark": "Activate dark mode",
-    "toggle_light": "Activate light mode"
+    "toggle_dark": "Switch to dark theme",
+    "toggle_light": "Switch to light theme"
   },
   "language": {
-    "label": "Language",
-    "pt": "Portuguese",
-    "en": "English",
-    "es": "Español"
+    "label": "Language"
   },
   "hero": {
     "greeting": "Hello, I'm",
@@ -408,16 +407,14 @@
     }
   },
   "footer": {
-    "made_with": "Made with",
-    "and": "e",
-    "rights": "All rights reserved.",
-    "back_to_top": "Back to top"
+    "back_to_top": "Back to top",
+    "location": "Manaus, Brazil"
   },
   "accessibility": {
     "skip_to_content": "Skip to main content",
     "theme_toggle": "Switch theme",
     "language_switcher": "Select language",
-    "open_link_new_tab": "Opens in new tab",
+    "open_link_new_tab": "opens in a new tab",
     "project_image_alt": "Project image {title}",
     "profile_photo_alt": "Profile photo of Francisco Marinho"
   }

@@ -1,0 +1,64 @@
+schema: spec-driven
+
+# Contexto mostrado à IA ao criar cada artefato. Detalhes e ponto de partida medido: CLAUDE.md na raiz.
+context: |
+  Portfólio pessoal de Francisco Marinho, Desenvolvedor Frontend Sênior. Página única com Hero, Sobre, Projetos,
+  Experiência e Contato, em pt/en/es, tema claro e escuro. Quem lê são recrutadores e líderes técnicos: o site é a própria
+  prova de competência, então acabamento, desempenho e acessibilidade fazem parte do conteúdo.
+
+  Stack atual:
+  - Next.js 14 (App Router, páginas estáticas por idioma) + React 18 + TypeScript strict
+  - Tailwind v3 + variáveis CSS (app/globals.css, tailwind.config.ts)
+  - framer-motion 11, lottie-react, canvas próprio (components/animations/Particles.tsx)
+  - next-intl (messages/pt.json é a origem; `npm run translate` gera en/es via DeepL)
+  - next-themes, react-hook-form + Zod, lucide-react, Resend (POST /api/contact)
+  - Sem testes e sem CI até agora
+
+  Estrutura: app/[locale]/ → components/sections/ → components/{layout,animations,ui}/ → lib/, i18n/, messages/.
+
+  Objetivo: upgrade para o nível dos melhores sites do mercado hoje (referências: Awwwards, Linear, Vercel, Apple), com
+  animações ligadas à rolagem, 3D em tempo real, efeitos visuais e acessibilidade de verdade, no mesmo padrão de
+  profissionalismo do CurrículoRaiz.
+
+  Stack-alvo do upgrade, alinhada ao CurrículoRaiz (preferir sempre as versões atuais, mesmo com migração maior):
+  - React 19, Tailwind v4 (CSS-first, `@theme`, tokens em CSS), shadcn/ui via CLI oficial (Radix + cva)
+  - `motion` (sucessor do framer-motion), lucide-react como única família de ícones, TypeScript strict
+  - Vitest e teste de hidratação sem divergência; Lighthouse no CI; imagens OG geradas por script
+  - Next.js continua, na versão atual, por causa da geração estática e do next-intl, salvo motivo forte no design
+  - 3D ainda a decidir no design (three.js com react-three-fiber é o candidato natural)
+  - Zustand e TanStack Query só se surgir estado que justifique: hoje o site não tem
+
+  Ferramentas: graphify (graphify-out/) para navegar o código; Pencil para protótipos em design/prototipos/.
+
+rules:
+  proposal:
+    - Escrever em português do Brasil.
+    - Incluir a seção "Fora do escopo".
+    - Dizer o que o visitante percebe de diferente, e não só o que muda no código.
+    - Mudança grande se divide em changes menores e independentes, entregues uma de cada vez.
+  specs:
+    - Requisitos com SHALL e cenários verificáveis.
+    - Todo requisito com movimento ou 3D tem um cenário para `prefers-reduced-motion` e outro para a falta de WebGL.
+    - Todo requisito interativo tem um cenário de uso só com teclado.
+    - Todo texto visível, inclusive aria-label e alt, vem de messages/ nos três idiomas.
+  design:
+    - Justificar cada biblioteca nova pelo custo em KB e pelo que ela permite. Uma ferramenta por finalidade.
+    - Para cada efeito ou cena 3D, definir como carrega (import dinâmico, sem SSR, depois do LCP), o que aparece enquanto carrega, o alternativo sem WebGL ou com movimento reduzido e o comportamento em celular fraco.
+    - O conteúdo principal é HTML real renderizado no servidor. O LCP nunca depende de canvas ou WebGL.
+    - Definir orçamento de desempenho, partindo dos limiares bons do Core Web Vitals (LCP abaixo de 2,5 s, CLS abaixo de 0,1, INP abaixo de 200 ms, medidos em celular).
+    - Mudança visual nova passa por protótipo no Pencil antes do código.
+    - Avaliar telas novas contra as 10 heurísticas de Nielsen.
+  tasks:
+    - Organizar em blocos entregáveis, cada um terminando em um estado que o dono consegue testar no navegador.
+    - Incluir tarefas de `npm run lint`, `npm run build` e testes.
+    - Incluir conferência em pt/en/es, claro/escuro, celular e computador, teclado e leitor de tela, com axe sem violações WCAG 2.2 AA.
+    - Testar movimento reduzido e WebGL desligado de verdade, no navegador.
+
+operations:
+  apply:
+    guidance:
+      - Entregar um bloco por vez, com status curto, e parar para o dono testar no navegador local.
+      - Rodar `graphify update .` depois de mexer no código.
+  archive:
+    guidance:
+      - Resumir o que foi entregue e o que ficou de fora antes de encerrar.

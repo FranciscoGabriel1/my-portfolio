@@ -1,3 +1,4 @@
+import { setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
@@ -6,13 +7,21 @@ import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
 
-export default function HomePage() {
+interface HomePageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
+  // Renderização estática por idioma (next-intl).
+  setRequestLocale(locale);
+
   return (
     <>
       <Navbar />
 
       <div className="overflow-x-hidden">
-        <main id="main-content" className="pt-16">
+        <main id="main-content">
           <Hero />
           <About />
           <Projects />

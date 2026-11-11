@@ -1,16 +1,17 @@
 # Francisco Marinho — Portfolio
 
-Personal portfolio built with Next.js 14, featuring multilingual support, Apple-inspired design system, and professional animations.
+Personal portfolio built with Next.js 16, featuring multilingual support, Apple-inspired design system, and professional animations.
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 16 (App Router) + React 19, on Node.js 24 LTS
 - **Language:** TypeScript (strict)
-- **Styling:** Tailwind CSS + CSS Variables
-- **Animations:** Framer Motion + Lottie
-- **i18n:** next-intl (PT, EN, ES)
+- **Styling:** Tailwind CSS 4 (CSS-first `@theme`) + CSS Variables
+- **Animations:** Framer Motion
+- **i18n:** next-intl 4 (PT, EN, ES)
 - **Theme:** next-themes (dark/light)
-- **Forms:** React Hook Form + Zod
+- **Forms:** React Hook Form + Zod 4
+- **Tests:** Vitest + Testing Library, Playwright + axe
 - **Icons:** Lucide React
 
 ## Getting Started
@@ -26,7 +27,7 @@ For full setup instructions, see [SETUP.md](./SETUP.md).
 
 ## Features
 
-- Multilingual (PT 🇧🇷 / EN 🇺🇸 / ES 🇪🇸) with auto-translation via Claude API
+- Multilingual (PT 🇧🇷 / EN 🇺🇸 / ES 🇪🇸) with auto-translation via the DeepL API
 - Dark / light mode toggle
 - Responsive (mobile, tablet, desktop)
 - Accessible (ARIA, skip-to-content, reduced motion)
@@ -40,5 +41,9 @@ For full setup instructions, see [SETUP.md](./SETUP.md).
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production |
 | `npm run lint` | Run ESLint |
+| `npm run typecheck` | Type-check with TypeScript |
+| `npm test` | Unit tests (Vitest) |
+| `npm run test:e2e` | Build, then browser tests (Playwright): smoke, visual baselines, axe |
+| `npm run test:e2e:update` | Same, rewriting the visual baselines (only on purpose) |
 | `npm run format` | Format with Prettier |
-| `npm run translate` | Auto-generate EN/ES from PT via Claude API |
+| `npm run translate` | Auto-generate EN/ES from PT via the DeepL API |

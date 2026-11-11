@@ -2,8 +2,10 @@
 
 ## Requirements
 
-- Node.js 18+
-- npm 9+
+- Node.js 24 LTS (pinned in `.nvmrc`; run `nvm use`). The test tooling needs Node 22.12 or newer.
+- npm 11+
+
+The `package-lock.json` is committed: use `npm ci` for a reproducible install.
 
 ---
 
@@ -59,31 +61,12 @@ Free plan: 500.000 characters/month — more than enough for a portfolio.
 ## Replacing placeholder content
 
 ### Profile photo
-Replace the `FM` initials placeholder in `components/sections/Hero.tsx`:
-```tsx
-// Replace the initials block with:
-<Image src="/images/photo.jpg" alt="Francisco Marinho" fill className="object-cover" />
-```
-Place the photo at `public/images/photo.jpg`.
+The photo is `public/images/profile.jpeg`, used by the Hero and About sections. Replace the file to update it.
 
 ### CV / Resume
-Place your PDF at `public/cv.pdf` — the "Download CV" button already points to this path.
+The "Download CV" buttons open a Google Drive link per language, defined in `lib/cv.ts` (`CV_URL.pt`, `CV_URL.en`, `CV_URL.es`). To update the resume, upload the new PDF to Drive, share it as "anyone with the link", and replace the URL for that language.
 
-Currently the PDF is at `curriculum/Francisco_Marinho_-_Desenvolvedor_Frontend_Sênior.pdf`.
-Just copy it:
-```bash
-cp "curriculum/Francisco_Marinho_-_Desenvolvedor_Frontend_Sênior.pdf" public/cv.pdf
-```
-
-### Lottie animations
-Place `.json` Lottie files at `public/lottie/`. Recommended source: [lottiefiles.com](https://lottiefiles.com).
-
-Use the `LottiePlayer` component:
-```tsx
-import { LottiePlayer } from "@/components/animations/LottiePlayer";
-
-<LottiePlayer src="/lottie/your-animation.json" />
-```
+The source PDF lives in `curriculum/`.
 
 ### Project images
 Place project images at `public/images/projects/`. They are referenced in `messages/pt.json` under `projects.items[].image`.
@@ -99,19 +82,19 @@ Add design references to `inspirations/` — this folder is not committed to git
 ├── app/
 │   └── [locale]/          # i18n routes (pt, en, es)
 ├── components/
-│   ├── animations/        # FadeInView, StaggerChildren, LottiePlayer
+│   ├── animations/        # FadeInView, StaggerChildren, CountUp, Particles
 │   ├── layout/            # Navbar, Footer, ThemeToggle, LanguageSwitcher
 │   ├── sections/          # Hero, About, Projects, Experience, Contact
 │   └── ui/                # Button, Badge, Card, Input, Textarea
 ├── curriculum/            # Source CV PDF
+├── design/
+│   └── prototipos/        # Visual prototypes (.pen and HTML), not part of the build
 ├── i18n/                  # next-intl config and routing
 ├── inspirations/          # Design references (not committed)
-├── lib/                   # Utility functions
+├── lib/                   # Utility functions and CV links (cv.ts)
 ├── messages/              # Translation files (pt, en, es)
 ├── public/                # Static assets
-│   ├── cv.pdf             # Resume (add manually)
-│   ├── images/            # Photos and project images
-│   └── lottie/            # Lottie animation JSON files
+│   └── images/            # Photos and project images
 └── scripts/
     └── translate.ts       # Auto-translation script
 ```

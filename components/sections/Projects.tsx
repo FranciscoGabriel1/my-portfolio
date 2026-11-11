@@ -4,7 +4,8 @@ import { useTranslations, useMessages } from "next-intl";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/ui/BrandIcons";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { SectionDivider } from "@/components/ui/SectionDivider";
@@ -81,14 +82,14 @@ export const Projects = () => {
                 onClick={() => setActiveFilter(key)}
                 className={cn(
                   "relative rounded-md px-4 py-1.5 text-caption font-medium transition-colors duration-200",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary",
-                  activeFilter === key ? "text-white" : "text-text-secondary hover:text-text-primary"
+                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent-primary",
+                  activeFilter === key ? "text-on-accent" : "text-text-secondary hover:text-text-primary"
                 )}
               >
                 {activeFilter === key && (
                   <motion.span
                     layoutId="filter-pill"
-                    className="absolute inset-0 rounded-md bg-accent-primary"
+                    className="absolute inset-0 rounded-md bg-accent"
                     transition={{ type: "spring", stiffness: 300, damping: 28 }}
                   />
                 )}
@@ -134,7 +135,6 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
 
           <div className="absolute left-3 top-3">
             <Badge
@@ -174,10 +174,10 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                   "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-caption font-medium",
                   "text-text-secondary hover:text-text-primary hover:bg-surface-elevated",
                   "transition-colors duration-200",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary"
+                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent-primary"
                 )}
               >
-                <Github className="h-3.5 w-3.5" aria-hidden />
+                <GithubIcon className="h-3.5 w-3.5" aria-hidden />
                 GitHub
               </a>
             )}
@@ -191,7 +191,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                   "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-caption font-medium",
                   "text-accent-primary hover:bg-accent-primary/10",
                   "transition-colors duration-200",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary"
+                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent-primary"
                 )}
               >
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden />

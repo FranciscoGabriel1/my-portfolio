@@ -38,7 +38,7 @@ export function StaggerChildren({
     show: {
       opacity: 1,
       y: 0,
-      transition: { ease: [0.21, 0.47, 0.32, 0.98], duration: 0.5 },
+      transition: { ease: [0.21, 0.47, 0.32, 0.98] as const, duration: 0.5 },
     },
   };
 

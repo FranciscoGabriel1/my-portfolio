@@ -84,7 +84,7 @@ export function Hero() {
 
             {/* Rotating role — taller container, smaller font on mobile */}
             <FadeInView delay={0.25}>
-              <div className="min-h-[2rem] overflow-hidden sm:min-h-[2.5rem]">
+              <div className="min-h-8 overflow-hidden sm:min-h-10">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={roleIndex}

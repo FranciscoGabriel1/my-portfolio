@@ -37,11 +37,26 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 
-# Lock files (use npm install normally — lock is reproduced locally)
-package-lock.json
+# Lock files: o projeto usa npm, e o package-lock.json é versionado (build reproduzível, CI com npm ci)
 yarn.lock
 pnpm-lock.yaml
 
 # Misc
 .vercel
 .turbo
+
+# graphify — versiona graph.json e GRAPH_REPORT.md; o resto é cache/local
+graphify-out/cache/
+graphify-out/graph.html
+graphify-out/manifest.json
+graphify-out/.graphify_*
+graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
+
+# Testes de navegador (Playwright)
+/playwright-report/
+/test-results/
+/blob-report/
+
+# Gerados localmente
+/graphify-out/
+/.claude/settings.local.json

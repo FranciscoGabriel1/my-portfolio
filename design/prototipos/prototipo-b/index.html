@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Francisco Marinho · Protótipo B (v2)</title>
+<meta name="description" content="Protótipo B, versão 2: a carreira contada como uma montagem, com rolagem nativa, agendamento de call e recomendações.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+  /* Cabeçalho */
+  .site-header { position: absolute; inset: 0 0 auto; z-index: 20; padding-block: 22px; }
+  .site-header .container { display: flex; align-items: center; gap: 28px; }
+  .brand { display: flex; gap: 12px; align-items: center; font-weight: 600; font-size: .95rem; text-decoration: none; }
+  .mark { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 8px; display: grid; place-items: center; font: 700 13px var(--mono-font); }
+  .site-header nav { display: flex; gap: 32px; margin-left: auto; align-items: center; }
+  .site-header nav a:not(.btn) { color: var(--text-2); text-decoration: none; font-size: .95rem; }
+  .site-header nav a:not(.btn):hover { color: var(--text); }
+  .site-header .btn { min-height: 42px; padding: 8px 16px; font-size: .92rem; }
+  @media (max-width: 900px) { .site-header nav a:not(.btn) { display: none; } }
+
+  /* Mundo 3D */
+  .world { position: relative; }
+  .world-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; z-index: 0; }
+  .world-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .world-poster { position: absolute; inset: 0; background: var(--bg) url("../cena-blocos-escuro.png") no-repeat 82% 58% / auto 100%; transition: opacity 1s var(--ease-out); }
+  .world.is-live .world-poster { opacity: 0; }
+  .world-chapters { position: relative; z-index: 2; margin-top: -100vh; margin-top: -100svh; }
+  .world-rail { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); z-index: 3; display: grid; gap: 10px; opacity: 0; transition: opacity .4s var(--ease-out); }
+  .world:not([data-chapter="0"]) .world-rail { opacity: 1; }
+  .world-rail a { display: flex; gap: 10px; align-items: center; justify-content: flex-end; font: 400 .72rem var(--mono-font); letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); text-decoration: none; min-height: 32px; padding: 0 10px; border-radius: 8px; background: rgba(20,19,17,.78); }
+  .world-rail a::after { content: ""; width: 20px; height: 2px; background: var(--line); transition: width .3s var(--ease-out), background .3s; }
+  .world-rail a[aria-current] { color: var(--text); }
+  .world-rail a[aria-current]::after { width: 36px; background: var(--accent); }
+  @media (max-width: 900px) { .world-rail { display: none; } }
+
+  .hero { min-height: 100vh; min-height: 100svh; display: grid; align-items: center; padding-block: 120px 96px; }
+  .hero-copy { max-width: 620px; display: grid; gap: 28px; }
+  .status { display: flex; gap: 10px; align-items: center; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+
+  .chapter { min-height: 135vh; min-height: 135svh; display: flex; align-items: center; }
+  .chapter .card { width: min(420px, 100%); background: rgba(20,19,17,.9); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: grid; gap: 12px; }
+  .chapter .card a { color: var(--accent-text); font-weight: 600; text-underline-offset: 4px; }
+  @media (max-width: 900px) {
+    .world-poster { background-position: 50% 96%; background-size: 135% auto; }
+    .hero { align-items: start; padding-top: 104px; }
+    .chapter { align-items: flex-end; padding-bottom: 8svh; }
+    .chapter .card { padding: 22px; }
+  }
+
+  /* Seções: só espaço entre elas, sem linhas */
+  section.block { padding-block: clamp(96px, 12vw, 168px); position: relative; z-index: 3; background: var(--bg); }
+  .sec-head { display: grid; gap: 14px; margin-bottom: clamp(40px, 5vw, 64px); max-width: 820px; }
+
+  /* Casos */
+  .cases { display: grid; gap: clamp(64px, 8vw, 112px); }
+  .case { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .case:nth-child(even) .shot { order: -1; }
+  .case-copy { display: grid; gap: 14px; }
+  .case .stack { font: 400 .76rem var(--mono-font); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+  .case .shot { aspect-ratio: 16 / 10; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .case .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .case-copy a { color: var(--accent-text); font-weight: 600; text-underline-offset: 4px; justify-self: start; }
+  .also { margin-top: clamp(64px, 8vw, 104px); color: var(--text-2); max-width: 70ch; }
+  .also b { color: var(--text); font-weight: 600; }
+  @media (max-width: 900px) { .case { grid-template-columns: 1fr; } .case .shot, .case:nth-child(even) .shot { order: -1; } }
+
+  /* Como eu trabalho */
+  .principles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 72px; }
+  .principles h3 { font: 700 1.45rem/1.15 var(--display-font); letter-spacing: -.015em; margin-bottom: 10px; }
+  .principles p { color: var(--text-2); }
+  @media (max-width: 900px) { .principles { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* Trajetória: régua no computador, lista no celular */
+  .ruler { position: relative; height: 330px; }
+  .ruler .year { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(242,238,230,.07); }
+  .ruler .year span { position: absolute; bottom: -2px; left: 8px; font: 400 .72rem var(--mono-font); color: var(--text-3); }
+  .ruler .bar { position: absolute; height: 44px; border-radius: 8px; background: var(--surface-2); display: flex; align-items: center; padding: 0 14px; font-weight: 600; font-size: .9rem; white-space: nowrap; transform-origin: left center; }
+  .ruler .bar small { font-weight: 400; color: var(--text-3); margin-left: 10px; font-size: .8rem; }
+  .ruler .bar.now { background: var(--accent); color: var(--on-accent); }
+  .ruler .bar.now small { color: rgba(23,22,18,.75); }
+  .ruler .today { position: absolute; top: 0; bottom: 22px; width: 2px; background: var(--accent); }
+  .jobs { display: none; list-style: none; padding: 0; margin: 0; }
+  .jobs li { padding: 18px 0; display: grid; gap: 4px; }
+  .jobs .when { font: 400 .74rem var(--mono-font); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+  .jobs small { color: var(--text-3); }
+  @media (max-width: 900px) { .ruler { display: none; } .jobs { display: grid; } }
+
+  /* Recomendações */
+  .recs { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .recs li { background: var(--surface); border-radius: 16px; padding: 28px; display: grid; gap: 22px; align-content: space-between; }
+  .recs blockquote { margin: 0; color: var(--text); font-size: 1.02rem; line-height: 1.6; }
+  .recs blockquote::before { content: "“"; display: block; font: 800 2.6rem/1 var(--display-font); color: var(--accent-text); margin-bottom: 6px; }
+  .recs figcaption { display: grid; gap: 2px; }
+  .recs figcaption small { color: var(--text-3); }
+  .recs figure { margin: 0; display: grid; gap: 22px; height: 100%; align-content: space-between; }
+  .recs-foot { margin-top: 28px; }
+  .recs-foot a { color: var(--accent-text); font-weight: 600; text-underline-offset: 4px; }
+  @media (max-width: 900px) { .recs { grid-template-columns: 1fr; } }
+
+  /* Perguntas */
+  .faq { display: grid; max-width: 860px; }
+  .faq details + details { border-top: 1px solid rgba(242,238,230,.08); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; font: 700 clamp(1.15rem, 1.8vw, 1.4rem)/1.25 var(--display-font); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font: 400 1.5rem var(--mono-font); color: var(--accent-text); transition: transform .3s var(--ease-out); }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { padding: 0 0 24px; color: var(--text-2); max-width: 64ch; }
+
+  /* Contato */
+  .contact-head { display: grid; gap: 18px; max-width: 760px; margin-bottom: 48px; }
+  .channels { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 1040px; }
+  .channels a { display: flex; gap: 18px; align-items: center; padding: 22px 24px; border-radius: 16px; background: var(--surface); text-decoration: none; border: 1px solid transparent; transition: border-color .2s, transform .2s var(--ease-out); min-height: 88px; }
+  .channels a:hover { border-color: var(--line); transform: translateY(-2px); }
+  .channels .ico { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); flex: none; }
+  .channels .ico svg { width: 20px; height: 20px; }
+  .channels .lbl { display: block; font: 400 .72rem var(--mono-font); letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+  .channels .val { font-weight: 600; font-size: 1.05rem; overflow-wrap: anywhere; }
+  .channels .call a { border-color: rgba(255,107,44,.55); background: linear-gradient(0deg, rgba(255,107,44,.08), rgba(255,107,44,.08)), var(--surface); }
+  .channels .call .ico { background: var(--accent); color: var(--on-accent); }
+  .channels .call .lbl { color: var(--accent-text); }
+  .contact-extra { margin-top: 28px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .write { max-width: 1040px; margin-top: 20px; }
+  .write summary { cursor: pointer; color: var(--text-2); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; display: inline-block; }
+  form.contact { margin-top: 20px; background: var(--surface); border-radius: 16px; padding: 24px; display: grid; gap: 16px; max-width: 560px; }
+  form.contact label { display: grid; gap: 8px; font-weight: 600; font-size: .92rem; }
+  form.contact input, form.contact textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  form.contact textarea { min-height: 130px; resize: vertical; }
+  @media (max-width: 900px) { .channels { grid-template-columns: 1fr; } .channels a { padding: 18px; gap: 14px; } .channels .val { font-size: .9rem; } }
+
+  footer.site-footer { padding-block: 40px 48px; font: 400 .78rem var(--mono-font); letter-spacing: .06em; color: var(--text-3); position: relative; z-index: 3; background: var(--bg); }
+  footer .container { display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: space-between; }
+  footer a { color: var(--text-2); }
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#topo"><span class="mark" aria-hidden="true">FM</span>Francisco Marinho</a>
+    <nav aria-label="Principal">
+      <a href="#casos">Casos</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#recomendacoes">Recomendações</a>
+      <a href="#contato">Contato</a>
+      <a class="btn btn-primary" data-agendar href="#contato">Agendar call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+  <div class="world" id="mundo" data-chapter="0">
+    <div class="world-stage" aria-hidden="true">
+      <div class="world-poster"></div>
+      <canvas class="world-canvas"></canvas>
+      <nav class="world-rail" aria-label="Atos">
+        <a href="#ato-1" data-goto="1">A peça</a>
+        <a href="#ato-2" data-goto="2">O componente</a>
+        <a href="#ato-3" data-goto="3">O produto</a>
+        <a href="#ato-4" data-goto="4">O sistema</a>
+      </nav>
+    </div>
+
+    <div class="world-chapters">
+      <section class="hero" id="topo" data-cam="0" aria-labelledby="nome">
+        <div class="container">
+          <div class="hero-copy">
+            <p class="eyebrow status" data-reveal data-reveal-on="load"><span class="dot" aria-hidden="true"></span>Frontend sênior · Manaus, BR · remoto</p>
+            <h1 class="giant" id="nome" data-split="load">Francisco Marinho</h1>
+            <p class="lead" data-reveal data-reveal-on="load">Construo produtos em React e TypeScript peça por peça. Hoje trabalho na HostGator e mantenho o CurrículoRaiz, um SaaS que criei.</p>
+            <div class="actions" data-reveal="children" data-reveal-on="load">
+              <a class="btn btn-primary" data-agendar href="#contato">Agendar call</a>
+              <a class="btn btn-ghost" href="#casos">Ver casos</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="ato-1" data-cam="1" aria-labelledby="ato-1-t">
+        <div class="container">
+          <div class="card" data-anchor>
+            <p class="eyebrow accent">01 · A peça · 2019–2022</p>
+            <h2 class="h3" id="ato-1-t">Comecei programando robôs com blocos.</h2>
+            <p class="muted">No mestrado da UFAM, criei o UpRobotics: blocos do Google Blockly viram código para Arduino ou uma simulação no Webots.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="ato-2" data-cam="2" aria-labelledby="ato-2-t">
+        <div class="container">
+          <div class="card" data-anchor>
+            <p class="eyebrow accent">02 · O componente · 2021–2025</p>
+            <h2 class="h3" id="ato-2-t">Depois, peças que times inteiros reutilizam.</h2>
+            <p class="muted">Design system compartilhado e micro-frontends no Sidia. Bibliotecas de componentes e CI/CD na Atem.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="ato-3" data-cam="3" aria-labelledby="ato-3-t">
+        <div class="container">
+          <div class="card" data-anchor>
+            <p class="eyebrow accent">03 · O produto · 2024 até hoje</p>
+            <h2 class="h3" id="ato-3-t">Hoje, produtos com cliente do outro lado.</h2>
+            <p class="muted">Painel do cliente e carrinho na HostGator. Antes, a plataforma de roteiristas Teksto, na O2 Filmes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" id="ato-4" data-cam="4" aria-labelledby="ato-4-t">
+        <div class="container">
+          <div class="card" data-anchor>
+            <p class="eyebrow accent">04 · O sistema próprio</p>
+            <h2 class="h3" id="ato-4-t">E montei um produto meu, da tela ao PDF.</h2>
+            <p class="muted">O CurrículoRaiz, do qual sou fundador e principal autor: React no front, Node e Prisma na API, PDF com Puppeteer.</p>
+            <a href="#casos">Ver o caso</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section class="block" id="casos" aria-labelledby="casos-t">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow accent">Casos</p>
+        <h2 class="display" id="casos-t" data-split>Três casos, de perto.</h2>
+      </div>
+      <div class="cases">
+        <article class="case" aria-labelledby="c1" data-reveal>
+          <div class="case-copy">
+            <p class="eyebrow">Produto próprio · fundador</p>
+            <h3 class="h3" id="c1">CurrículoRaiz</h3>
+            <p class="muted">Um SaaS para montar currículos, com 9 modelos, exportação em PDF e Word e importação do PDF do LinkedIn.</p>
+            <p class="stack">React · Node.js · Prisma · Puppeteer</p>
+            <a href="https://curriculoraiz.com/" target="_blank" rel="noopener noreferrer">Ver online<span class="sr-only"> (abre em nova aba)</span></a>
+          </div>
+          <div class="shot"><img src="curriculoraiz.png" width="1440" height="900" alt="Página inicial do CurrículoRaiz com o título Um currículo com a sua cara e um modelo de currículo ao lado" loading="lazy"></div>
+        </article>
+        <article class="case" aria-labelledby="c2" data-reveal>
+          <div class="case-copy">
+            <p class="eyebrow">HostGator · 2025 até hoje</p>
+            <h3 class="h3" id="c2">Painel do cliente HostGator</h3>
+            <p class="muted">Onde clientes acompanham métricas, gerenciam a hospedagem e pedem suporte. Trabalho nas interfaces, nos componentes do design system e nos testes.</p>
+            <p class="stack">React · Redux Saga · Jest · Design System</p>
+            <a href="https://cliente.hostgator.com.br/inicio" target="_blank" rel="noopener noreferrer">Ver online<span class="sr-only"> (abre em nova aba)</span></a>
+          </div>
+          <div class="shot"><img src="../../../public/images/projects/dash_hg.png" alt="Painel do cliente HostGator com a busca do assistente e os atalhos de serviços" loading="lazy"></div>
+        </article>
+        <article class="case" aria-labelledby="c3" data-reveal>
+          <div class="case-copy">
+            <p class="eyebrow">Mestrado · iComp UFAM</p>
+            <h3 class="h3" id="c3">UpRobotics</h3>
+            <p class="muted">Programação visual de braços robóticos. A pesquisa saiu no SBIE 2022 e no SBESC 2020.</p>
+            <p class="stack">React · Google Blockly · Webots</p>
+            <a href="https://github.com/FranciscoGabriel1/uprobotics" target="_blank" rel="noopener noreferrer">Código no GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+          </div>
+          <div class="shot"><img src="../../../public/images/projects/uprobotics.png" alt="Tela do UpRobotics com a área de blocos para programar o braço robótico" loading="lazy"></div>
+        </article>
+      </div>
+      <p class="also" data-reveal>Também trabalhei em <b>Teksto</b> (O2 Filmes), no <b>carrinho de compras da HostGator</b>, no <b>MBX Academy</b> (Instituto Pecege), no <b>portal do cliente da Atem</b> e no <b>site do Lab312</b> (UFAM).</p>
+    </div>
+  </section>
+
+  <section class="block" id="como-trabalho" aria-labelledby="ct-t">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow accent">Como eu trabalho</p>
+        <h2 class="display" id="ct-t" data-split>Quatro hábitos, com prova.</h2>
+      </div>
+      <ul class="principles" data-reveal="children">
+        <li><h3>Componente antes de tela</h3><p>Design system compartilhado no Sidia, bibliotecas de componentes na Atem e o design system da HostGator hoje.</p></li>
+        <li><h3>Teste junto do código</h3><p>Jest e React Testing Library na HostGator. Jest na O2 Filmes.</p></li>
+        <li><h3>Arquitetura que aguenta crescer</h3><p>Micro-frontends com Module Federation no Sidia. Fluxos com Redux e Saga na Atem e na O2.</p></li>
+        <li><h3>Acessível e rápido</h3><p>Este site funciona por teclado, com movimento reduzido e sem 3D.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="trajetoria" aria-labelledby="tr-t">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow accent">Trajetória</p>
+        <h2 class="display" id="tr-t" data-split>Sete anos, cinco lugares.</h2>
+        <p class="lead">As sobreposições foram trabalhos em paralelo: a bolsa de pesquisa com o Sidia e o contrato PJ da O2 Filmes.</p>
+      </div>
+      <div class="ruler" id="ruler" role="img" aria-label="Linha do tempo de 2019 a 2026: iComp UFAM de 2019 a 2022, Sidia de 2021 a 2022, Atem de 2022 a 2025, O2 Filmes de 2024 a 2025 e HostGator de 2025 até hoje"></div>
+      <ol class="jobs">
+        <li><span class="when">out 2025 · hoje</span><b>Front-end Sênior · HostGator</b><small>Florianópolis · CLT</small></li>
+        <li><span class="when">set 2024 · dez 2025</span><b>Front-end Pleno · O2 Filmes</b><small>remoto · PJ</small></li>
+        <li><span class="when">mai 2022 · mai 2025</span><b>Front-end Pleno · Atem</b><small>Manaus · CLT</small></li>
+        <li><span class="when">abr 2021 · mai 2022</span><b>Software Jr. · Sidia</b><small>Manaus · CLT</small></li>
+        <li><span class="when">mar 2019 · mar 2022</span><b>Pesquisador bolsista · iComp UFAM</b><small>Manaus · CAPES</small></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="recomendacoes" aria-labelledby="rc-t">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow accent">Recomendações no LinkedIn</p>
+        <h2 class="display" id="rc-t" data-split>O que diz quem trabalhou comigo.</h2>
+      </div>
+      <ul class="recs" data-reveal="children">
+        <li><figure><blockquote><span class="validar">cole aqui o texto real de uma recomendação, cortado em até 3 linhas</span></blockquote><figcaption><b class="validar">Nome</b><small>Cargo · como trabalharam juntos · mês e ano</small></figcaption></figure></li>
+        <li><figure><blockquote><span class="validar">segunda recomendação real</span></blockquote><figcaption><b class="validar">Nome</b><small>Cargo · como trabalharam juntos · mês e ano</small></figcaption></figure></li>
+        <li><figure><blockquote><span class="validar">terceira recomendação real</span></blockquote><figcaption><b class="validar">Nome</b><small>Cargo · como trabalharam juntos · mês e ano</small></figcaption></figure></li>
+      </ul>
+      <p class="recs-foot"><a href="https://www.linkedin.com/in/francisco-gabriel-software/details/recommendations/" target="_blank" rel="noopener noreferrer">Ver todas no LinkedIn<span class="sr-only"> (abre em nova aba)</span></a></p>
+    </div>
+  </section>
+
+  <section class="block" id="perguntas" aria-labelledby="pq-t">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow accent">Perguntas de quem recruta</p>
+        <h2 class="display" id="pq-t" data-split>Antes de me chamar.</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Qual regime de contratação você aceita?</summary><p><span class="validar">CLT ou PJ, confirmar com você</span></p></details>
+        <details><summary>Você trabalha remoto?</summary><p>Moro em Manaus, no fuso UTC−4. <span class="validar">Trabalho remoto desde 2024, confirmar</span></p></details>
+        <details><summary>Qual é o seu nível de inglês?</summary><p><span class="validar">nível real, preencher com você</span></p></details>
+        <details><summary>Quando você pode começar?</summary><p><span class="validar">prazo real, preencher com você</span></p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contato" aria-labelledby="ctt-t">
+    <div class="container">
+      <div class="contact-head">
+        <p class="eyebrow accent">Contato</p>
+        <h2 class="giant" id="ctt-t" data-split>Vamos conversar.</h2>
+        <p class="lead">Escolha um horário na minha agenda ou me chame pelo canal que preferir.</p>
+      </div>
+      <ul class="channels">
+        <li class="call"><a data-agendar href="#contato" target="_blank" rel="noopener noreferrer">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>
+          <span><span class="lbl">Agendar call</span><span class="val">30 min no Google Meet</span> <span class="validar">criar a página de agendamento</span><span class="sr-only"> (abre em nova aba)</span></span></a></li>
+        <li><a href="mailto:franciscogabriel.dev@gmail.com">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <span><span class="lbl">E-mail</span><span class="val">franciscogabriel.dev@gmail.com</span></span></a></li>
+        <li><a href="https://www.linkedin.com/in/francisco-gabriel-software/" target="_blank" rel="noopener noreferrer">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
+          <span><span class="lbl">LinkedIn</span><span class="val">francisco-gabriel-software</span><span class="sr-only"> (abre em nova aba)</span></span></a></li>
+        <li><a href="https://github.com/FranciscoGabriel1" target="_blank" rel="noopener noreferrer">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></span>
+          <span><span class="lbl">GitHub</span><span class="val">FranciscoGabriel1</span><span class="sr-only"> (abre em nova aba)</span></span></a></li>
+      </ul>
+      <div class="contact-extra">
+        <a class="btn btn-ghost" href="#contato">Baixar CV (PDF)</a>
+      </div>
+      <details class="write">
+        <summary>Prefere escrever por aqui?</summary>
+        <form class="contact" aria-label="Mensagem direta" onsubmit="event.preventDefault(); this.querySelector('[role=status]').textContent='Protótipo: o envio não está ligado.';">
+          <label>Nome<input name="name" autocomplete="name" required></label>
+          <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
+          <label>Mensagem<textarea name="message" required></textarea></label>
+          <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+          <p role="status" class="muted" style="min-height:1.5em"></p>
+        </form>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Francisco Marinho · Manaus, BR</span>
+    <span><a href="http://lattes.cnpq.br/6111525331943224" target="_blank" rel="noopener noreferrer">Lattes</a> · pt · en · es</span>
+    <span>Protótipo B v2 · <a href="?poster">ver sem 3D</a> · <a href="v1.html">ver v1</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="base.js"></script>
+<script>
+  /* Link de agendamento: um só lugar pra trocar quando a página do Google Agenda existir. */
+  var AGENDA_URL = ''; /* ex.: https://calendar.app.google/xxxx (página de agendamento do Google Agenda) */
+  document.querySelectorAll('[data-agendar]').forEach(function (a) {
+    if (AGENDA_URL) { a.href = AGENDA_URL; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    else { a.href = '#contato'; a.removeAttribute('target'); }
+  });
+
+  /* Régua da trajetória: blocos posicionados pelo período real (2019 a 2026). */
+  (function () {
+    var ruler = document.getElementById('ruler'); if (!ruler) return;
+    var start = 2019 * 12, span = 8 * 12;
+    function pct(y, m) { return ((y * 12 + m - 1) - start) / span * 100; }
+    for (var y = 2019; y <= 2026; y++) {
+      var l = document.createElement('div'); l.className = 'year'; l.style.left = pct(y, 1) + '%';
+      l.innerHTML = '<span>' + y + '</span>'; ruler.appendChild(l);
+    }
+    [['iComp UFAM', 'pesquisa', 2019, 3, 2022, 3], ['Sidia', '', 2021, 4, 2022, 5], ['Atem', 'pleno', 2022, 5, 2025, 5], ['O2 Filmes', 'PJ', 2024, 9, 2025, 12], ['HostGator', 'sênior', 2025, 10, 2026, 11, 1]]
+      .forEach(function (r, i) {
+        var b = document.createElement('div'); b.className = 'bar' + (r[6] ? ' now' : '');
+        var a = pct(r[2], r[3]), e = pct(r[4], r[5]);
+        b.style.left = a + '%'; b.style.width = Math.max(e - a, 8) + '%'; b.style.top = (i * 58) + 'px';
+        b.textContent = r[0];
+        if (r[1]) { var s = document.createElement('small'); s.textContent = r[1]; b.appendChild(s); }
+        ruler.appendChild(b);
+      });
+    var t = document.createElement('div'); t.className = 'today'; t.style.left = pct(2026, 11) + '%'; ruler.appendChild(t);
+  })();
+
+  window.protoInit = function (MT) {
+    if (MT.reduceMotion) return;
+    var bars = document.querySelectorAll('#ruler .bar');
+    if (bars.length) MT.gsap.fromTo(bars, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: '#ruler', start: 'top 85%', once: true } });
+  };
+</script>
+<script src="mundo.js"></script>
+</body>
+</html>

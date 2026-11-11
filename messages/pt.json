@@ -3,29 +3,24 @@
     "title": "Francisco Marinho — Desenvolvedor Frontend Sênior",
     "description": "Portfólio de Francisco Marinho, Desenvolvedor Frontend Sênior especialista em React, Next.js e TypeScript com 5+ anos de experiência."
   },
-
   "nav": {
     "about": "Sobre",
     "projects": "Projetos",
-    "experience": "Experiência",
+    "experience": "Trajetória",
     "contact": "Contato",
-    "download_cv": "Download CV",
+    "download_cv": "Baixar CV",
     "open_menu": "Abrir menu",
-    "close_menu": "Fechar menu"
+    "close_menu": "Fechar menu",
+    "label": "Principal",
+    "menu": "Menu"
   },
-
   "theme": {
-    "toggle_dark": "Ativar modo escuro",
-    "toggle_light": "Ativar modo claro"
+    "toggle_dark": "Mudar para o tema escuro",
+    "toggle_light": "Mudar para o tema claro"
   },
-
   "language": {
-    "label": "Idioma",
-    "pt": "Português",
-    "en": "English",
-    "es": "Español"
+    "label": "Idioma"
   },
-
   "hero": {
     "greeting": "Olá, eu sou",
     "name": "Francisco Marinho",
@@ -44,7 +39,6 @@
     "stat_companies": "Empresas",
     "stat_projects": "Projetos"
   },
-
   "about": {
     "label": "Sobre",
     "title": "Quem sou eu",
@@ -109,7 +103,6 @@
       }
     }
   },
-
   "projects": {
     "label": "Projetos",
     "title": "O que já construí",
@@ -128,27 +121,51 @@
         "id": "1",
         "title": "UpRobotics",
         "description": "Ferramenta web para programação visual de braços robóticos usando Google Blocks. Permite gerar código para Arduino UNO ou simulações 3D no Webots por meio de interface drag-and-drop intuitiva.",
-        "stack": ["React.js", "JavaScript", "Google Blockly", "Webots", "Arduino"],
+        "stack": [
+          "React.js",
+          "JavaScript",
+          "Google Blockly",
+          "Webots",
+          "Arduino"
+        ],
         "category": "fullstack",
         "github": "https://github.com/FranciscoGabriel1/uprobotics",
         "live": "https://uprobotics.com.br/",
         "image": "/images/projects/uprobotics.png"
       },
-            {
+      {
         "id": "2",
         "title": "Plataforma SaaS para Roteiristas",
         "description": "Plataforma SaaS para roteiristas desenvolvida na O2 Filmes com React.js e TypeScript. Componentes escaláveis com Redux + Saga, integração REST/GraphQL e pipelines CI/CD automatizados.",
-        "stack": ["React.js", "TypeScript", "Radix UI", "Redux Saga", "Jest", "Docker", "Ruby on Rails", "Prosemirror"],
+        "stack": [
+          "React.js",
+          "TypeScript",
+          "Radix UI",
+          "Redux Saga",
+          "Jest",
+          "Docker",
+          "Ruby on Rails",
+          "Prosemirror"
+        ],
         "category": "fullstack",
         "github": null,
         "live": "https://teksto.com/#/",
         "image": "/images/projects/teksto.png"
       },
-            {
+      {
         "id": "3",
         "title": "Dashboard Cliente da HostGator",
         "description": "Dashboard para clientes da HostGator com visualização de métricas, gerenciamento de serviços e suporte integrado. Desenvolvido com foco em experiência do usuário, performance e acessibilidade.",
-        "stack": ["React.js", "JavaScript", "Redux Saga", "Styled Components", "Jest", "Design System", "Docker", "Jenkins"],
+        "stack": [
+          "React.js",
+          "JavaScript",
+          "Redux Saga",
+          "Styled Components",
+          "Jest",
+          "Design System",
+          "Docker",
+          "Jenkins"
+        ],
         "category": "frontend",
         "github": null,
         "live": "https://cliente.hostgator.com.br/inicio",
@@ -158,7 +175,16 @@
         "id": "4",
         "title": "Carrinho de compras HostGator",
         "description": "Módulo de carrinho de compras da HostGator para aquisição de produtos e serviços de hospedagem. Desenvolvido com React.js e Redux Saga, com foco em conversão e experiência de compra fluida.",
-          "stack": ["React.js", "JavaScript", "Redux Saga", "Styled Components", "Jest", "Design System", "Docker", "Jenkins"],
+        "stack": [
+          "React.js",
+          "JavaScript",
+          "Redux Saga",
+          "Styled Components",
+          "Jest",
+          "Design System",
+          "Docker",
+          "Jenkins"
+        ],
         "category": "frontend",
         "github": null,
         "live": "https://cart.hostgator.com.br/?pid=437&billingCycle=triennially",
@@ -168,7 +194,19 @@
         "id": "5",
         "title": "Sistema MBX Academy",
         "description": "Sistema de gestão de aprendizagem (LMS) do Instituto Pecege, voltado à educação corporativa, responsável por disponibilizar, transmitir e gerenciar aulas, eventos, avaliações e relatórios.",
-        "stack": ["React.js","TypeScript", "Zustand", "Jotai","zod","Tailwind CSS", "DS Arandu", "Azure", "CI/CD", "Docker", "Observability com Sentry"],
+        "stack": [
+          "React.js",
+          "TypeScript",
+          "Zustand",
+          "Jotai",
+          "zod",
+          "Tailwind CSS",
+          "DS Arandu",
+          "Azure",
+          "CI/CD",
+          "Docker",
+          "Observability com Sentry"
+        ],
         "category": "frontend",
         "github": null,
         "live": "https://newdashboard.mbx.academy/",
@@ -178,7 +216,15 @@
         "id": "6",
         "title": "Portal do Cliente - Atem",
         "description": "Portal do cliente da Atem Distribuidora de Petróleo com React.js e TypeScript. Oferece visualização de faturas, histórico de pedidos e integração com serviços AWS para autenticação segura.",
-        "stack": ["React", "TypeScript", "Context API", "Material UI", "Observability com DataDog", "Cognito", "AWS"],
+        "stack": [
+          "React",
+          "TypeScript",
+          "Context API",
+          "Material UI",
+          "Observability com DataDog",
+          "Cognito",
+          "AWS"
+        ],
         "category": "frontend",
         "github": null,
         "live": "https://portal.grupoatem.com.br",
@@ -188,7 +234,11 @@
         "id": "7",
         "title": "Site de Laboratório da Universidade",
         "description": "Site institucional de laboratório universitário desenvolvido com Bootstrap, HTML5 e CSS3. Apresenta pesquisas, publicações e membros do grupo com design responsivo e navegação acessível.",
-        "stack": ["Bootstrap", "HTML5", "CSS3"],
+        "stack": [
+          "Bootstrap",
+          "HTML5",
+          "CSS3"
+        ],
         "category": "frontend",
         "github": "https://github.com/FranciscoGabriel1/lab312",
         "live": "https://lab312.vercel.app/",
@@ -196,7 +246,6 @@
       }
     ]
   },
-
   "experience": {
     "label": "Experiência",
     "title": "Trajetória profissional",
@@ -285,7 +334,6 @@
       }
     ]
   },
-
   "education": {
     "label": "Formação",
     "title": "Formação acadêmica",
@@ -319,7 +367,6 @@
       }
     ]
   },
-
   "contact": {
     "label": "Contato",
     "title": "Vamos conversar?",
@@ -359,19 +406,15 @@
       "discord": "https://discord.gg/jDjgZUjamz"
     }
   },
-
   "footer": {
-    "made_with": "Feito com",
-    "and": "e",
-    "rights": "Todos os direitos reservados.",
-    "back_to_top": "Voltar ao topo"
+    "back_to_top": "Voltar ao topo",
+    "location": "Manaus, Brasil"
   },
-
   "accessibility": {
     "skip_to_content": "Pular para o conteúdo principal",
     "theme_toggle": "Alternar tema",
     "language_switcher": "Selecionar idioma",
-    "open_link_new_tab": "Abre em nova aba",
+    "open_link_new_tab": "abre em nova aba",
     "project_image_alt": "Imagem do projeto {title}",
     "profile_photo_alt": "Foto de perfil de Francisco Marinho"
   }

@@ -55,7 +55,7 @@ const TimelineLine = () => {
       className="absolute left-4 top-0 hidden h-full w-0.5 overflow-hidden lg:left-1/2 lg:block lg:-translate-x-1/2"
     >
       <motion.div
-        className="w-full bg-gradient-to-b from-accent-primary via-accent-secondary/60 to-transparent"
+        className="w-full bg-linear-to-b from-accent-primary via-accent-secondary/60 to-transparent"
         initial={{ height: "0%" }}
         animate={isInView ? { height: "100%" } : { height: "0%" }}
         transition={{ duration: 1.8, ease: "easeInOut" }}
