@@ -1,21 +1,14 @@
 import Image from "next/image";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { SplitText } from "@/components/motion/SplitText";
+import { Skills } from "@/components/sections/Skills";
 
-const SKILL_GROUPS = ["frontend", "state_tools", "backend_infra", "quality"] as const;
 const FACTS = ["location", "education", "now", "product"] as const;
 
-type SkillGroup = (typeof SKILL_GROUPS)[number];
-
-interface AboutMessages {
-  about: { skills: Record<SkillGroup, { label: string; items: string[] }> };
-}
-
-/** Sobre, de servidor: texto, quatro fatos curtos e competências agrupadas. */
+/** Sobre, de servidor: texto, quatro fatos curtos e competências (components/sections/Skills.tsx). */
 export async function About() {
   const t = await getTranslations("about");
   const tA11y = await getTranslations("accessibility");
-  const { about } = (await getMessages()) as unknown as AboutMessages;
 
   return (
     <section id="about" aria-labelledby="about-title" className="band-alt py-24 lg:py-40">
@@ -59,19 +52,7 @@ export async function About() {
           </div>
         </div>
 
-        <h3 className="type-eyebrow mt-20 lg:mt-28">{t("skills_title")}</h3>
-        <div data-reveal="children" className="mt-6 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {SKILL_GROUPS.map((group) => (
-            <div key={group} className="border-t border-line pt-6">
-              <h4 className="font-display text-xl font-bold text-text">{about.skills[group].label}</h4>
-              <ul className="mt-4 flex flex-col gap-1.5 text-text-2">
-                {about.skills[group].items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <Skills />
       </div>
     </section>
   );

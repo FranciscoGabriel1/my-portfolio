@@ -324,6 +324,24 @@ instantânea, como antes.
 - **Resultado:** o pedaço da cena foi de 136 para 137,5 kB gzip, já contando o notebook novo inteiro. Os pôsteres
   gerados de novo ficaram menores (37 e 35 kB, antes 41 e 40 kB).
 
+### 2.14 Logotipos numa folha de símbolos (change `secao-de-tecnologias`)
+
+- **Problema:** a seção de competências passou a mostrar cada tecnologia com logotipo. Como SVG inline, cada idioma
+  carregaria os caminhos de todos os desenhos dentro do HTML, e de novo no payload do React.
+- **Solução:** uma folha de símbolos, `public/icons/tech.svg`, usada com `<svg><use href="/icons/tech.svg#si-react">`.
+  O HTML leva só a referência, o arquivo vem uma vez para os três idiomas, e o ícone herda `currentColor`, então o
+  hover troca a cor por CSS. A folha é gerada por `scripts/tech-icons/build.mjs` a partir do Simple Icons, baixado à
+  parte: nenhuma dependência nova.
+- **Menos também é desempenho:** a primeira versão tinha uma faixa animada com os logotipos repetidos e 51
+  tecnologias. Na revisão, o dono achou a seção poluída. A faixa saiu e a lista foi para 32 itens, com o resto numa
+  linha de texto. Ao todo, o HTML de `/pt` tinha passado de 125 para 187 kB bruto; depois do corte, ficou em 151 kB.
+- **Resultado (build de produção):**
+  - JavaScript inicial: **216 kB gzip, sem mudança**. O movimento é CSS, e a ilha do brilho é mínima.
+  - Folha de logotipos: **47 kB, ou 19 kB com gzip**, fora do HTML. O Next a serve com revalidação por ETag.
+  - HTML de `/pt`: **125 → 151 kB bruto (23 kB com gzip)**.
+- **Para a entrevista:** "Inline é ótimo para um ícone. Para dezenas, uma folha externa com `<use>` deixa o HTML
+  leve, aproveita o cache e mantém a cor no CSS. E cortar o que não informa foi a otimização que mais rendeu."
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:

@@ -50,58 +50,72 @@
     "skills": {
       "frontend": {
         "label": "Frontend",
-        "items": [
-          "React.js",
-          "Next.js",
-          "TypeScript",
-          "JavaScript ES6+",
-          "HTML5",
-          "CSS3 / SCSS",
-          "Tailwind CSS",
-          "Styled Components",
-          "Angular"
-        ]
+        "items": {
+          "react": "React",
+          "nextjs": "Next.js",
+          "typescript": "TypeScript",
+          "tailwind": "Tailwind CSS",
+          "angular": "Angular",
+          "threejs": "Three.js"
+        }
       },
       "state_tools": {
         "label": "Estado e ferramentas",
-        "items": [
-          "Redux e Redux Saga",
-          "Zustand",
-          "Context API",
-          "Storybook",
-          "Figma",
-          "Design System",
-          "Webpack",
-          "Vite"
-        ]
+        "items": {
+          "redux": "Redux e Redux Saga",
+          "zustand": "Zustand",
+          "tanstack_query": "TanStack Query",
+          "storybook": "Storybook",
+          "figma": "Figma",
+          "design_system": "Design System"
+        }
       },
       "backend_infra": {
         "label": "Backend e infra",
-        "items": [
-          "Node.js",
-          "Express",
-          "REST e GraphQL",
-          "Docker",
-          "AWS",
-          "GitHub Actions",
-          "CI/CD",
-          "Git Flow"
-        ]
+        "items": {
+          "node": "Node.js",
+          "prisma": "Prisma",
+          "postgres_neon": "PostgreSQL · Neon",
+          "docker": "Docker",
+          "cloud_run": "Google Cloud Run",
+          "cloudflare": "Cloudflare",
+          "aws": "AWS"
+        }
+      },
+      "product": {
+        "label": "Produto e integrações",
+        "items": {
+          "mercado_pago": "Mercado Pago · Pix",
+          "google_login": "Login com Google",
+          "growthbook": "GrowthBook",
+          "puppeteer": "Puppeteer (PDF)"
+        }
       },
       "quality": {
         "label": "Qualidade",
-        "items": [
-          "Jest",
-          "React Testing Library",
-          "Cypress",
-          "Zod",
-          "ESLint",
-          "Prettier",
-          "WCAG 2.1",
-          "Lighthouse"
-        ]
+        "items": {
+          "jest": "Jest",
+          "rtl": "React Testing Library",
+          "cypress": "Cypress",
+          "playwright": "Playwright",
+          "lighthouse": "Lighthouse",
+          "wcag": "WCAG 2.1"
+        }
+      },
+      "ai": {
+        "label": "IA no desenvolvimento",
+        "items": {
+          "claude_code": "Claude Code",
+          "openspec": "OpenSpec",
+          "graphify": "graphify"
+        }
       }
-    }
+    },
+    "skills_heading": "Do componente ao deploy",
+    "skills_legend": "Usado no CurrículoRaiz",
+    "skills_cr_sr": "usado no CurrículoRaiz",
+    "skills_extra_label": "Também",
+    "skills_extra": "HTML, CSS/SCSS, JavaScript ES6+, Styled Components, Context API, shadcn/ui, Vite, Webpack, Express, REST e GraphQL, Vercel, GitHub Actions, CI/CD, Git Flow, Resend, Vitest, Zod, ESLint e Prettier."
   },
   "projects": {
     "label": "Projetos",
