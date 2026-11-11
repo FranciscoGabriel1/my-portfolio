@@ -40,8 +40,8 @@
 - [ ] 5.4 Reescrever `app/api/contact/route.ts`: tipo de conteúdo, tamanho, JSON, campo isca, schema, limite, escape, texto puro, variáveis de ambiente e erros genéricos (400, 413, 415, 429, 502, 503)
 - [ ] 5.5 Testes da rota cobrindo todos os cenários da spec `formulario-de-contato`, com o Resend simulado
 - [ ] 5.6 Atualizar `ContactForm.tsx` (já sem bibliotecas e com a validação compartilhada): campo isca fora do teclado e do leitor de tela, mensagens por status
-- [ ] 5.7 Adicionar as mensagens novas em `messages/pt.json` e gerar `en`/`es` (`npm run translate` ou revisão manual se não houver chave do DeepL)
-- [ ] 5.7a Fazer `scripts/translate.ts` preservar caminhos, URLs e e-mails (o DeepL traduziu `/images/projects/` para `/images/proyectos/` no `es.json`; dado corrigido no bloco 2, causa corrigida aqui) e cobrir com teste
+- [ ] 5.7 Adicionar as mensagens novas em `messages/pt.json`, `en.json` e `es.json` (à mão: a tradução automática saiu em 2026-11-11)
+- [x] 5.7a ~~Fazer `scripts/translate.ts` preservar caminhos, URLs e e-mails (o DeepL traduziu `/images/projects/` para `/images/proyectos/` no `es.json`; dado corrigido no bloco 2, causa corrigida aqui) e cobrir com teste~~ Desnecessária: `scripts/translate.ts` e o DeepL saíram em 2026-11-11
 - [ ] 5.8 Teste de componente e de navegador: envio só com teclado, aviso anunciado e erros traduzidos em `/en` e `/es`
 - [ ] 5.9 Documentar `CONTACT_TO_EMAIL` e `CONTACT_FROM_EMAIL` no `SETUP.md`; dono testa um envio real no navegador local
 

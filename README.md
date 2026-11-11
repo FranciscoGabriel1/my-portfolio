@@ -12,7 +12,7 @@ Personal portfolio built with Next.js 16: server-rendered content in three langu
 - **Fonts:** Bricolage Grotesque, Instrument Sans, JetBrains Mono via `next/font` (self-hosted)
 - **i18n:** next-intl 4 (PT, EN, ES)
 - **Theme:** next-themes (dark/light)
-- **Forms:** React Hook Form + Zod 4 (validation loaded on demand)
+- **Forms:** no libraries: native fields, an accessible subject list and a shared validation module (`lib/contact/validate.ts`); delivery via Resend
 - **Tests:** Vitest + Testing Library, Playwright + axe
 - **Icons:** Lucide React
 
@@ -29,7 +29,7 @@ For full setup instructions, see [SETUP.md](./SETUP.md).
 
 ## Features
 
-- Multilingual (PT 🇧🇷 / EN 🇺🇸 / ES 🇪🇸) with auto-translation via the DeepL API
+- Multilingual (PT 🇧🇷 / EN 🇺🇸 / ES 🇪🇸), with the texts in `messages/*.json`
 - Dark / light mode toggle
 - Responsive (mobile, tablet, desktop)
 - Accessible: WCAG 2.2 AA checked with axe, keyboard-only flows, translated ARIA, reduced motion
@@ -49,4 +49,3 @@ For full setup instructions, see [SETUP.md](./SETUP.md).
 | `npm run test:e2e` | Build, then browser tests (Playwright): smoke, visual baselines, axe |
 | `npm run test:e2e:update` | Same, rewriting the visual baselines (only on purpose) |
 | `npm run format` | Format with Prettier |
-| `npm run translate` | Auto-generate EN/ES from PT via the DeepL API |

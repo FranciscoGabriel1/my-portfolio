@@ -10,7 +10,6 @@ npm run dev        # http://localhost:3000, redireciona para /pt
 npm run lint
 npm run build
 npm run format     # Prettier com a configuração do projeto (.prettierrc)
-npm run translate  # gera en/es a partir de messages/pt.json (DeepL, pede DEEPL_API_KEY)
 ```
 
 ## Ponto de partida (medido em 2026-11-10)
@@ -60,7 +59,8 @@ Regras que não se negociam:
 
 ## Convenções
 
-- Conteúdo em `messages/*.json`, nunca no componente. Editar `pt.json` e rodar `npm run translate`.
+- Conteúdo em `messages/*.json`, nunca no componente. Editar `pt.json` e escrever `en.json` e `es.json` à mão (a
+  tradução automática pelo DeepL saiu em 2026-11-11; o dono vai traduzir com IA quando quiser).
 - Links internos e troca de idioma por `i18n/navigation.ts`.
 - Cores por tokens de `app/globals.css`, nunca hex ou rgb no componente. Classes com `cn()` de `lib/utils.ts`.
 - Ícones só de `lucide-react`, exceto logos de marca (ex.: `components/ui/DiscordIcon.tsx`).

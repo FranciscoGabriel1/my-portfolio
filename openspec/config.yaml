@@ -10,8 +10,8 @@ context: |
   - Next.js 14 (App Router, páginas estáticas por idioma) + React 18 + TypeScript strict
   - Tailwind v3 + variáveis CSS (app/globals.css, tailwind.config.ts)
   - framer-motion 11, lottie-react, canvas próprio (components/animations/Particles.tsx)
-  - next-intl (messages/pt.json é a origem; `npm run translate` gera en/es via DeepL)
-  - next-themes, react-hook-form + Zod, lucide-react, Resend (POST /api/contact)
+  - next-intl (messages/pt.json é a origem; en/es escritos à mão, sem tradução automática desde 2026-11-11)
+  - next-themes, lucide-react; formulário de contato sem bibliotecas, entregue pelo Resend (POST /api/contact)
   - Sem testes e sem CI até agora
 
   Estrutura: app/[locale]/ → components/sections/ → components/{layout,animations,ui}/ → lib/, i18n/, messages/.

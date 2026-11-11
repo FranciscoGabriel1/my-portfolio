@@ -39,22 +39,9 @@ cp .env.local.example .env.local
 
 | Variable | Required | Description |
 |---|---|---|
-| `DEEPL_API_KEY` | Only for translations | Free key at [deepl.com/pro-api](https://deepl.com/pro-api) |
 | `RESEND_API_KEY` | Contact form | Free key at [resend.com](https://resend.com) |
 
----
-
-## Auto-generating translations
-
-Edit `messages/pt.json` with your content in Portuguese, then run:
-
-```bash
-npm run translate
-```
-
-This calls the DeepL API and overwrites `messages/en.json` and `messages/es.json` automatically.
-
-Free plan: 500.000 characters/month — more than enough for a portfolio.
+Translations live in `messages/*.json` and are edited by hand (no translation service).
 
 ---
 
@@ -95,8 +82,7 @@ Add design references to `inspirations/` — this folder is not committed to git
 ├── messages/              # Translation files (pt, en, es)
 ├── public/                # Static assets
 │   └── images/            # Photos and project images
-└── scripts/
-    └── translate.ts       # Auto-translation script
+└── scripts/               # Scene posters and screen captures
 ```
 
 ---
