@@ -22,31 +22,30 @@
     "label": "Language"
   },
   "hero": {
-    "greeting": "Hello, I'm",
+    "status": "Open to opportunities · Manaus, Brazil",
     "name": "Francisco Marinho",
-    "roles": [
-      "Senior Frontend Developer",
-      "React & TypeScript specialist",
-      "Software Engineer",
-      "Design Systems Architect"
-    ],
-    "available": "Available for opportunities",
-    "tagline": "Need a website or application? I'm a front-end professional with extensive experience. I can solve your problem using the best technologies on the market.",
-    "cta_projects": "See Projects",
+    "tagline": "Senior frontend developer. I think of interfaces as pieces that fit together: I started out programming robotic arms with blocks during my master's, and today I build products on a design system at HostGator.",
+    "cta_projects": "See projects",
     "cta_cv": "Download CV",
-    "scroll_hint": "Scroll down",
-    "stat_years": "Years",
-    "stat_companies": "Companies",
-    "stat_projects": "Projects"
+    "built_label": "Where I've built"
   },
   "about": {
     "label": "About",
-    "title": "Who I am",
-    "bio_1": "Software Engineer with a Master's Degree in Computer Science from UFAM, with 5+ years of experience in Front-End Development using React.js, Next.js, Angular, JavaScript ES6+, TypeScript, Vite and Webpack. Specialist in modular architectures and creating reusable components.",
-    "bio_2": "I have solid experience in advanced state management via Context API, Zustand, Redux and Redux Saga, integration of REST APIs and GraphQL, performance optimization (Lighthouse > 95), automated testing with Jest and Cypress, and collaborative workflows with Git Flow and CI/CD.",
+    "title": "Software engineer with a master's in informatics, building frontends for over 5 years.",
+    "lead": "I hold a degree in Software Engineering and a master's in Informatics from UFAM, with research in educational robotics published at SBIE 2022 and SBESC 2020.",
+    "bio_1": "Today I'm a senior frontend developer at HostGator, on the monetization, innovation and AI agents teams. Before that, I worked at O2 Filmes, Atem and Sidia, where I built design systems, micro-frontends and products in React and TypeScript.",
+    "bio_2": "I also created and maintain CurrículoRaiz, a résumé SaaS that I develop end to end.",
+    "facts": {
+      "location_label": "Location",
+      "location": "Manaus, Brazil",
+      "education_label": "Education",
+      "education": "Master's in Informatics — UFAM",
+      "now_label": "Now",
+      "now": "Senior frontend at HostGator",
+      "product_label": "Own product",
+      "product": "CurrículoRaiz"
+    },
     "skills_title": "Skills",
-    "location": "Manaus, Brazil",
-    "available": "Available for opportunities",
     "skills": {
       "frontend": {
         "label": "Frontend",
@@ -63,9 +62,9 @@
         ]
       },
       "state_tools": {
-        "label": "Status & Tools",
+        "label": "State and tools",
         "items": [
-          "Redux & Redux Saga",
+          "Redux and Redux Saga",
           "Zustand",
           "Context API",
           "Storybook",
@@ -76,11 +75,11 @@
         ]
       },
       "backend_infra": {
-        "label": "Backend & Infra",
+        "label": "Backend and infra",
         "items": [
           "Node.js",
           "Express",
-          "REST & GraphQL",
+          "REST and GraphQL",
           "Docker",
           "AWS",
           "GitHub Actions",
@@ -93,12 +92,12 @@
         "items": [
           "Jest",
           "React Testing Library",
-          "Cypress E2E",
+          "Cypress",
           "Zod",
           "ESLint",
           "Prettier",
           "WCAG 2.1",
-          "Lighthouse > 95"
+          "Lighthouse"
         ]
       }
     }

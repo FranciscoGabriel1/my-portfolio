@@ -12,10 +12,6 @@ for (const locale of LOCALES) {
       await openStable(page, `/${locale}`, theme);
       const { violations } = await new AxeBuilder({ page })
         .withTags(WCAG_22_AA)
-        // Cargo do Hero antigo que alterna sozinho a cada 3 s: o axe o mede no meio do esmaecimento.
-        // A cor final passa no contraste. O elemento sai na tarefa 2.5 de identidade-visual-composicao,
-        // e esta exclusão sai junto.
-        .exclude("#hero .text-gradient")
         .analyze();
 
       const unexpected = violations

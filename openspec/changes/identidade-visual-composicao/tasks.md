@@ -13,17 +13,20 @@
 - [x] 1.10 Textos novos em `messages/pt.json` (rótulos do menu, idiomas por extenso, aviso de nova aba e link para pular ao conteúdo traduzido); `npm run translate` e revisão do en/es
   - en e es escritos à mão só para as chaves novas, sem `npm run translate`: o script retraduz os arquivos inteiros e desfaria correções manuais (caminho de imagem em `/es`, "Póngase en contacto con"). Os nomes dos idiomas saíram das mensagens para `LOCALE_NAMES` em `i18n/routing.ts`, porque não se traduzem.
 - [x] 1.11 `npm run lint`, `npm run typecheck`, `npm test` e `npm run build` sem erro; ajustar o teste de hidratação para os componentes novos
-- [ ] 1.12 Dono confere no navegador: cabeçalho e rodapé novos, paleta e fontes novas nas seções antigas, pt/en/es, claro/escuro, menu de celular só com teclado
+- [x] 1.12 Dono confere no navegador: cabeçalho e rodapé novos, paleta e fontes novas nas seções antigas, pt/en/es, claro/escuro, menu de celular só com teclado (dono pediu para seguir em 2026-11-11, sem objeções; commit 3a19aaa)
 
 ## 2. Hero e Sobre
 
-- [ ] 2.1 Converter `cena-blocos-escuro.png` e `cena-blocos-claro.png` em WebP/AVIF otimizados (até 80 kB cada) em `public/images/scene/`
-- [ ] 2.2 Hero como componente de servidor: situação, nome com `SplitText` animado ao carregar só com CSS, frase de posicionamento, "Ver projetos" e "Baixar CV", lista "Onde já construí" e as duas imagens da cena por tema (decisão 9)
-- [ ] 2.3 Sobre como componente de servidor: texto, quatro fatos e competências agrupadas, com `data-reveal`
-- [ ] 2.4 Textos do Hero e do Sobre em `messages/pt.json` só com dados reais; "remoto" e qualquer item das Open Questions ficam fora até o dono confirmar; `npm run translate` e revisão
-- [ ] 2.5 Remover do Hero os contadores, o cargo alternando e as partículas
-- [ ] 2.6 Medir o LCP celular com o nome animado e com o nome parado; se a diferença passar de 100 ms, deixar o nome parado (decisão 3) e anotar o resultado aqui
-- [ ] 2.7 Lint, tipos, testes e build; dono confere Hero e Sobre em pt/en/es, claro/escuro, 1440 e 390, e com movimento reduzido
+- [x] 2.1 Converter `cena-blocos-escuro.png` e `cena-blocos-claro.png` em WebP/AVIF otimizados (até 80 kB cada) em `public/images/scene/`
+- [x] 2.2 Hero como componente de servidor: situação, nome com `SplitText` animado ao carregar só com CSS, frase de posicionamento, "Ver projetos" e "Baixar CV", lista "Onde já construí" e as duas imagens da cena por tema (decisão 9)
+- [x] 2.3 Sobre como componente de servidor: texto, quatro fatos e competências agrupadas, com `data-reveal`
+- [x] 2.4 Textos do Hero e do Sobre em `messages/pt.json` só com dados reais; "remoto" e qualquer item das Open Questions ficam fora até o dono confirmar; `npm run translate` e revisão
+  - en/es à mão (mesmo motivo da 1.10). Nomes de ferramentas nas competências agora iguais nos três idiomas: o DeepL tinha traduzido "Prettier" para "Más bonito" e "Lighthouse > 95" para "Faro > 95". "Lighthouse > 95" virou "Lighthouse" (número sem fonte).
+- [x] 2.5 Remover do Hero os contadores, o cargo alternando e as partículas
+- [x] 2.6 Medir o LCP celular com o nome animado e com o nome parado; se a diferença passar de 100 ms, deixar o nome parado (decisão 3) e anotar o resultado aqui
+  - Resultado (Lighthouse 12 celular, 2 execuções cada, parado = `--force-prefers-reduced-motion`): animado 3,9 e 3,8 s; parado 3,9 e 3,8 s. **Sem diferença: o nome continua animado.** O elemento de LCP é a imagem da cena, não o nome. Com `next/image` e `loading="lazy"`, ela esperava 1,9 s para começar a baixar, então virou fundo em CSS por tema (decisão 9 atualizada).
+  - LCP **observado** caiu de 1,25 s (linha de base) para cerca de 0,26 s. O **simulado** (4G lento) segue em 3,8 s porque a imagem disputa banda com 269 kB de JS e 136 kB de fontes (Bricolage variável: 75 kB). Ações para a 6.7: tirar o framer-motion e as seções antigas de cliente (5.4), mandar ao cliente só as mensagens que os componentes de cliente usam e, se ainda faltar, avaliar a Bricolage em pesos fixos.
+- [x] 2.7 Lint, tipos, testes e build; dono confere Hero e Sobre em pt/en/es, claro/escuro, 1440 e 390, e com movimento reduzido (aprovado pelo dono em 2026-11-11)
 
 ## 3. Projetos
 

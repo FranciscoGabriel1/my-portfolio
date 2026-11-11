@@ -83,7 +83,13 @@ O "mês atual" da barra da HostGator é o mês do build. Como a página é está
 
 ### 9. Imagem da cena no Hero
 
-`cena-blocos-escuro.png` e `cena-blocos-claro.png` viram WebP e AVIF otimizados (meta de até 80 kB cada) em `public/images/scene/`. São duas `next/image` decorativas (`alt=""`), uma com `dark:hidden` e outra com `hidden dark:block`, com dimensões fixas para não causar salto. Ambas usam `loading="lazy"`, para que a do tema oculto não seja baixada (imagem em `display: none` com carregamento preguiçoso não baixa). O texto do Hero não depende delas. A change `cena-3d-montagem` vai montar o canvas por cima e usar esta imagem enquanto carrega e como alternativa.
+`cena-blocos-escuro.png` e `cena-blocos-claro.png` viram WebP **sem perdas** (34 e 40 kB) em `public/images/scene/`, servidos como **imagem de fundo em CSS**, uma regra por tema (`.hero-scene` e `.dark .hero-scene`), num elemento `aria-hidden` com `aspect-ratio` fixo, o que evita salto de layout.
+
+- **Uma imagem só:** o navegador baixa só a imagem da regra que se aplica, então a do tema oculto nunca é baixada.
+- **LCP:** a imagem é descoberta junto com o CSS. Na primeira versão, com duas `next/image` e `loading="lazy"`, a imagem virou o elemento de LCP e esperou 1,9 s para começar a baixar (LCP de 3,7 s).
+- **Sem perdas:** o WebP com perdas, e a recodificação do `next/image`, desviavam o fundo da imagem em 1 ou 2 tons do `--bg`, o que deixava um retângulo visível em volta da cena.
+
+O texto do Hero não depende da imagem. A change `cena-3d-montagem` vai montar o canvas por cima e usar esta imagem enquanto carrega e como alternativa.
 
 ### 10. Link de agendamento num só lugar
 

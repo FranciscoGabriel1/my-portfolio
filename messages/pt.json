@@ -22,31 +22,30 @@
     "label": "Idioma"
   },
   "hero": {
-    "greeting": "Olá, eu sou",
+    "status": "Aberto a oportunidades · Manaus, Brasil",
     "name": "Francisco Marinho",
-    "roles": [
-      "Desenvolvedor Frontend Sênior",
-      "Especialista em React & TypeScript",
-      "Engenheiro de Software",
-      "Arquiteto de Design Systems"
-    ],
-    "available": "Disponível para oportunidades",
-    "tagline": "Precisa de um site ou aplicativo? Sou um profissional Front-end com vasta experiência. Resolvo o seu problema utilizando as melhores tecnologias do mercado.",
-    "cta_projects": "Ver Projetos",
-    "cta_cv": "Download CV",
-    "scroll_hint": "Role para baixo",
-    "stat_years": "Anos",
-    "stat_companies": "Empresas",
-    "stat_projects": "Projetos"
+    "tagline": "Desenvolvedor frontend sênior. Penso interfaces como peças que se encaixam: comecei programando braços robóticos com blocos no mestrado e hoje construo produtos com design system na HostGator.",
+    "cta_projects": "Ver projetos",
+    "cta_cv": "Baixar CV",
+    "built_label": "Onde já construí"
   },
   "about": {
     "label": "Sobre",
-    "title": "Quem sou eu",
-    "bio_1": "Engenheiro de Software com Mestrado em Informática pela UFAM, com 5+ anos de atuação em Desenvolvimento Front-End utilizando React.js, Next.js, Angular, JavaScript ES6+, TypeScript, Vite e Webpack. Especialista em arquiteturas modulares e criação de componentes reutilizáveis.",
-    "bio_2": "Tenho experiência sólida em gerenciamento de estado avançado via Context API, Zustand, Redux e Redux Saga, integração de APIs REST e GraphQL, otimização de performance (Lighthouse > 95), testes automatizados com Jest e Cypress, e workflows colaborativos com Git Flow e CI/CD.",
+    "title": "Engenheiro de software, mestre em informática e frontend há mais de 5 anos.",
+    "lead": "Sou formado em Engenharia de Software e mestre em Informática pela UFAM, com pesquisa em robótica educacional publicada no SBIE 2022 e no SBESC 2020.",
+    "bio_1": "Hoje sou desenvolvedor frontend sênior na HostGator, em times de monetização, inovação e agentes de IA. Antes, passei pela O2 Filmes, pela Atem e pelo Sidia, onde construí design systems, micro-frontends e produtos em React e TypeScript.",
+    "bio_2": "Também criei e mantenho o CurrículoRaiz, um SaaS de currículos que desenvolvo de ponta a ponta.",
+    "facts": {
+      "location_label": "Local",
+      "location": "Manaus, Brasil",
+      "education_label": "Formação",
+      "education": "Mestrado em Informática — UFAM",
+      "now_label": "Hoje",
+      "now": "Frontend sênior na HostGator",
+      "product_label": "Produto próprio",
+      "product": "CurrículoRaiz"
+    },
     "skills_title": "Competências",
-    "location": "Manaus, Brasil",
-    "available": "Disponível para oportunidades",
     "skills": {
       "frontend": {
         "label": "Frontend",
@@ -63,9 +62,9 @@
         ]
       },
       "state_tools": {
-        "label": "Estado & Ferramentas",
+        "label": "Estado e ferramentas",
         "items": [
-          "Redux & Redux Saga",
+          "Redux e Redux Saga",
           "Zustand",
           "Context API",
           "Storybook",
@@ -76,11 +75,11 @@
         ]
       },
       "backend_infra": {
-        "label": "Backend & Infra",
+        "label": "Backend e infra",
         "items": [
           "Node.js",
           "Express",
-          "REST & GraphQL",
+          "REST e GraphQL",
           "Docker",
           "AWS",
           "GitHub Actions",
@@ -93,12 +92,12 @@
         "items": [
           "Jest",
           "React Testing Library",
-          "Cypress E2E",
+          "Cypress",
           "Zod",
           "ESLint",
           "Prettier",
           "WCAG 2.1",
-          "Lighthouse > 95"
+          "Lighthouse"
         ]
       }
     }

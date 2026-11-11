@@ -22,43 +22,42 @@
     "label": "Idioma"
   },
   "hero": {
-    "greeting": "Hola, soy",
+    "status": "Abierto a oportunidades · Manaus, Brasil",
     "name": "Francisco Marinho",
-    "roles": [
-      "Desarrollador Frontend Senior",
-      "Especialista en React y TypeScript",
-      "Ingeniero de software",
-      "Arquitecto de sistemas de diseño"
-    ],
-    "available": "Disponible para oportunidades",
-    "tagline": "¿Necesitas un sitio web o una aplicación? Soy un profesional front-end con amplia experiencia. Puedo resolver tu problema utilizando las mejores tecnologías del mercado.",
+    "tagline": "Desarrollador frontend sénior. Pienso las interfaces como piezas que encajan: empecé programando brazos robóticos con bloques en la maestría y hoy construyo productos con design system en HostGator.",
     "cta_projects": "Ver proyectos",
     "cta_cv": "Descargar CV",
-    "scroll_hint": "Desplácese hacia abajo",
-    "stat_years": "Años",
-    "stat_companies": "Empresas",
-    "stat_projects": "Proyectos"
+    "built_label": "Dónde he construido"
   },
   "about": {
-    "label": "Acerca de",
-    "title": "Quién soy",
-    "bio_1": "Ingeniero de Software con Máster en Informática por la UFAM, con más de 5 años de experiencia en Desarrollo Front-End utilizando React.js, Next.js, Angular, JavaScript ES6+, TypeScript, Vite y Webpack. Está especializado en arquitecturas modulares y creación de componentes reutilizables.",
-    "bio_2": "Tengo una sólida experiencia en gestión avanzada de estados mediante Context API, Zustand, Redux y Redux Saga, integración de REST APIs y GraphQL, optimización del rendimiento (Lighthouse > 95), pruebas automatizadas con Jest y Cypress, y flujos de trabajo colaborativos con Git Flow y CI/CD.",
+    "label": "Sobre mí",
+    "title": "Ingeniero de software, máster en informática y frontend desde hace más de 5 años.",
+    "lead": "Soy ingeniero de software y máster en Informática por la UFAM, con investigación en robótica educativa publicada en el SBIE 2022 y el SBESC 2020.",
+    "bio_1": "Hoy soy desarrollador frontend sénior en HostGator, en equipos de monetización, innovación y agentes de IA. Antes pasé por O2 Filmes, Atem y Sidia, donde construí design systems, micro-frontends y productos en React y TypeScript.",
+    "bio_2": "También creé y mantengo CurrículoRaiz, un SaaS de currículums que desarrollo de punta a punta.",
+    "facts": {
+      "location_label": "Ubicación",
+      "location": "Manaus, Brasil",
+      "education_label": "Formación",
+      "education": "Máster en Informática — UFAM",
+      "now_label": "Hoy",
+      "now": "Frontend sénior en HostGator",
+      "product_label": "Producto propio",
+      "product": "CurrículoRaiz"
+    },
     "skills_title": "Competencias",
-    "location": "Manaos, Brasil",
-    "available": "Disponible para oportunidades",
     "skills": {
       "frontend": {
         "label": "Frontend",
         "items": [
           "React.js",
-          "Siguiente.js",
+          "Next.js",
           "TypeScript",
           "JavaScript ES6+",
           "HTML5",
           "CSS3 / SCSS",
           "Tailwind CSS",
-          "Componentes estilizados",
+          "Styled Components",
           "Angular"
         ]
       },
@@ -67,10 +66,10 @@
         "items": [
           "Redux y Redux Saga",
           "Zustand",
-          "API de contexto",
-          "Libro de cuentos",
+          "Context API",
+          "Storybook",
           "Figma",
-          "Sistema de diseño",
+          "Design System",
           "Webpack",
           "Vite"
         ]
@@ -83,22 +82,22 @@
           "REST y GraphQL",
           "Docker",
           "AWS",
-          "Acciones de GitHub",
+          "GitHub Actions",
           "CI/CD",
-          "Flujo Git"
+          "Git Flow"
         ]
       },
       "quality": {
         "label": "Calidad",
         "items": [
           "Jest",
-          "Biblioteca de pruebas de React",
-          "Cypress E2E",
+          "React Testing Library",
+          "Cypress",
           "Zod",
           "ESLint",
-          "Más bonito",
+          "Prettier",
           "WCAG 2.1",
-          "Faro > 95"
+          "Lighthouse"
         ]
       }
     }

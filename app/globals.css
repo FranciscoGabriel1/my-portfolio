@@ -261,6 +261,19 @@
   color: var(--accent-text);
 }
 
+/* ─── Cena do Hero (versão sem 3D) ───────────────────────────────────────────
+   Imagem de fundo por tema: só a do tema ativo é baixada. WebP sem perdas, para o fundo
+   da imagem coincidir com --bg. A change cena-3d-montagem monta o canvas por cima. */
+
+.hero-scene {
+  aspect-ratio: 1200 / 1100;
+  background: url('/images/scene/blocks-light.webp') center / contain no-repeat;
+}
+
+.dark .hero-scene {
+  background-image: url('/images/scene/blocks-dark.webp');
+}
+
 /* ─── Movimento ────────────────────────────────────────────────────────────────
    O HTML do servidor já é o estado final. O estado "antes da entrada" só existe
    depois que components/motion/MotionReady.tsx marca <html data-motion="ready">,
