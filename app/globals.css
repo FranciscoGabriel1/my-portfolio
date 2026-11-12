@@ -297,6 +297,23 @@ a:hover > .signature .signature-swoosh {
   }
 }
 
+/* ─── Status "Aberto a oportunidades" ───────────────────────────────────────
+   O ponto verde do Hero ganha um anel que se expande e some (em Movimento), como um indicador de "disponível". */
+
+.status-dot {
+  position: relative;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  color: var(--ok);
+  opacity: 0;
+}
+
 /* ─── Faixas das seções ──────────────────────────────────────────────────────
    Cada seção é uma faixa de largura total: `band` (fundo da página) e `band-alt` (superfície vizinha) se
    alternam, e o Contato fecha a página com a paleta do outro tema (`band-invert`). Uma trama de pontos fica
@@ -549,6 +566,11 @@ a:hover > .signature .signature-swoosh {
     transform: scaleX(0);
   }
 
+  /* Ponto de status: um pulso a cada 2,4 s; o anel cresce e some, o ponto em si fica parado. */
+  .status-dot::after {
+    animation: status-pulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
+
   /* Assinatura do cabeçalho: cada letra é traçada e preenchida em sequência, o sublinhado vem por último, e
      depois um brilho atravessa as letras a cada 7 s. Só CSS. */
   .signature-letter {
@@ -606,6 +628,18 @@ a:hover > .signature .signature-swoosh {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes status-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
   }
 }
 

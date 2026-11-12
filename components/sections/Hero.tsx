@@ -30,7 +30,7 @@ export async function Hero() {
       <div className="container-site grid flex-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-12 lg:py-24">
         <div className="flex flex-col gap-7">
           <p className="type-eyebrow flex items-center gap-2.5 text-text-2">
-            <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-ok" />
+            <span aria-hidden="true" className="status-dot h-2 w-2 shrink-0 rounded-full bg-ok" />
             {t("status")}
           </p>
 
