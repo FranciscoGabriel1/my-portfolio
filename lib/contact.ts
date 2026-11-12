@@ -10,7 +10,7 @@
 export const AGENDA_URL = "https://calendar.app.google/gA8xnG6SVduVEJaJ9";
 
 export interface Channel {
-  id: "email" | "linkedin" | "github" | "lattes" | "discord";
+  id: "email" | "linkedin" | "github" | "lattes";
   href: string;
   /** Endereço como aparece na página. */
   display: string;
@@ -25,7 +25,6 @@ export const CHANNELS: readonly Channel[] = [
   },
   { id: "github", href: "https://github.com/FranciscoGabriel1", display: "github.com/FranciscoGabriel1" },
   { id: "lattes", href: "http://lattes.cnpq.br/6111525331943224", display: "lattes.cnpq.br/6111525331943224" },
-  { id: "discord", href: "https://discord.gg/jDjgZUjamz", display: "discord.gg/jDjgZUjamz" },
 ];
 
 export const LATTES_URL = CHANNELS.find((c) => c.id === "lattes")!.href;

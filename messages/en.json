@@ -240,8 +240,7 @@
       "email": "Email",
       "linkedin": "LinkedIn",
       "github": "GitHub",
-      "lattes": "Lattes",
-      "discord": "Discord"
+      "lattes": "Lattes"
     },
     "cv": "Download CV",
     "agenda_label": "Book a call",

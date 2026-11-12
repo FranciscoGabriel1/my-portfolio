@@ -63,7 +63,8 @@ Regras que não se negociam:
   tradução automática pelo DeepL saiu em 2026-11-11; o dono vai traduzir com IA quando quiser).
 - Links internos e troca de idioma por `i18n/navigation.ts`.
 - Cores por tokens de `app/globals.css`, nunca hex ou rgb no componente. Classes com `cn()` de `lib/utils.ts`.
-- Ícones só de `lucide-react`, exceto logos de marca (ex.: `components/ui/DiscordIcon.tsx`).
+- Ícones só de `lucide-react`, exceto logos de marca, que ficam na folha `public/icons/tech.svg` (gerada por
+  `scripts/tech-icons/build.mjs`).
 - Novas telas são avaliadas contra as 10 heurísticas de usabilidade de Nielsen.
 - Referências visuais em `inspirations/`: ler antes de desenhar.
 
