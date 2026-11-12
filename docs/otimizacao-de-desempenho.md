@@ -320,7 +320,8 @@ instantânea, como antes.
 - **Problema:** o dono pediu que a tela do notebook iluminasse o teclado. O caminho óbvio, `RectAreaLight`, exige
   as tabelas de `RectAreaLightTexturesLib`, com **110 kB gzip**. Isso quase dobraria o pedaço da cena (136 kB).
 - **Solução:** um `SpotLight` embutido, saindo da tela, e um brilho aditivo pintado na base. Os dois acompanham a
-  cor média da tela, lida a cada 500 ms num canvas de 4 × 4 px, e somem quando a tampa fecha.
+  cor média da tela, lida a cada 2 s num canvas de 4 × 4 px (a luz desliza até o tom novo; antes era a cada 500 ms,
+  e cada leitura de quadro do vídeo trava a placa de vídeo por um instante), e somem quando a tampa fecha.
 - **Resultado:** o pedaço da cena foi de 136 para 137,5 kB gzip, já contando o notebook novo inteiro. Os pôsteres
   gerados de novo ficaram menores (37 e 35 kB, antes 41 e 40 kB).
 
@@ -372,10 +373,18 @@ instantânea, como antes.
 - **Primeira tentativa (não serviu):** `next/script` com `strategy="beforeInteractive"`. No App Router, o script
   inline só roda quando o JavaScript do Next carrega, e não antes da primeira pintura: o `<html>` chegava sem a classe
   do tema, o que faria a página piscar.
-- **Solução:** um `<script>` no `<head>` do layout, que é componente de servidor. O navegador o executa enquanto lê o
-  HTML, antes de pintar, e o React só o hidrata (não o cria), então não há aviso. O script e as constantes ficam em
-  `lib/theme-script.ts`, que o servidor pode importar. O hook do botão (`useSyncExternalStore`, avisando de forma
-  síncrona para funcionar dentro do `flushSync` da transição de tema) fica em `lib/theme.ts`.
+- **Segunda tentativa (só meio certa):** um `<script>` no `<head>` do layout de servidor. Na primeira carga funciona:
+  o navegador executa o script ao ler o HTML, antes de pintar. Mas trocar de idioma redesenha o layout no navegador,
+  sem recarregar, e aí o React **cria** o `<script>` de novo, e o aviso voltou. O teste mostrou um segundo problema
+  que o `next-themes` escondia: nesse redesenho o React refaz o `<html>` e a classe do tema some.
+- **Solução:** um componente `ThemeScript` (`components/layout/ThemeScript.tsx`):
+  - no HTML do servidor, é um script comum, que roda antes da primeira pintura;
+  - no navegador, renderiza `type="text/plain"` (com `suppressHydrationWarning` só nesse atributo), então o React
+    nunca cria um script executável e não há aviso;
+  - um `useLayoutEffect` reaplica o tema salvo antes da pintura sempre que o layout é redesenhado.
+  O script e as constantes ficam em `lib/theme-script.ts`; o hook do botão (`useSyncExternalStore`, avisando de forma
+  síncrona para funcionar dentro do `flushSync` da transição de tema) fica em `lib/theme.ts`. Um teste de navegador
+  troca de idioma com o tema escuro salvo e confere a classe e o console.
 - **Resultado:** uma dependência a menos, JavaScript inicial de **216 para 215 kB gzip**, e a classe do tema já está
   no `<html>` no `DOMContentLoaded`, antes da hidratação (conferido no navegador).
 - **Para a entrevista:** "O jeito certo de evitar o flash de tema é rodar o script antes da primeira pintura, e no App

@@ -25,7 +25,8 @@ async function openDark(page: Page) {
 }
 
 const html = (page: Page) => page.locator("html");
-const transitions = (page: Page) => page.evaluate(() => (window as unknown as { __vt: number }).__vt);
+const transitions = (page: Page) =>
+  page.evaluate(() => (window as unknown as { __vt: number }).__vt);
 
 test("com movimento reduzido, a troca é instantânea e não usa a transição", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -44,7 +45,9 @@ test("com movimento, a troca usa a transição circular e lembra a escolha", asy
   await expect(html(page)).toHaveClass(/\blight\b/);
 });
 
-test("dois cliques rápidos terminam no tema de partida e a página continua respondendo", async ({ page }) => {
+test("dois cliques rápidos terminam no tema de partida e a página continua respondendo", async ({
+  page,
+}) => {
   await openDark(page);
   const button = page.getByRole("button", { name: /Mudar para o tema/ });
   await button.click();
@@ -66,4 +69,34 @@ test("pelo teclado, o foco continua no botão e o rótulo muda", async ({ page }
   const after = page.getByRole("button", { name: "Mudar para o tema escuro" });
   await expect(after).toBeFocused();
   await expect(html(page)).toHaveClass(/\blight\b/);
+});
+
+test("o tema sobrevive à troca de idioma, aplicado antes da hidratação e sem erro no console", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+  page.on("pageerror", (e) => errors.push(String(e)));
+  await page.addInitScript(() => {
+    // A classe do <html> no fim da leitura do HTML, antes da hidratação: prova que o script do <head> rodou.
+    document.addEventListener(
+      "DOMContentLoaded",
+      () =>
+        ((window as unknown as { __first: string }).__first = document.documentElement.className),
+      { once: true }
+    );
+  });
+  await openDark(page);
+  expect(await page.evaluate(() => (window as unknown as { __first: string }).__first)).toContain(
+    "dark"
+  );
+
+  // Trocar de idioma redesenha o layout sem recarregar a página: o tema não pode se perder.
+  for (const locale of ["en", "es"]) {
+    await page.locator(`header a[hreflang="${locale}"]`).first().click();
+    await page.waitForURL(new RegExp(`/${locale}$`));
+    await expect(html(page)).toHaveAttribute("lang", locale);
+    await expect(html(page)).toHaveClass(/\bdark\b/);
+  }
+  expect(errors).toEqual([]);
 });

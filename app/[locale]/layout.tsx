@@ -5,7 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { routing } from "@/i18n/routing";
 import { Providers } from "@/components/providers";
 import { MotionReady } from "@/components/motion/MotionReady";
-import { THEME_SCRIPT } from "@/lib/theme-script";
+import { ThemeScript } from "@/components/layout/ThemeScript";
 import "@/app/globals.css";
 
 /** Grupos de mensagens usados por componentes de cliente (Navbar, ThemeToggle, ContactForm). */
@@ -93,12 +93,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const tA11y = await getTranslations("accessibility");
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        {/* Tema antes da primeira pintura (lib/theme-script.ts). Script de servidor, lido junto com o HTML: o React só o
-            hidrata, não o cria no navegador (um <script> criado por componente de cliente, como o do next-themes,
-            gera aviso no React 19). */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        {/* Tema antes da primeira pintura, sem piscar (components/layout/ThemeScript.tsx). */}
+        <ThemeScript />
       </head>
       <body
         className={`${heading.variable} ${body.variable} ${code.variable} font-sans antialiased`}

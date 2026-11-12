@@ -35,6 +35,21 @@ export function setTheme(theme: Theme) {
   emit();
 }
 
+/**
+ * Reaplica o tema salvo no <html> e avisa quem usa `useTheme`. Necessário quando o layout é redesenhado sem recarregar
+ * a página (troca de idioma): o React redesenha o <html> e a classe do tema se perde.
+ */
+export function syncThemeFromStorage() {
+  let saved: string | null = null;
+  try {
+    saved = window.localStorage.getItem(THEME_KEY);
+  } catch {
+    // Armazenamento bloqueado: fica o tema padrão.
+  }
+  applyTheme(saved === "light" || saved === "dark" ? saved : DEFAULT_THEME);
+  emit();
+}
+
 function subscribe(listener: () => void) {
   listeners.add(listener);
   // Outra aba trocou o tema: acompanha.
