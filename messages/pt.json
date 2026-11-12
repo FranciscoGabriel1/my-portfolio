@@ -232,6 +232,21 @@
       }
     }
   },
+  "recommendations": {
+    "label": "Recomendações",
+    "title": "O que dizem de trabalhar comigo",
+    "subtitle": "Recomendações publicadas no LinkedIn por quem trabalhou comigo na HostGator e na Atem, entre outras empresas, e na universidade.",
+    "original_note": "No idioma original (português ou inglês), exatamente como foram publicadas.",
+    "same_team": "Trabalhou na mesma equipe",
+    "different_teams": "Trabalhou comigo em equipes diferentes",
+    "linkedin": "Ver todas no LinkedIn",
+    "count": "{count} recomendações",
+    "read_more": "Ler completa",
+    "read_less": "Mostrar menos",
+    "prev": "Recomendação anterior",
+    "next": "Próxima recomendação",
+    "track_label": "Recomendações, role para o lado"
+  },
   "contact": {
     "label": "Contato",
     "title": "Vamos conversar?",

@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
+import { Recommendations } from "@/components/sections/Recommendations";
 import { Contact } from "@/components/sections/Contact";
 
 interface HomePageProps {
@@ -27,6 +28,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <About />
           <Projects />
           <Experience />
+          <Recommendations />
           <Contact />
         </main>
 

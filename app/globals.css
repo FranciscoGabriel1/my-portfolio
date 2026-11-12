@@ -297,6 +297,129 @@ a:hover > .signature .signature-swoosh {
   }
 }
 
+/* ─── Recomendações (components/sections/Recommendations.tsx) ───────────────
+   Texto cortado em `--lines` linhas com esmaecimento, solto quando o <details> "Ler completa" abre (sem JS). O corte
+   é só visual: o texto inteiro está no HTML. A faixa rola na horizontal com encaixe por cartão; as setas
+   (`.carousel-controls`) só aparecem com JavaScript. */
+
+.rec-quote[data-clamped] .rec-quote-text {
+  max-height: calc(var(--lines, 6) * 1lh);
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2.2lh), transparent);
+}
+
+.rec-quote[data-clamped]:has(.rec-more[open]) .rec-quote-text {
+  max-height: none;
+  mask-image: none;
+}
+
+.rec-more-close,
+.rec-more[open] .rec-more-open {
+  display: none;
+}
+
+.rec-more[open] .rec-more-close {
+  display: inline;
+}
+
+/* Faixa: cartões da mesma altura (a autoria fica no pé), folga em cima para o cartão subir no hover, e as bordas
+   esmaecidas só do lado em que ainda há cartões (`data-at-start`/`data-at-end`, de CarouselControls). */
+.rec-track {
+  --fade-l: 3.5rem;
+  --fade-r: 3.5rem;
+  display: flex;
+  align-items: stretch;
+  gap: 1.25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-block: 0.75rem 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+}
+
+.rec-track[data-at-start] {
+  --fade-l: 0px;
+}
+
+.rec-track[data-at-end] {
+  --fade-r: 0px;
+}
+
+.rec-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  flex: 0 0 min(24rem, 85%);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.75rem 1.6rem 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  transition:
+    border-color 0.3s var(--ease-out-soft),
+    box-shadow 0.4s var(--ease-out-soft),
+    translate 0.5s var(--ease-out-strong);
+}
+
+/* Aspas grandes, decorativas, no canto do cartão. */
+.rec-card::after {
+  content: '\201D';
+  position: absolute;
+  top: 0.6rem;
+  right: 1.2rem;
+  z-index: -1;
+  font: 800 5.5rem/1 var(--font-heading), serif;
+  color: var(--accent);
+  opacity: 0.12;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out-soft);
+}
+
+/* Brilho que segue o ponteiro (components/motion/CardGlow.tsx). */
+.rec-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+  background: radial-gradient(
+    24rem circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in oklab, var(--accent) 12%, transparent),
+    transparent 60%
+  );
+}
+
+.rec-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 22px 44px -28px rgb(0 0 0 / 0.55);
+}
+
+.rec-card:hover::before {
+  opacity: 1;
+}
+
+.rec-card:hover::after {
+  opacity: 0.22;
+}
+
+.rec-card .rec-author {
+  margin-top: auto;
+}
+
+.carousel-controls {
+  display: none;
+}
+
+[data-motion='ready'] .carousel-controls {
+  display: flex;
+}
+
 /* ─── Status "Aberto a oportunidades" ───────────────────────────────────────
    O ponto verde do Hero ganha um anel que se expande e some (em Movimento), como um indicador de "disponível". */
 
@@ -587,6 +710,11 @@ a:hover > .signature .signature-swoosh {
     animation-delay: calc(1.6s + var(--n, 0) * 85ms);
   }
 
+  /* Recomendações: o cartão sobe de leve no hover. */
+  .rec-card:hover {
+    translate: 0 -4px;
+  }
+
   /* Competências: as tecnologias sobem uma a uma e sobem de leve no hover. */
   .tech-chip:hover {
     transform: translateY(-2px);
@@ -628,6 +756,37 @@ a:hover > .signature .signature-swoosh {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+/* Carrossel de recomendações: ligado à rolagem da faixa (CSS scroll-driven animations, onde houver suporte), o
+   cartão que entra pela borda chega menor e esmaecido e cresce até o tamanho cheio; o que sai, o inverso. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Só com JavaScript (`data-motion="ready"`), como o resto do movimento: sem ele, tudo aparece pronto. */
+    [data-motion='ready'] .rec-card {
+      animation: rec-focus linear both;
+      animation-timeline: view(inline);
+    }
+  }
+}
+
+@keyframes rec-focus {
+  entry 0% {
+    opacity: 0.35;
+    scale: 0.92;
+  }
+  entry 100% {
+    opacity: 1;
+    scale: 1;
+  }
+  exit 0% {
+    opacity: 1;
+    scale: 1;
+  }
+  exit 100% {
+    opacity: 0.35;
+    scale: 0.92;
   }
 }
 

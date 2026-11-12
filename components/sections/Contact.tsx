@@ -21,7 +21,7 @@ export async function Contact() {
     <section id="contact" aria-labelledby="contact-title" className="band-invert py-24 lg:py-40">
       <div className="container-site">
         <p className="type-eyebrow mb-5 text-accent-text">
-          <span aria-hidden="true">05 — </span>
+          <span aria-hidden="true">06 — </span>
           {t("label")}
         </p>
         <SplitText id="contact-title" text={t("title")} className="type-giant text-text" />
