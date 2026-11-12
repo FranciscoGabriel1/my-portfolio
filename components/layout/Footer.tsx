@@ -16,7 +16,15 @@ export async function Footer() {
     <footer className="band-invert border-t border-line">
       <div className="container-site flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-10 font-mono text-[0.78rem] tracking-[0.06em] text-text-3">
         <p>
-          © {year} Francisco Marinho · {t("location")}
+          © {year} Francisco Gabriel Teixeira Marinho
+          {/* No celular, a cidade vai para a linha de baixo, sem o separador pendurado no fim da linha. */}
+          <span aria-hidden="true" className="hidden sm:inline">
+            {" · "}
+          </span>
+          <span className="block sm:inline">
+            <span className="sr-only">, </span>
+            {t("location")}
+          </span>
         </p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <a
