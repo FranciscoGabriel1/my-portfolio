@@ -7,7 +7,7 @@
  * Página de agendamento do Google Agenda (ex.: https://calendar.app.google/...).
  * Vazio: "Agendar call" não aparece em lugar nenhum, para não haver link morto.
  */
-export const AGENDA_URL = "";
+export const AGENDA_URL = "https://calendar.app.google/gA8xnG6SVduVEJaJ9";
 
 export interface Channel {
   id: "email" | "linkedin" | "github" | "lattes" | "discord";

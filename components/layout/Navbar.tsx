@@ -157,15 +157,31 @@ export function Navbar({ logo }: { logo: ReactNode }) {
           </nav>
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
             <LanguageSwitcher current={locale} label={tLanguage("label")} />
-            <a
-              href={cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonVariants({ variant: "primary", size: "sm" })}
-            >
-              {t("download_cv")}
-              {newTab}
-            </a>
+            <div className="flex flex-wrap gap-3">
+              {AGENDA_URL && (
+                <a
+                  href={AGENDA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "primary", size: "sm" })}
+                >
+                  {t("schedule")}
+                  {newTab}
+                </a>
+              )}
+              <a
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({
+                  variant: AGENDA_URL ? "secondary" : "primary",
+                  size: "sm",
+                })}
+              >
+                {t("download_cv")}
+                {newTab}
+              </a>
+            </div>
           </div>
         </div>
       </div>
