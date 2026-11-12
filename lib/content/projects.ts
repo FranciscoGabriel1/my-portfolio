@@ -65,7 +65,7 @@ export const PROJECTS: readonly Project[] = [
     id: "atem-portal",
     url: "https://portal.grupoatem.com.br",
     github: null,
-    image: { src: "/images/projects/portal_atem.png", width: 1600, height: 733 },
+    image: { src: "/images/projects/portal_atem.webp", width: 1600, height: 733 },
     stack: ["React", "TypeScript", "Cognito"],
   },
   {
