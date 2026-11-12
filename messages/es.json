@@ -182,7 +182,7 @@
         "role": "Desarrollador Front-end Sénior",
         "location": "Florianópolis",
         "type": "Tiempo completo (CLT)",
-        "description": "Desarrollo y mantengo aplicaciones web en equipos de monetización, innovación y agentes de IA, y contribuyo a la evolución de la arquitectura front-end."
+        "description": "Desarrollo y mantengo aplicaciones web en los equipos de activación, innovación y agentes de IA, y contribuyo a la evolución de la arquitectura front-end. Conduzco el refinamiento técnico y las dailies, participo en la concepción de proyectos y mejoras y acompaño cada entrega de punta a punta, hasta el despliegue en producción y la gestión de los pipelines."
       },
       "o2": {
         "role": "Desarrollador Front-end Semi Sénior",
@@ -194,19 +194,19 @@
         "role": "Desarrollador Front-end Semi Sénior",
         "location": "Manaus (híbrido)",
         "type": "Tiempo completo (CLT)",
-        "description": "Lideré productos en React, React Native y TypeScript, con bibliotecas de componentes, optimización de bundles y automatización de CI/CD."
+        "description": "Lideré el front-end en React de productos como el portal de suministros. Con el equipo, trabajé con React Native y TypeScript en el portal del cliente, la plataforma financiera de Atem, REAM (Refinería de Manaos) y la app de cashback PoshCash, con bibliotecas de componentes, optimización de bundles y automatización de CI/CD."
       },
       "sidia": {
         "role": "Desarrollador de Software Junior",
         "location": "Manaus (presencial)",
         "type": "Tiempo completo (CLT)",
-        "description": "Dashboards con telemetría en tiempo real, design system compartido entre equipos y micro-frontends con Module Federation."
+        "description": "Mi primera experiencia profesional: participé en la creación de pruebas de concepto y desarrollé dashboards con seguimiento en tiempo real de smartwatches, además de productos educativos y corporativos, como el dashboard de HeyTeam."
       },
       "icomp": {
-        "role": "Investigador becario (CAPES)",
+        "role": "Estudiante de maestría, becario CAPES",
         "location": "Manaus",
         "bar_note": "investigación",
-        "description": "Creé UpRobotics, una herramienta web con Google Blockly para programar brazos robóticos, con generación de código para Arduino y simulación en Webots."
+        "description": "Creé UpRobotics, una herramienta web con Google Blockly para programar brazos robóticos y otros robots 3D, con generación de código para Arduino y simulación en Webots."
       }
     }
   },

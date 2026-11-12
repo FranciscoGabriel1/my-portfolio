@@ -182,7 +182,7 @@
         "role": "Senior Front-end Developer",
         "location": "Florianópolis",
         "type": "Full-time (CLT)",
-        "description": "I build and maintain web applications on the monetization, innovation and AI agents teams, and contribute to the evolution of the front-end architecture."
+        "description": "I build and maintain web applications for the activation, innovation and AI agents teams, and help evolve the front-end architecture. I lead technical refinement and daily meetings, take part in shaping projects and improvements, and see each delivery through end to end, all the way to production deploys and pipeline management."
       },
       "o2": {
         "role": "Mid-level Front-end Developer",
@@ -194,19 +194,19 @@
         "role": "Mid-level Front-end Developer",
         "location": "Manaus (hybrid)",
         "type": "Full-time (CLT)",
-        "description": "Led products in React, React Native and TypeScript, with component libraries, bundle optimization and CI/CD automation."
+        "description": "I led the React front end of products such as the supply portal. With the team, I worked with React Native and TypeScript on the customer portal, Atem's finance platform, REAM (Manaus Refinery) and the PoshCash cashback app, building component libraries, optimizing bundles and automating CI/CD."
       },
       "sidia": {
         "role": "Junior Software Developer",
         "location": "Manaus (on-site)",
         "type": "Full-time (CLT)",
-        "description": "Real-time telemetry dashboards, a design system shared across teams and micro-frontends with Module Federation."
+        "description": "My first professional role: I helped build proofs of concept and developed dashboards with real-time smartwatch tracking, as well as educational and corporate products such as the HeyTeam dashboard."
       },
       "icomp": {
-        "role": "Research fellow (CAPES)",
+        "role": "Master's student, CAPES scholarship",
         "location": "Manaus",
         "bar_note": "research",
-        "description": "Built UpRobotics, a web tool with Google Blockly for programming robotic arms, generating code for Arduino and simulations in Webots."
+        "description": "I created UpRobotics, a web tool built on Google Blockly for programming robotic arms and other 3D robots, with code generation for Arduino and simulation in Webots."
       }
     }
   },
