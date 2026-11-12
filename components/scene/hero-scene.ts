@@ -265,13 +265,20 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
   const glowMat = track(new MeshBasicMaterial({ map: glowTex, transparent: true, blending: AdditiveBlending, depthWrite: false, toneMapped: false, opacity: 0 }));
   add(laptop, new Mesh(geo(new PlaneGeometry(LW - 0.3, LD - 0.4)), glowMat), 0, LT + 0.06, 0).rotation.x = -Math.PI / 2;
   const screenTone = { color: new Color("#f4f6ff"), level: 0.85 };
+  const toneTarget = { color: screenTone.color.clone(), level: screenTone.level };
   const sampler = document.createElement("canvas"); sampler.width = sampler.height = 4;
   const sampleCtx = sampler.getContext("2d", { willReadFrequently: true });
-  let lastSample = 0;
-  /** Cor média da tela, num canvas de 4 × 4 px (vídeo a cada 500 ms; imagem parada, uma vez). */
+  let lastSample = -Infinity, stillSampled = false;
+  /**
+   * Cor média da tela, num canvas de 4 × 4 px: do vídeo a cada 2 s, da imagem parada uma vez só. Ler um quadro do
+   * vídeo obriga a placa de vídeo a devolvê-lo ao processador ("GPU stall due to ReadPixels"), então a leitura é rara
+   * e a luz desliza até o tom novo a cada quadro, sem saltos.
+   */
   function sampleScreen(now: number) {
+    screenTone.color.lerp(toneTarget.color, 0.04);
+    screenTone.level += (toneTarget.level - screenTone.level) * 0.04;
     const src = (video ?? (lScreen.mesh.material.map?.image as CanvasImageSource | undefined)) as CanvasImageSource | undefined;
-    if (!sampleCtx || !src || now - lastSample < 500) return;
+    if (!sampleCtx || !src || (!video && stillSampled) || now - lastSample < 2000) return;
     lastSample = now;
     try {
       sampleCtx.drawImage(src, 0, 0, 4, 4);
@@ -279,8 +286,9 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
       let r = 0, g = 0, b = 0;
       for (let i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; b += d[i + 2]; }
       const n = d.length / 4;
-      screenTone.color.setRGB(r / n / 255, g / n / 255, b / n / 255, SRGBColorSpace);
-      screenTone.level = (0.2126 * r + 0.7152 * g + 0.0722 * b) / n / 255;
+      toneTarget.color.setRGB(r / n / 255, g / n / 255, b / n / 255, SRGBColorSpace);
+      toneTarget.level = (0.2126 * r + 0.7152 * g + 0.0722 * b) / n / 255;
+      if (!video) stillSampled = true;
     } catch { /* quadro ainda indisponível: mantém o último tom */ }
   }
 
