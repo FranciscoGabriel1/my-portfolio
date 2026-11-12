@@ -5,9 +5,12 @@ Scripts que geram o conteúdo das telas dos aparelhos em `public/images/scene/sc
 
 | Arquivo gerado | Script | De onde vem |
 |---|---|---|
-| `curriculoraiz-tablet.webp` | `capture-landing.js` | página pública curriculoraiz.com (820 px) |
-| `curriculoraiz-admin-phone.webp` | `admin-demo.js` | painel admin real, com **dados de demonstração** (390 px) |
-| `curriculoraiz-editor.webm` e `-still.webp` | `record.js` + `mock.js` | editor real em uso, com o exemplo público da Ada Lovelace (1280 px) |
+| `curriculoraiz-tablet.webp` e `-dark.webp` | `capture-landing.js` (`SCENE_THEME=dark` para o escuro) | página pública curriculoraiz.com (820 px) |
+| `curriculoraiz-admin-phone.webp` e `-dark.webp` | `admin-demo.js light` / `admin-demo.js dark` | painel admin real, com **dados de demonstração** (390 px) |
+| `notebook-code.webm` e `-still.webp` | `record-code.js` | editor montando a vitrine de projetos (`design/prototipos/notebook-codigo`), 1024 px; os prints vêm de `public/images/projects` |
+
+`record.js` e `mock.js` gravavam o editor do CurrículoRaiz, que ficou no notebook até 2026-11-12; ficam aqui para
+regravar se ele voltar.
 
 Regras que não mudam: nenhum dado real de usuário ou do negócio entra nas imagens, e os números do painel são
 fictícios.
@@ -26,12 +29,13 @@ export SCENE_TMP="$(mktemp -d)"                                          # saíd
 (cd "$CURRICULORAIZ_DIR/curriculoraiz-web" && npx vite --port 5180 --strictPort --host 127.0.0.1) &
 
 # 3. Capturas (rodar da raiz deste projeto)
-node scripts/scene-screens/capture-landing.js
-node scripts/scene-screens/admin-demo.js
-node scripts/scene-screens/record.js
+node scripts/scene-screens/capture-landing.js && SCENE_THEME=dark node scripts/scene-screens/capture-landing.js
+node scripts/scene-screens/admin-demo.js light && node scripts/scene-screens/admin-demo.js dark
+node scripts/scene-screens/record-code.js   # notebook (não precisa do CurrículoRaiz rodando)
 ```
 
 Depois, converter as saídas de `$SCENE_TMP` para WebP/WebM (o ffmpeg do Playwright fica em
-`~/.cache/ms-playwright/ffmpeg-*/ffmpeg-linux` e codifica VP9): o vídeo em 1024×640, `-crf 46`, cortado no trecho
-indicado em `video/cut.json`; a imagem parada do notebook é o **primeiro quadro** do vídeo, para a troca imagem → cena
-não mudar o conteúdo da tela. Por fim, regenerar os pôsteres com `scripts/render-scene-posters.ts`.
+`~/.cache/ms-playwright/ffmpeg-*/ffmpeg-linux` e codifica VP9): o vídeo em 1024×640, `-c:v libvpx-vp9 -crf 46 -b:v 0`,
+cortado no trecho indicado em `video/cut.json`; a imagem parada do notebook é o **primeiro quadro** do vídeo, para a
+troca imagem → cena não mudar o conteúdo da tela. O roteiro começa e termina no mesmo quadro, então o vídeo faz loop
+sem emenda. Por fim, regenerar os pôsteres com `scripts/render-scene-posters.ts`.

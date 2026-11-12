@@ -1,10 +1,12 @@
 /**
- * Cena 3D do Hero: notebook, tablet e celular realistas, sem logotipos, mostrando o CurrículoRaiz.
+ * Cena 3D do Hero: notebook, tablet e celular realistas, sem logotipos.
  * Porte do protótipo aprovado (design/prototipos/cena-3d-hero/scene-realista.js). Carregada só por
  * import dinâmico (HeroSceneLoader), depois do LCP; nada daqui entra no carregamento inicial.
  *
- * Telas (public/images/scene/screens): o editor do CurrículoRaiz em vídeo no notebook (quadro parado no
- * celular e na captura do pôster), a página inicial no tablet e o painel admin com dados de demonstração no celular.
+ * Telas (public/images/scene/screens): no notebook, um vídeo do editor montando a vitrine de projetos, com o print de
+ * cada um no preview (quadro parado no celular e na captura do pôster; roteiro em design/prototipos/notebook-codigo);
+ * no tablet, a página inicial do CurrículoRaiz; no celular, o painel admin dele com dados de demonstração. As duas
+ * telas alternam entre o tema claro e o escuro do CurrículoRaiz, cada uma no seu tempo.
  */
 import {
   ACESFilmicToneMapping,
@@ -61,10 +63,12 @@ export interface HeroScene {
 
 const SCREEN = "/images/scene/screens/";
 const SCREENS = {
-  laptopVideo: SCREEN + "curriculoraiz-editor.webm",
-  laptopStill: SCREEN + "curriculoraiz-editor-still.webp",
+  laptopVideo: SCREEN + "notebook-code.webm",
+  laptopStill: SCREEN + "notebook-code-still.webp",
   tablet: SCREEN + "curriculoraiz-tablet.webp",
+  tabletDark: SCREEN + "curriculoraiz-tablet-dark.webp",
   phone: SCREEN + "curriculoraiz-admin-phone.webp",
+  phoneDark: SCREEN + "curriculoraiz-admin-phone-dark.webp",
 };
 const ASPECT = { laptop: 1.6, tablet: 820 / 1180, phone: 390 / 844 };
 
@@ -142,11 +146,18 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
 
   /* ── Telas ─────────────────────────────────────────────────────────── */
   const loader = new TextureLoader();
-  interface Screen { mesh: Mesh<PlaneGeometry, MeshBasicMaterial>; visible: number }
+  interface Screen {
+    mesh: Mesh<PlaneGeometry, MeshBasicMaterial>;
+    visible: number;
+    /** Versão em tema escuro por cima da clara, que entra e sai (mostra a troca de tema do CurrículoRaiz). */
+    dark?: Mesh<PlaneGeometry, MeshBasicMaterial>;
+    /** Defasagem do ciclo claro/escuro, para as telas não trocarem ao mesmo tempo. */
+    phase: number;
+  }
   const screens: Screen[] = [];
   function screenMesh(w: number, h: number): Screen {
     const mesh = new Mesh(geo(new PlaneGeometry(w, h)), track(new MeshBasicMaterial({ color: "#f2f2f2", toneMapped: false })));
-    const s = { mesh, visible: 0 };
+    const s: Screen = { mesh, visible: 0, phase: 0 };
     screens.push(s);
     return s;
   }
@@ -156,16 +167,37 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
     t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     return track(t);
   }
-  /** Tela que rola sozinha: mostra a fração da imagem que cabe na proporção da tela. */
-  async function scrollingScreen(s: Screen, url: string, aspect: number) {
-    const t = await imageTexture(url);
-    t.wrapS = t.wrapT = ClampToEdgeWrapping;
-    const img = t.image as { width: number; height: number };
-    s.visible = img.width / aspect / img.height;
-    t.repeat.set(1, s.visible);
-    t.offset.set(0, 1 - s.visible);
+  /**
+   * Tela que rola sozinha: mostra a fração da imagem que cabe na proporção da tela. Com `darkUrl`, uma segunda camada
+   * com o tema escuro (mesmo tamanho de imagem, então as duas rolam alinhadas) fica por cima e alterna com a clara.
+   */
+  async function scrollingScreen(s: Screen, url: string, aspect: number, darkUrl?: string, phase = 0) {
+    const [t, td] = await Promise.all([imageTexture(url), darkUrl ? imageTexture(darkUrl) : null]);
+    for (const tex of [t, td]) {
+      if (!tex) continue;
+      tex.wrapS = tex.wrapT = ClampToEdgeWrapping;
+      const img = tex.image as { width: number; height: number };
+      s.visible = img.width / aspect / img.height;
+      tex.repeat.set(1, s.visible);
+      tex.offset.set(0, 1 - s.visible);
+    }
     s.mesh.material.map = t;
     s.mesh.material.needsUpdate = true;
+    if (td && s.mesh.parent) {
+      const mat = track(new MeshBasicMaterial({ map: td, transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
+      const dark = new Mesh(s.mesh.geometry, mat);
+      dark.position.copy(s.mesh.position);
+      dark.position.y += 0.0012;
+      dark.rotation.copy(s.mesh.rotation);
+      s.mesh.parent.add(dark);
+      s.dark = dark;
+      s.phase = phase;
+    }
+  }
+  /** Quanto do tema escuro aparece (0 a 1), num ciclo de 12 s: claro, esmaece para o escuro, escuro, volta. */
+  function darkMix(time: number) {
+    const k = (((time % 12) + 12) % 12) / 12;
+    return k < 0.43 ? 0 : k < 0.5 ? smooth((k - 0.43) / 0.07) : k < 0.93 ? 1 : 1 - smooth((k - 0.93) / 0.07);
   }
   let video: HTMLVideoElement | null = null;
   async function laptopScreen(s: Screen) {
@@ -180,7 +212,6 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
         video!.addEventListener("error", () => ko(new Error("vídeo da tela não carregou")), { once: true });
         video!.load();
       });
-      video.playbackRate = 1.3;
       const vt = track(new VideoTexture(video));
       vt.colorSpace = SRGBColorSpace;
       s.mesh.material.map = vt;
@@ -397,6 +428,11 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
       const k = (t % 16) / 16;
       const pos = idle ? (k < 0.08 ? 0 : k < 0.78 ? smooth((k - 0.08) / 0.7) : k < 0.86 ? 1 : 1 - smooth((k - 0.86) / 0.14)) : 0;
       map.offset.y = (1 - s.visible) * (1 - pos);
+      if (s.dark) {
+        s.dark.material.map!.offset.y = map.offset.y;
+        s.dark.material.opacity = idle * darkMix(t + s.phase);
+        s.dark.visible = s.dark.material.opacity > 0.001;
+      }
     }
     ptr.x += (ptr.tx - ptr.x) * 0.06; ptr.y += (ptr.ty - ptr.y) * 0.06;
     camP.set(CAM.p[0] + ptr.x * 1.2, CAM.p[1] + ptr.y * 0.7, CAM.p[2]);
@@ -462,7 +498,7 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
 
   /* ── Montagem: telas antes do primeiro quadro, para a troca imagem → cena não mostrar telas vazias ── */
   try {
-    await Promise.all([laptopScreen(lScreen), scrollingScreen(tScreen, SCREENS.tablet, ASPECT.tablet), scrollingScreen(pScreen, SCREENS.phone, ASPECT.phone)]);
+    await Promise.all([laptopScreen(lScreen), scrollingScreen(tScreen, SCREENS.tablet, ASPECT.tablet, SCREENS.tabletDark, 0), scrollingScreen(pScreen, SCREENS.phone, ASPECT.phone, SCREENS.phoneDark, 4)]);
   } catch (err) {
     failed = true; destroy(); throw err;
   }

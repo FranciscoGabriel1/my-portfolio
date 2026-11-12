@@ -390,6 +390,22 @@ instantânea, como antes.
 - **Para a entrevista:** "O jeito certo de evitar o flash de tema é rodar o script antes da primeira pintura, e no App
   Router isso significa um `<script>` no `<head>` renderizado pelo servidor, não um componente de cliente."
 
+### 2.17 Vídeo do notebook: conteúdo novo, 43% mais leve
+
+- **Mudança:** a tela do notebook passou a mostrar um editor montando a vitrine de projetos, com o print de cada um
+  no preview, no lugar do editor do CurrículoRaiz.
+- **Por que ficou mais leve:** a gravação vem de uma página feita para isso (1024 × 640, cores chapadas, texto
+  monoespaçado e telas que mudam pouco entre quadros), em vez de um app real a 1280 px com sombras e rolagem. O VP9
+  comprime muito melhor esse tipo de imagem.
+- **Resultado:** **483 → 275 kB** no mesmo `-crf 46`, com 21,5 s de duração e cinco projetos. A imagem parada
+  (primeiro quadro) ficou em 36 kB, e as imagens de reserva da cena em 37 e 36 kB. Nada muda no carregamento inicial: o vídeo só é baixado em
+  computador, depois da primeira interação.
+- **Troca de tema no tablet e no celular:** em vez de um vídeo, uma segunda textura (o tema escuro, 90 + 34 kB)
+  numa malha por cima da clara, com opacidade animada. As duas imagens têm o mesmo tamanho, então a mesma rolagem
+  serve às duas. Custa uma chamada de desenho a mais por tela, e nada no carregamento inicial.
+- **Detalhe de acabamento:** o roteiro começa e termina no mesmo quadro, então o loop não tem emenda e a troca
+  imagem parada → vídeo não muda o conteúdo da tela.
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:

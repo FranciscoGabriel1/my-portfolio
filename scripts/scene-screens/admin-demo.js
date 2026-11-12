@@ -47,10 +47,12 @@ const me = { id: 'demo', firstName: 'Conta', lastName: 'Demo', email: 'demo@exem
     unknown.add(u.pathname);
     return route.fulfill({ json: {} });
   });
-  await c.addInitScript(([user]) => {
+  await c.addInitScript(([user, t]) => {
+    // Tema do CurrículoRaiz (o app usa a própria chave, não o tema do sistema).
+    localStorage.setItem('amj-theme', JSON.stringify({ state: { theme: t }, version: 0 }));
     localStorage.setItem('accessToken', 'demo'); localStorage.setItem('refreshToken', 'demo');
     localStorage.setItem('auth-storage', JSON.stringify({ state: { user, accessToken: 'demo', refreshToken: 'demo' }, version: 0 }));
-  }, [me]);
+  }, [me, theme]);
   const p = await c.newPage();
   const errs = []; p.on('pageerror', (e) => errs.push(String(e)));
   await p.goto((process.env.CR_WEB_URL ?? 'http://127.0.0.1:5180') + '/admin', { waitUntil: 'networkidle', timeout: 90000 });
