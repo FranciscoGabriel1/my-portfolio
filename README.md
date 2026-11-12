@@ -11,7 +11,7 @@ Personal portfolio built with Next.js 16: server-rendered content in three langu
 - **3D:** Three.js hero scene, loaded with dynamic `import()` on first interaction, only on capable devices (static image otherwise)
 - **Fonts:** Bricolage Grotesque, Instrument Sans, JetBrains Mono via `next/font` (self-hosted)
 - **i18n:** next-intl 4 (PT, EN, ES)
-- **Theme:** next-themes (dark/light)
+- **Theme:** dark/light without a library: an inline script in `<head>` applies the saved theme before first paint (`lib/theme-script.ts`), and a small hook drives the toggle (`lib/theme.ts`)
 - **Forms:** no libraries: native fields, an accessible subject list and a shared validation module (`lib/contact/validate.ts`); delivery via Resend
 - **Tests:** Vitest + Testing Library, Playwright + axe
 - **Icons:** Lucide React

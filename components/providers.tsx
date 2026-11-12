@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
 import type { AbstractIntlMessages } from "next-intl";
 import type { ReactNode } from "react";
@@ -15,14 +14,7 @@ interface ProvidersProps {
 export function Providers({ children, locale, messages }: ProvidersProps) {
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone={TIME_ZONE}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="dark"
-        enableSystem
-        disableTransitionOnChange={false}
-      >
-        {children}
-      </ThemeProvider>
+      {children}
     </NextIntlClientProvider>
   );
 }

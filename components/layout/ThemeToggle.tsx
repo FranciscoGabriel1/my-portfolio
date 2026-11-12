@@ -1,41 +1,28 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useRef, useSyncExternalStore } from "react";
+import { useRef } from "react";
 import { flushSync } from "react-dom";
 import { Sun, Moon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-
-const subscribeNoop = () => () => {};
-
-type Theme = "light" | "dark";
-
-/** Aplica o tema no <html> na hora. O next-themes só aplica num efeito do React, depois da renderização. */
-function applyThemeNow(theme: Theme) {
-  const root = document.documentElement;
-  root.classList.remove("light", "dark");
-  root.classList.add(theme);
-  root.style.colorScheme = theme;
-}
+import { setTheme, useTheme, type Theme } from "@/lib/theme";
 
 /**
  * Botão de tema com transição circular (View Transitions API): o tema novo cresce a partir do centro do botão.
  * Sem a API ou com movimento reduzido, a troca é instantânea, como antes.
  */
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  // O tema só é conhecido no navegador: falso no servidor e na hidratação, verdadeiro depois.
-  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  // O tema só é conhecido no navegador: `undefined` no servidor e na hidratação.
+  const theme = useTheme();
   const t = useTranslations("theme");
   const buttonRef = useRef<HTMLButtonElement>(null);
   const transitionRef = useRef<ViewTransition | null>(null);
 
-  if (!mounted) {
+  if (!theme) {
     return <div className="h-10 w-10" aria-hidden="true" />;
   }
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = theme === "dark";
 
   function toggle() {
     const next: Theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
@@ -50,7 +37,10 @@ export function ThemeToggle() {
     const rect = button.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
-    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
     const root = document.documentElement;
 
     // Trocas seguidas: termina a transição em andamento e vale sempre o último tema pedido.
@@ -58,7 +48,7 @@ export function ThemeToggle() {
     const transition = document.startViewTransition(() => {
       // Sem transições de cor durante a captura, para a tela nova não sair no meio de um `transition-colors`.
       root.classList.add("theme-capturing");
-      applyThemeNow(next);
+      // Aplica no <html> e redesenha o botão dentro da captura, para o ícone novo já sair na tela nova.
       flushSync(() => setTheme(next));
     });
     transitionRef.current = transition;
@@ -67,8 +57,17 @@ export function ThemeToggle() {
       .then(() => {
         root.animate(
           // Começa do tamanho do botão (sem "estalo" no primeiro quadro) e acelera e desacelera devagar.
-          { clipPath: [`circle(${rect.width / 2}px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-          { duration: 1000, easing: "cubic-bezier(0.65, 0, 0.35, 1)", pseudoElement: "::view-transition-new(root)" }
+          {
+            clipPath: [
+              `circle(${rect.width / 2}px at ${x}px ${y}px)`,
+              `circle(${radius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 1000,
+            easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+            pseudoElement: "::view-transition-new(root)",
+          }
         );
       })
       .catch(() => {});
@@ -86,7 +85,11 @@ export function ThemeToggle() {
       aria-label={isDark ? t("toggle_light") : t("toggle_dark")}
       onClick={toggle}
     >
-      {isDark ? <Moon className="h-[18px] w-[18px]" aria-hidden /> : <Sun className="h-[18px] w-[18px]" aria-hidden />}
+      {isDark ? (
+        <Moon className="h-[18px] w-[18px]" aria-hidden />
+      ) : (
+        <Sun className="h-[18px] w-[18px]" aria-hidden />
+      )}
     </Button>
   );
 }

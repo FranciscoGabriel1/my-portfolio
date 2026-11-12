@@ -11,7 +11,7 @@ context: |
   - Tailwind v3 + variáveis CSS (app/globals.css, tailwind.config.ts)
   - framer-motion 11, lottie-react, canvas próprio (components/animations/Particles.tsx)
   - next-intl (messages/pt.json é a origem; en/es escritos à mão, sem tradução automática desde 2026-11-11)
-  - next-themes, lucide-react; formulário de contato sem bibliotecas, entregue pelo Resend (POST /api/contact)
+  - tema claro/escuro sem biblioteca (lib/theme-script.ts e lib/theme.ts; next-themes removido em 2026-11-12), lucide-react; formulário de contato sem bibliotecas, entregue pelo Resend (POST /api/contact)
   - Sem testes e sem CI até agora
 
   Estrutura: app/[locale]/ → components/sections/ → components/{layout,animations,ui}/ → lib/, i18n/, messages/.

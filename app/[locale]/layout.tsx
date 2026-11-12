@@ -5,6 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { routing } from "@/i18n/routing";
 import { Providers } from "@/components/providers";
 import { MotionReady } from "@/components/motion/MotionReady";
+import { THEME_SCRIPT } from "@/lib/theme-script";
 import "@/app/globals.css";
 
 /** Grupos de mensagens usados por componentes de cliente (Navbar, ThemeToggle, ContactForm). */
@@ -93,10 +94,18 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${heading.variable} ${body.variable} ${code.variable} font-sans antialiased`}>
+      <head>
+        {/* Tema antes da primeira pintura (lib/theme-script.ts). Script de servidor, lido junto com o HTML: o React só o
+            hidrata, não o cria no navegador (um <script> criado por componente de cliente, como o do next-themes,
+            gera aviso no React 19). */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
+      <body
+        className={`${heading.variable} ${body.variable} ${code.variable} font-sans antialiased`}
+      >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-on-accent"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-60 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-on-accent"
         >
           {tA11y("skip_to_content")}
         </a>

@@ -364,6 +364,23 @@ instantânea, como antes.
 - **Para a entrevista:** "Componente de servidor passado como prop para um componente de cliente é o jeito de pôr
   conteúdo pesado e estático dentro de uma ilha interativa sem que ele entre no bundle."
 
+### 2.16 Tema sem `next-themes`
+
+- **Problema:** o `ThemeProvider` do `next-themes` desenha um `<script>` dentro de um componente de cliente para
+  aplicar o tema antes da pintura. O React 19 avisa no console de desenvolvimento ("Encountered a script tag while
+  rendering React component"), e a biblioteca não tem versão nova desde março de 2025.
+- **Primeira tentativa (não serviu):** `next/script` com `strategy="beforeInteractive"`. No App Router, o script
+  inline só roda quando o JavaScript do Next carrega, e não antes da primeira pintura: o `<html>` chegava sem a classe
+  do tema, o que faria a página piscar.
+- **Solução:** um `<script>` no `<head>` do layout, que é componente de servidor. O navegador o executa enquanto lê o
+  HTML, antes de pintar, e o React só o hidrata (não o cria), então não há aviso. O script e as constantes ficam em
+  `lib/theme-script.ts`, que o servidor pode importar. O hook do botão (`useSyncExternalStore`, avisando de forma
+  síncrona para funcionar dentro do `flushSync` da transição de tema) fica em `lib/theme.ts`.
+- **Resultado:** uma dependência a menos, JavaScript inicial de **216 para 215 kB gzip**, e a classe do tema já está
+  no `<html>` no `DOMContentLoaded`, antes da hidratação (conferido no navegador).
+- **Para a entrevista:** "O jeito certo de evitar o flash de tema é rodar o script antes da primeira pintura, e no App
+  Router isso significa um `<script>` no `<head>` renderizado pelo servidor, não um componente de cliente."
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:
