@@ -1,6 +1,7 @@
 import { preload } from "react-dom";
 import { ArrowRight, Download } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { HeroBackdrop } from "@/components/motion/HeroBackdrop";
 import { NameWave } from "@/components/motion/NameWave";
 import { SplitText } from "@/components/motion/SplitText";
 import { HeroSceneLoader } from "@/components/scene/HeroSceneLoader";
@@ -9,7 +10,8 @@ import { BUILT_AT } from "@/lib/content/career";
 import { CV_URL } from "@/lib/cv";
 
 /**
- * Hero de servidor: HTML completo e final sem JavaScript. Só o nome anima (CSS, ao carregar).
+ * Hero de servidor: HTML completo e final sem JavaScript. O nome anima (CSS, ao carregar) e o fundo é uma
+ * constelação de peças que reage ao ponteiro (components/motion/HeroBackdrop.tsx).
  * A imagem dos blocos é decorativa e é a versão sem 3D; a change cena-3d-montagem monta o canvas por cima.
  */
 export async function Hero() {
@@ -27,9 +29,10 @@ export async function Hero() {
       aria-labelledby="hero-title"
       className="band flex min-h-[calc(100svh-var(--header-h))] flex-col"
     >
+      <HeroBackdrop />
       <div className="container-site grid flex-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-12 lg:py-24">
         <div className="flex flex-col gap-7">
-          <p className="type-eyebrow flex items-center gap-2.5 text-text-2">
+          <p className="flex items-center gap-2.5 type-eyebrow text-text-2">
             <span aria-hidden="true" className="status-dot h-2 w-2 shrink-0 rounded-full bg-ok" />
             {t("status")}
           </p>
@@ -40,7 +43,7 @@ export async function Hero() {
             mode="load"
             letters
             text={t("name")}
-            className="type-giant max-w-[9ch] text-text"
+            className="max-w-[9ch] type-giant text-text"
           />
           <NameWave targetId="hero-title" />
 
@@ -74,7 +77,10 @@ export async function Hero() {
       <div className="border-y border-line">
         <div className="container-site flex flex-wrap items-center gap-x-7 gap-y-3 py-5">
           <p className="type-eyebrow">{t("built_label")}</p>
-          <ul aria-label={t("built_label")} className="flex flex-wrap gap-x-7 gap-y-2 font-display text-lg font-bold text-text-2">
+          <ul
+            aria-label={t("built_label")}
+            className="flex flex-wrap gap-x-7 gap-y-2 font-display text-lg font-bold text-text-2"
+          >
             {BUILT_AT.map((name) => (
               <li key={name}>{name}</li>
             ))}

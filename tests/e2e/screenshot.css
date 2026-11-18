@@ -2,3 +2,8 @@
    Desde a identidade-visual-composicao, nada na página muda sozinho: as capturas usam movimento
    reduzido, então o nome, as entradas e a régua já aparecem no estado final. Fica vazio de propósito;
    se algo aleatório voltar (ex.: a cena 3D), esconda aqui, com o motivo ao lado. */
+
+/* Fundo do Hero (HeroBackdrop): o canvas liga com o navegador ocioso, num momento que varia entre execuções. */
+.hero-backdrop {
+  visibility: hidden;
+}

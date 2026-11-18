@@ -406,6 +406,26 @@ instantânea, como antes.
 - **Detalhe de acabamento:** o roteiro começa e termina no mesmo quadro, então o loop não tem emenda e a troca
   imagem parada → vídeo não muda o conteúdo da tela.
 
+### 2.18 Fundo do Hero: esmaecer no desenho, não com `mask-image`
+
+- **Mudança:** o Hero ganhou um fundo em canvas 2D (`components/motion/HeroBackdrop.tsx`), com estrelas e formas
+  geométricas que reagem ao ponteiro. Ele precisava ficar mais fraco do lado do texto.
+- **Primeira versão:** `mask-image: linear-gradient(...)` no próprio canvas. Com uma máscara, o navegador refaz o
+  recorte da camada inteira a cada quadro que o canvas muda.
+- **Medição** (Chromium de teste sem GPU, WebGL desligado para isolar o fundo, 1440 × 900, ponteiro em movimento):
+  - sem o fundo: 56 a 60 fps;
+  - fundo com `mask-image`: **28 a 34 fps** (p95 de 50 a 67 ms por quadro);
+  - fundo sem a máscara: 60 fps (p95 de 17 ms).
+- **Solução:** a opacidade de cada estrela, forma, linha e estrela cadente é multiplicada por uma função da posição
+  (`fadeAt`). O cálculo custa umas poucas multiplicações por objeto, e o resultado na tela é o mesmo.
+- **Resultado:** **60 fps** com o fundo ligado, e 48 fps com a CPU 4x mais lenta.
+- **O resto do orçamento:** zero biblioteca e 2,7 kB de JavaScript com gzip (5,7 kB minificado, medido com esbuild
+  só sobre o componente). Começa com o navegador ocioso, depois do
+  `load` (não disputa o LCP). Pausa fora da tela e com a aba oculta. Com movimento reduzido, desenha um quadro parado.
+- **Lição para entrevista:** propriedades de composição (`mask-image`, `filter`, `backdrop-filter`) são baratas sobre
+  conteúdo parado e caras sobre conteúdo que muda a cada quadro. Antes de culpar o JavaScript, meça com e sem a
+  propriedade.
+
 ## 3. Desempenho e acessibilidade juntos
 
 As mesmas decisões que aceleraram o site também o deixaram mais acessível:
